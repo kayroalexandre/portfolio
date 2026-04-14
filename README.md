@@ -53,11 +53,11 @@ cases/
   image maps
   assets visuais locais
 
-guidelines/
-  documentação operacional e memórias de sessão
+docs/
+  documentação operacional, status e referências
 
-codex-skills/
-  skill local para reconstrução e manutenção de case studies
+scripts/
+  utilitários de manutenção e apoio
 ```
 
 ## Estado atual do conteúdo
@@ -81,10 +81,11 @@ codex-skills/
 
 ## Documentação útil
 
-- `guidelines/Guidelines.md`: guia principal do repositório
-- `guidelines/ChatMemory-2026-03-20.md`: memória consolidada mais recente
+- `docs/PROJECT_STATUS.md`: status consolidado do projeto
+- `docs/ATTRIBUTIONS.md`: atribuições e licenças
+- `docs/EXAMPLE_PROMPTS.md`: exemplos de prompts
 - `cases/agent-layout-guidelines.md`: convenções para converter markdown em JSX
-- `codex-skills/product-design-case-study/SKILL.md`: workflow da skill local
+- `.github/CONTRIBUTING.md`: fluxo de contribuição e uso do Copilot
 
 ## GitHub Copilot Enterprise
 
@@ -123,3 +124,4 @@ Referencias oficiais:
 
 - O repositório ainda carrega uma pasta `src/app/components/ui/` herdada do template original. A experiência principal atual do portfólio não depende dela.
 - O envio real do formulário depende da configuração pública de `VITE_FORMSUBMIT_ACTION` e `VITE_SITE_URL`.
+- Scripts auxiliares de manutenção ficam em `scripts/` para manter a raiz enxuta.
