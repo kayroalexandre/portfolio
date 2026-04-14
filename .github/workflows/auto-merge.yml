@@ -42,17 +42,21 @@ jobs:
 
             // Decision logic
             const canAutoMerge = 
+              pr.base.ref === 'develop' &&
               changesRequested === 0 &&
               approvals >= 1 &&
               !isSecurityChange &&
-              pr.mergeable === true;
+              pr.mergeable === true &&
+              pr.mergeable_state === 'clean';
 
             core.setOutput('can_merge', canAutoMerge);
             core.setOutput('reason', 
               changesRequested > 0 ? 'Changes requested' :
               approvals < 1 ? 'Not enough approvals' :
+              pr.base.ref !== 'develop' ? 'Auto-merge allowed only for develop' :
               isSecurityChange ? 'Security change requires manual review' :
               pr.mergeable === false ? 'Merge conflicts detected' :
+              pr.mergeable_state !== 'clean' ? `Mergeable state: ${pr.mergeable_state}` :
               'Ready to merge'
             );
 

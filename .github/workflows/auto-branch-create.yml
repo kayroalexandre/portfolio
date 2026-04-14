@@ -122,9 +122,10 @@ jobs:
           
           # Create branch context directory
           mkdir -p .github/branch-context
+          mkdir -p "$(dirname ".github/branch-context/${BRANCH}.md")"
           
           # Create context file
-          cat > ".github/branch-context/${BRANCH}.md" << 'EOF'
+          cat > ".github/branch-context/${BRANCH}.md" << EOF
           # Branch Context: $BRANCH
           
           **Created**: $(date -u +'%Y-%m-%d %H:%M:%S UTC')

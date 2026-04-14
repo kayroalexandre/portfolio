@@ -8,7 +8,7 @@ jobs:
   review:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
+      issues: write
       contents: read
     steps:
       - uses: actions/checkout@v4
@@ -56,16 +56,20 @@ jobs:
                            '${{ steps.tests.outcome }}' === 'success' &&
                            '${{ steps.build.outcome }}' === 'success';
 
-            const body = `## 🤖 Automated Code Review
-
-| Category | Status |
-|----------|--------|
-| Lint | ${lintStatus} |
-| Type Check | ${typesStatus} |
-| Tests | ${testsStatus} |
-| Build | ${buildStatus} |
-
-${allPass ? '✅ All checks passed - ready for merge!' : '⚠️ Some checks failed - please review and fix.'}`;
+            const body = [
+              '## Automated Code Review',
+              '',
+              '| Category | Status |',
+              '|----------|--------|',
+              `| Lint | ${lintStatus} |`,
+              `| Type Check | ${typesStatus} |`,
+              `| Tests | ${testsStatus} |`,
+              `| Build | ${buildStatus} |`,
+              '',
+              allPass
+                ? 'All checks passed - ready for merge.'
+                : 'Some checks failed - please review and fix.'
+            ].join('\\n');
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -74,28 +78,8 @@ ${allPass ? '✅ All checks passed - ready for merge!' : '⚠️ Some checks fai
               body: body
             });
 
-      - name: Auto-Approve if All Pass
-        if: steps.lint.outcome == 'success' && steps.types.outcome == 'success' && steps.tests.outcome == 'success' && steps.build.outcome == 'success'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.pulls.createReview({
-              pull_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              event: 'APPROVE',
-              body: '✅ All automated checks passed. Ready for merge!'
-            });
-
-      - name: Request Changes if Any Fail
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.pulls.createReview({
-              pull_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              event: 'REQUEST_CHANGES',
-              body: '❌ Some checks failed. Please review the logs and fix issues.'
-            });
+      - name: Enforce Check Results
+        if: steps.lint.outcome != 'success' || steps.types.outcome != 'success' || steps.tests.outcome != 'success' || steps.build.outcome != 'success'
+        run: |
+          echo "One or more automated review checks failed."
+          exit 1
