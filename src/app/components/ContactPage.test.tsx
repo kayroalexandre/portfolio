@@ -30,28 +30,26 @@ describe('ContactPage', () => {
     it('renders the fallback message when form is not configured', () => {
       renderWithRouter(<ContactPage />);
 
+      expect(screen.getByText(/configure/i)).toBeInTheDocument();
+      expect(screen.getByText(/VITE_FORMSUBMIT_ACTION/i)).toBeInTheDocument();
+    });
+
+    it('renders a disabled submit button in fallback mode', () => {
+      renderWithRouter(<ContactPage />);
+
+      const submitButton = screen.getByRole('button', { name: /canal em configuração/i });
+      expect(submitButton).toBeInTheDocument();
+      expect(submitButton).toBeDisabled();
+    });
+
+    it('renders form fields in fallback mode', () => {
+      renderWithRouter(<ContactPage />);
+
+      expect(screen.getByPlaceholderText('Seu nome')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('Seu e-mail')).toBeInTheDocument();
       expect(
-        screen.getByRole('heading', { level: 3, name: /formulário em ajustes/i })
+        screen.getByPlaceholderText('Explique o desafio, o contexto e o que você precisa.')
       ).toBeInTheDocument();
-      // "ajustes técnicos" appears in both the sidebar and the fallback card
-      const ajustesElements = screen.getAllByText(/ajustes técnicos/i);
-      expect(ajustesElements.length).toBeGreaterThanOrEqual(1);
-    });
-
-    it('renders a LinkedIn contact link in fallback mode', () => {
-      renderWithRouter(<ContactPage />);
-
-      const linkedInLink = screen.getByText('Contato via LinkedIn');
-      expect(linkedInLink).toBeInTheDocument();
-      expect(linkedInLink).toHaveAttribute('href', 'https://www.linkedin.com/in/kayrogomes/');
-    });
-
-    it('does not render the form fields in fallback mode', () => {
-      renderWithRouter(<ContactPage />);
-
-      expect(screen.queryByLabelText('Nome')).not.toBeInTheDocument();
-      expect(screen.queryByLabelText('E-mail')).not.toBeInTheDocument();
-      expect(screen.queryByLabelText('Mensagem')).not.toBeInTheDocument();
     });
   });
 

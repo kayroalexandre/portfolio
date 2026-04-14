@@ -20,11 +20,11 @@ export function Lightbox({ src, alt, onClose }: LightboxProps) {
 
   // Close on Esc
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+    const handleKeyDown = (keyboardEvent: KeyboardEvent) => {
+      if (keyboardEvent.key === 'Escape') onClose();
     };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
   // Prevent body scroll when open
@@ -37,32 +37,40 @@ export function Lightbox({ src, alt, onClose }: LightboxProps) {
   }, []);
 
   const handleOverlayClick = useCallback(
-    (e: React.MouseEvent) => {
-      if (e.target === overlayRef.current) onClose();
+    (mouseEvent: React.MouseEvent) => {
+      if (mouseEvent.target === overlayRef.current) onClose();
     },
     [onClose]
   );
 
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
-    setScale((prev) => Math.min(Math.max(prev + (e.deltaY > 0 ? -0.15 : 0.15), 0.5), 5));
+  const handleWheel = useCallback((wheelEvent: React.WheelEvent) => {
+    wheelEvent.preventDefault();
+    setScale((currentScale) =>
+      Math.min(Math.max(currentScale + (wheelEvent.deltaY > 0 ? -0.15 : 0.15), 0.5), 5)
+    );
   }, []);
 
   const handlePointerDown = useCallback(
-    (e: React.PointerEvent) => {
+    (pointerEvent: React.PointerEvent) => {
       if (scale > 1) {
         setIsDragging(true);
-        setDragStart({ x: e.clientX - translate.x, y: e.clientY - translate.y });
-        (e.target as HTMLElement).setPointerCapture(e.pointerId);
+        setDragStart({
+          x: pointerEvent.clientX - translate.x,
+          y: pointerEvent.clientY - translate.y,
+        });
+        (pointerEvent.target as HTMLElement).setPointerCapture(pointerEvent.pointerId);
       }
     },
     [scale, translate]
   );
 
   const handlePointerMove = useCallback(
-    (e: React.PointerEvent) => {
+    (pointerEvent: React.PointerEvent) => {
       if (!isDragging) return;
-      setTranslate({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+      setTranslate({
+        x: pointerEvent.clientX - dragStart.x,
+        y: pointerEvent.clientY - dragStart.y,
+      });
     },
     [isDragging, dragStart]
   );
@@ -108,7 +116,7 @@ export function Lightbox({ src, alt, onClose }: LightboxProps) {
       {/* Zoom controls */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 bg-white/10 rounded-full px-4 py-2 backdrop-blur-sm">
         <button
-          onClick={() => setScale((s) => Math.max(s - 0.25, 0.5))}
+          onClick={() => setScale((currentScale) => Math.max(currentScale - 0.25, 0.5))}
           className="text-white hover:text-white/80 transition-colors text-lg leading-none cursor-pointer"
           aria-label="Reduzir zoom"
         >
@@ -121,7 +129,7 @@ export function Lightbox({ src, alt, onClose }: LightboxProps) {
           {Math.round(scale * 100)}%
         </button>
         <button
-          onClick={() => setScale((s) => Math.min(s + 0.25, 5))}
+          onClick={() => setScale((currentScale) => Math.min(currentScale + 0.25, 5))}
           className="text-white hover:text-white/80 transition-colors text-lg leading-none cursor-pointer"
           aria-label="Aumentar zoom"
         >

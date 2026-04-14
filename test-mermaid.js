@@ -17,8 +17,8 @@ async function run() {
   try {
     const { svg } = await mermaid.render('test-id', chart);
     console.log(svg);
-  } catch (e) {
-    console.error(e);
+  } catch (renderError) {
+    console.error(renderError);
   }
 }
 run();
