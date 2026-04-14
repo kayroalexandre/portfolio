@@ -1,4 +1,0 @@
-interface:
-  display_name: "Product Design Case Study"
-  short_description: "Reconstrói cases factuais em PT-BR a partir de texto, notas e telas"
-  default_prompt: "Use $product-design-case-study to auditar as evidências disponíveis, fazer apenas as perguntas que realmente melhoram o case e então entregar um case factual em Markdown, em PT-BR, com curadoria enxuta de imagens e Mermaid somente quando houver base suficiente. Não converta o resultado para JSX."

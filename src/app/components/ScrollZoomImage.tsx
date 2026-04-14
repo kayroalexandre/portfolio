@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { useEffect, useRef, useState } from 'react';
+
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface ScrollZoomImageProps {
   src: string;
@@ -27,9 +28,9 @@ export function ScrollZoomImage({ src, alt, className }: ScrollZoomImageProps) {
       setScale(1.3 - progress * 0.3);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -38,7 +39,7 @@ export function ScrollZoomImage({ src, alt, className }: ScrollZoomImageProps) {
         src={src}
         alt={alt}
         className={className}
-        style={{ transform: `scale(${scale})`, transition: "transform 0.1s linear" }}
+        style={{ transform: `scale(${scale})`, transition: 'transform 0.1s linear' }}
       />
     </div>
   );

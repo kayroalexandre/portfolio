@@ -1,21 +1,28 @@
-import { createBrowserRouter } from "react-router";
-import { Layout } from "./components/Layout";
-import { HomePage } from "./components/HomePage";
-import { AboutPage } from "./components/AboutPage";
-import { ContactPage } from "./components/ContactPage";
-import { CaseStudyPage } from "./components/CaseStudyPage";
-import { ProjectsPage } from "./components/ProjectsPage";
+import { createBrowserRouter } from 'react-router';
 
-export const router = createBrowserRouter([
+import { AboutPage } from './components/AboutPage';
+import { CaseStudyPage } from './components/CaseStudyPage';
+import { ContactPage } from './components/ContactPage';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { HomePage } from './components/HomePage';
+import { Layout } from './components/Layout';
+import { NotFoundPage } from './components/NotFoundPage';
+import { ProjectsPage } from './components/ProjectsPage';
+
+export const appRoutes = [
   {
-    path: "/",
+    path: '/',
     Component: Layout,
+    ErrorBoundary,
     children: [
       { index: true, Component: HomePage },
-      { path: "projects", Component: ProjectsPage },
-      { path: "about", Component: AboutPage },
-      { path: "contact", Component: ContactPage },
-      { path: "project/:slug", Component: CaseStudyPage },
+      { path: 'projects', Component: ProjectsPage },
+      { path: 'about', Component: AboutPage },
+      { path: 'contact', Component: ContactPage },
+      { path: 'project/:slug', Component: CaseStudyPage },
+      { path: '*', Component: NotFoundPage },
     ],
   },
-]);
+];
+
+export const router = createBrowserRouter(appRoutes);

@@ -19,8 +19,8 @@ describe('siteConfig', () => {
       'practice',
     ];
 
-    for (const key of requiredKeys) {
-      expect(siteConfig).toHaveProperty(key);
+    for (const requiredKey of requiredKeys) {
+      expect(siteConfig).toHaveProperty(requiredKey);
     }
   });
 
@@ -63,13 +63,13 @@ describe('siteConfig', () => {
     expect(Array.isArray(siteConfig.practice)).toBe(true);
     expect(siteConfig.practice.length).toBeGreaterThan(0);
 
-    for (const item of siteConfig.practice) {
-      expect(item).toHaveProperty('title');
-      expect(item).toHaveProperty('body');
-      expect(typeof item.title).toBe('string');
-      expect(item.title.length).toBeGreaterThan(0);
-      expect(typeof item.body).toBe('string');
-      expect(item.body.length).toBeGreaterThan(0);
+    for (const practiceEntry of siteConfig.practice) {
+      expect(practiceEntry).toHaveProperty('title');
+      expect(practiceEntry).toHaveProperty('body');
+      expect(typeof practiceEntry.title).toBe('string');
+      expect(practiceEntry.title.length).toBeGreaterThan(0);
+      expect(typeof practiceEntry.body).toBe('string');
+      expect(practiceEntry.body.length).toBeGreaterThan(0);
     }
   });
 });

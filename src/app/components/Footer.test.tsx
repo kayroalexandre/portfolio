@@ -19,10 +19,10 @@ describe('Footer', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders a contact link when no email is configured', () => {
+  it('renders fallback contact message when no email is configured', () => {
     renderWithRouter(<Footer />);
 
-    expect(screen.getByText('Contato via LinkedIn')).toBeInTheDocument();
+    expect(screen.getByText('Canal público de contato em atualização.')).toBeInTheDocument();
   });
 
   it('renders the site name', () => {
