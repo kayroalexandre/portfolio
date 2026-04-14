@@ -25,6 +25,35 @@ React 18 + TypeScript + Vite 6 + Tailwind CSS v4 + React Router 7
 
 Follow Conventional Commits: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, `build:`, `ci:`, `chore:`, `revert:`
 
+## Copilot PR Review Checklist
+
+- Ensure PR description includes scope, risks, and validation steps
+- Ask Copilot to summarize changed files and behavioral impact
+- Confirm no regressions in routing, forms, or case-study rendering
+- Confirm tests cover new behavior or edge cases
+- Confirm docs were updated when behavior changed
+
+## Code Review Standards
+
+- Prioritize security, correctness, and maintainability over style-only feedback
+- Flag hardcoded secrets, unsafe input handling, and missing error handling
+- Validate accessibility for interactive components and forms
+- Verify performance-sensitive paths (lazy loading and heavy render trees)
+
+## Copilot on CLI
+
+- Install extension: `gh extension install github/gh-copilot`
+- Suggest commit message: `gh copilot suggest --type commit`
+- Use explain/suggest for shell guidance when needed
+
+## Official References
+
+- <https://docs.github.com/pt/copilot>
+- <https://docs.github.com/pt/copilot/how-tos/copilot-on-github>
+- <https://docs.github.com/pt/copilot/how-tos/copilot-cli>
+- <https://docs.github.com/pt/copilot/concepts/agents/code-review>
+- <https://docs.github.com/pt/copilot/get-started/best-practices>
+
 ## Testing
 
 - Vitest + React Testing Library

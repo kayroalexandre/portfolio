@@ -86,6 +86,39 @@ codex-skills/
 - `cases/agent-layout-guidelines.md`: convenções para converter markdown em JSX
 - `codex-skills/product-design-case-study/SKILL.md`: workflow da skill local
 
+## GitHub Copilot Enterprise
+
+Este repositório está preparado para uso operacional do Copilot em PRs, commits, code review, issues e automações de CI/CD.
+
+Arquivos principais:
+
+- `.github/pull_request_template.md`
+- `.github/issue_template/bug_report.md`
+- `.github/issue_template/feature_request.md`
+- `.github/CONTRIBUTING.md`
+- `.github/copilot/instructions.md`
+- `.github/copilot/SECURITY.md`
+- `.github/copilot/cloud-agent.md`
+- `.github/workflows/ci.yml`
+- `.github/workflows/release.yml`
+- `.github/workflows/codeql-analysis.yml`
+- `.github/workflows/copilot-pr-review.yml`
+- `.github/workflows/copilot-code-review.yml`
+
+Comandos uteis com CLI:
+
+- `gh extension install github/gh-copilot`
+- `gh copilot suggest --type commit`
+- `./scripts/copilot-commit-suggestion.sh`
+
+Referencias oficiais:
+
+- <https://docs.github.com/pt/copilot>
+- <https://docs.github.com/pt/copilot/how-tos/copilot-on-github>
+- <https://docs.github.com/pt/copilot/how-tos/copilot-cli>
+- <https://docs.github.com/pt/copilot/concepts/agents/code-review>
+- <https://docs.github.com/pt/copilot/get-started/best-practices>
+
 ## Observações
 
 - O repositório ainda carrega uma pasta `src/app/components/ui/` herdada do template original. A experiência principal atual do portfólio não depende dela.

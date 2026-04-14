@@ -13,3 +13,8 @@ commit-msg:
   commands:
     commitlint:
       run: npx commitlint --edit {1}
+
+prepare-commit-msg:
+  commands:
+    copilot-commit-suggestion:
+      run: '[ -n "${COPILOT_COMMIT_SUGGEST:-}" ] && ./scripts/copilot-commit-suggestion.sh || true'
