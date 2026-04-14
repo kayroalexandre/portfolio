@@ -116,9 +116,9 @@ jobs:
           REQUEST="${{ github.event.inputs.request }}"
           SCOPE_TYPE="${{ steps.detect.outputs.scope_type }}"
           
-          # Create branch from main
-          git fetch origin main
-          git checkout -b "$BRANCH" origin/main
+          # Create branch from develop
+          git fetch origin develop
+          git checkout -b "$BRANCH" origin/develop
           
           # Create branch context directory
           mkdir -p .github/branch-context

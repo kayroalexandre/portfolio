@@ -1,20 +1,28 @@
 name: Release Pipeline
 
-"on":
-  push:
-    tags:
-      - "v*"
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+  workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   release:
     name: Build and Release
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.merge_commit_sha || github.ref }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -25,6 +33,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Read version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Build
         run: npm run build
 
@@ -32,8 +46,20 @@ jobs:
         run: |
           tar -czf dist.tar.gz dist
 
+      - name: Create and push tag
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="v$VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "$TAG" ${GITHUB_SHA}
+          git push origin "$TAG"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: Release v${{ steps.version.outputs.version }}
+          body_path: CHANGELOG.md
           files: dist.tar.gz
           generate_release_notes: true

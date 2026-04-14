@@ -1,0 +1,104 @@
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened, reopened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    name: Auto label issues
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label issue by content
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const text = `${issue.title}\n${issue.body || ''}`.toLowerCase();
+            const labels = new Set();
+
+            function add(label) {
+              labels.add(label);
+            }
+
+            if (/bug|error|broken|fail|failure|crash|exception|unexpected/i.test(text)) {
+              add('type:bug');
+              add('status:needs-investigation');
+            }
+
+            if (/feature|enhancement|improve|add|new|request/i.test(text)) {
+              add('type:enhancement');
+            }
+
+            if (/docs|documentation|readme|guide|tutorial/i.test(text)) {
+              add('type:documentation');
+            }
+
+            if (/error|exception|stack trace|reproduce|reproduction/i.test(text)) {
+              add('kind:error');
+              add('status:needs-reproduction');
+            }
+
+            if (/performance|slow|bundle|render|lag|optimi[sz]e/i.test(text)) {
+              add('area:performance');
+            }
+
+            if (/security|vulnerability|csrf|xss|auth|token|secret/i.test(text)) {
+              add('area:security');
+              add('priority:high');
+            }
+
+            if (/ui|layout|style|visual|responsive|mobile/i.test(text)) {
+              add('area:ui');
+            }
+
+            if (labels.size === 0) {
+              add('type:task');
+            }
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label
+                });
+              } catch {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label,
+                  color: '0e8a16'
+                });
+              }
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: Array.from(labels)
+            });
+
+            if (labels.has('type:bug') || labels.has('kind:error')) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: [
+                  'Obrigado pelo reporte.',
+                  '',
+                  'Para acelerar a investigação, inclua quando possível:',
+                  '- Passos para reproduzir',
+                  '- Comportamento esperado',
+                  '- Comportamento atual',
+                  '- Captura de tela ou gravação',
+                  '- Logs do navegador ou stack trace',
+                  '',
+                  'O fluxo de branch para correção seguirá `fix/` e será integrado em `develop` primeiro.'
+                ].join('\n')
+              });
+            }
