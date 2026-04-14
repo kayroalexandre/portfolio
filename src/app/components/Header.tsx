@@ -1,11 +1,11 @@
-import { Link, useLocation } from "react-router";
-import { DynamicName } from "./DynamicName";
+import { Link, useLocation } from 'react-router';
+
+import { DynamicName } from './DynamicName';
 
 export function Header() {
   const location = useLocation();
-  const isHome = location.pathname === "/";
-  const isProjects =
-    location.pathname === "/projects" || location.pathname.startsWith("/project/");
+  const isHome = location.pathname === '/';
+  const isProjects = location.pathname === '/projects' || location.pathname.startsWith('/project/');
 
   return (
     <>
@@ -17,33 +17,33 @@ export function Header() {
 
       <nav
         className="flex justify-between items-center w-full px-6 md:px-12 py-6"
-        style={{ fontSize: "0.875rem" }}
+        style={{ fontSize: '0.875rem' }}
       >
         <Link
           to="/"
-          className={`${isHome ? "text-white" : "text-neutral-400"} hover:text-white transition-colors`}
-          aria-current={isHome ? "page" : undefined}
+          className={`${isHome ? 'text-white' : 'text-neutral-400'} hover:text-white transition-colors`}
+          aria-current={isHome ? 'page' : undefined}
         >
           Início
         </Link>
         <Link
           to="/projects"
-          className={`${isProjects ? "text-white" : "text-neutral-400"} hover:text-white transition-colors`}
-          aria-current={isProjects ? "page" : undefined}
+          className={`${isProjects ? 'text-white' : 'text-neutral-400'} hover:text-white transition-colors`}
+          aria-current={isProjects ? 'page' : undefined}
         >
           Projetos
         </Link>
         <Link
           to="/about"
-          className={`${location.pathname === "/about" ? "text-white" : "text-neutral-400"} hover:text-white transition-colors`}
-          aria-current={location.pathname === "/about" ? "page" : undefined}
+          className={`${location.pathname === '/about' ? 'text-white' : 'text-neutral-400'} hover:text-white transition-colors`}
+          aria-current={location.pathname === '/about' ? 'page' : undefined}
         >
           Sobre
         </Link>
         <Link
           to="/contact"
-          className={`${location.pathname === "/contact" ? "text-white" : "text-neutral-400"} hover:text-white transition-colors`}
-          aria-current={location.pathname === "/contact" ? "page" : undefined}
+          className={`${location.pathname === '/contact' ? 'text-white' : 'text-neutral-400'} hover:text-white transition-colors`}
+          aria-current={location.pathname === '/contact' ? 'page' : undefined}
         >
           Contato
         </Link>

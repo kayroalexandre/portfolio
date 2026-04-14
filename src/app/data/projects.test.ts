@@ -27,7 +27,7 @@ describe('projects', () => {
   });
 
   it('slugs are unique', () => {
-    const slugs = projects.map((p) => p.slug);
+    const slugs = projects.map((project) => project.slug);
     const uniqueSlugs = new Set(slugs);
     expect(uniqueSlugs.size).toBe(slugs.length);
   });

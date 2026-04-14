@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-import { siteConfig } from "../data/site";
+import { useEffect } from 'react';
+
+import { siteConfig } from '../data/site';
 
 export function useDocumentTitle(pageTitle?: string) {
   useEffect(() => {
-    document.title = pageTitle
-      ? `${pageTitle} | ${siteConfig.name}`
-      : siteConfig.title;
+    document.title = pageTitle ? `${pageTitle} | ${siteConfig.name}` : siteConfig.title;
 
     return () => {
       document.title = siteConfig.title;

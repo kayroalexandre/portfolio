@@ -24,8 +24,8 @@ export function PhoneMockup({ src, alt, caption, className = '', onClick }: Mock
         tabIndex={onClick ? 0 : undefined}
         onKeyDown={
           onClick
-            ? (e) => {
-                if (e.key === 'Enter' || e.key === ' ') onClick();
+            ? (keyboardEvent) => {
+                if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') onClick();
               }
             : undefined
         }
@@ -113,8 +113,8 @@ export function PhonePair({
           tabIndex={onLeftClick ? 0 : undefined}
           onKeyDown={
             onLeftClick
-              ? (e) => {
-                  if (e.key === 'Enter' || e.key === ' ') onLeftClick();
+              ? (keyboardEvent) => {
+                  if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') onLeftClick();
                 }
               : undefined
           }
@@ -155,8 +155,8 @@ export function PhonePair({
           tabIndex={onRightClick ? 0 : undefined}
           onKeyDown={
             onRightClick
-              ? (e) => {
-                  if (e.key === 'Enter' || e.key === ' ') onRightClick();
+              ? (keyboardEvent) => {
+                  if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') onRightClick();
                 }
               : undefined
           }
@@ -214,8 +214,8 @@ export function DesktopMockup({ src, alt, caption, className = '', onClick }: Mo
         tabIndex={onClick ? 0 : undefined}
         onKeyDown={
           onClick
-            ? (e) => {
-                if (e.key === 'Enter' || e.key === ' ') onClick();
+            ? (keyboardEvent) => {
+                if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') onClick();
               }
             : undefined
         }
