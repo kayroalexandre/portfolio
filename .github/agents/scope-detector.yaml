@@ -1,0 +1,130 @@
+name: Scope Detection Agent
+description: Detects scope type and categorizes requests
+
+scope_patterns:
+  feature:
+    keywords: ["add", "create", "new", "implement", "build", "enable", "introduce", "feat"]
+    pattern_priority: 10
+    branch_prefix: "feature/"
+    commit_type: "feat"
+
+  bugfix:
+    keywords: ["fix", "bug", "resolve", "broken", "issue", "error", "crash", "broken"]
+    pattern_priority: 9
+    branch_prefix: "fix/"
+    commit_type: "fix"
+
+  refactor:
+    keywords: ["refactor", "improve", "simplify", "extract", "reorganize", "restructure", "clean"]
+    pattern_priority: 8
+    branch_prefix: "refactor/"
+    commit_type: "refactor"
+
+  docs:
+    keywords: ["document", "write", "readme", "guide", "tutorial", "explain", "comment", "doc"]
+    pattern_priority: 7
+    branch_prefix: "docs/"
+    commit_type: "docs"
+
+  test:
+    keywords: ["test", "unit", "coverage", "verify", "validate", "check", "assert"]
+    pattern_priority: 6
+    branch_prefix: "test/"
+    commit_type: "test"
+
+  perf:
+    keywords: ["optimize", "performance", "speed", "slow", "bundle", "render", "memory", "perf"]
+    pattern_priority: 5
+    branch_prefix: "perf/"
+    commit_type: "perf"
+
+  security:
+    keywords: ["security", "vulnerability", "auth", "token", "csrf", "xss", "inject", "safe"]
+    pattern_priority: 4
+    branch_prefix: "security/"
+    commit_type: "security"
+
+  chore:
+    keywords: ["update", "cleanup", "remove", "organize", "configure", "setup", "maintain"]
+    pattern_priority: 3
+    branch_prefix: "chore/"
+    commit_type: "chore"
+
+context_awareness:
+  check_active_branches: true
+  check_open_prs: true
+  check_issue_labels: true
+  related_files_threshold: 0.7
+
+multi_scope_detection:
+  condition: "request_has_multiple_scopes"
+  action: "create_separate_branches_and_ask_user"
+  example: |
+    Request: "Add dark mode AND fix sidebar bug AND update docs"
+    Response: "I detected 3 scopes. Creating:
+      - feature/XXX-dark-mode-toggle
+      - fix/YYY-sidebar-bug
+      - docs/ZZZ-dark-mode-guide
+    Which should I focus on first?"
+
+scope_change_detection:
+  trigger: "When user request differs from current branch scope"
+  
+  comparison_logic:
+    1_extract_scope: "Get type from current branch name"
+    2_analyze_request: "Determine type from user request"
+    3_compare: "Same type = same scope, Different = scope change"
+  
+  decision:
+    same_scope: "Continue on current branch"
+    different_scope: "Ask before creating new branch"
+  
+  user_options:
+    - "Confirm new branch creation for different scope"
+    - "Continue on current branch and mix scopes (not recommended)"
+    - "Stash current work and switch to new branch"
+    - "Work on new branch in separate window"
+
+branch_naming:
+  format: "{type}/{number}-{slug}"
+  
+  examples:
+    - feature/131-dark-mode-toggle
+    - fix/132-image-loading-error
+    - refactor/133-extract-header-component
+    - docs/134-getting-started-guide
+    - test/135-add-form-validation-tests
+    - perf/136-reduce-bundle-size
+    - security/137-fix-xss-vulnerability
+    - chore/138-update-dependencies
+
+slug_generation:
+  algorithm: |
+    1. Convert to lowercase
+    2. Remove special characters (keep only a-z0-9 and spaces)
+    3. Replace spaces with hyphens
+    4. Limit to 40 characters
+    5. Result: machine-readable slug
+
+issue_numbering:
+  strategy: "Sequential or timestamp-based"
+  options:
+    - use_git_tag_count: "From release tags"
+    - use_timestamp: "Last 4 digits of current timestamp (usually sufficient)"
+    - use_github_api: "Next sequential from issues API"
+
+confidence_scoring:
+  perfect_match: "> 0.9 (very confident)"
+  high_confidence: "0.7 - 0.9 (proceed with confirmation)"
+  medium_confidence: "0.5 - 0.7 (ask user, suggest options)"
+  low_confidence: "< 0.5 (definitely ask user)"
+
+usage:
+  cli: "node scripts/scope-analyzer.js 'Your request here'"
+  output: |
+    Scope Analysis: { 
+      scope: 'feature', 
+      confidence: 0.95, 
+      scores: {...}
+    }
+    Suggested Branch: feature/131-your-feature-slug

@@ -1,0 +1,101 @@
+name: Automated Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Linter
+        id: lint
+        continue-on-error: true
+        run: npm run lint
+
+      - name: Type Check
+        id: types
+        continue-on-error: true
+        run: npm run type-check
+
+      - name: Run Tests
+        id: tests
+        continue-on-error: true
+        run: npm run test -- --run
+
+      - name: Build Check
+        id: build
+        continue-on-error: true
+        run: npm run build
+
+      - name: Generate Review Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const lintStatus = '${{ steps.lint.outcome }}' === 'success' ? '✅ Pass' : '❌ Fail';
+            const typesStatus = '${{ steps.types.outcome }}' === 'success' ? '✅ Pass' : '❌ Fail';
+            const testsStatus = '${{ steps.tests.outcome }}' === 'success' ? '✅ Pass' : '❌ Fail';
+            const buildStatus = '${{ steps.build.outcome }}' === 'success' ? '✅ Pass' : '❌ Fail';
+
+            const allPass = '${{ steps.lint.outcome }}' === 'success' &&
+                           '${{ steps.types.outcome }}' === 'success' &&
+                           '${{ steps.tests.outcome }}' === 'success' &&
+                           '${{ steps.build.outcome }}' === 'success';
+
+            const body = `## 🤖 Automated Code Review
+
+| Category | Status |
+|----------|--------|
+| Lint | ${lintStatus} |
+| Type Check | ${typesStatus} |
+| Tests | ${testsStatus} |
+| Build | ${buildStatus} |
+
+${allPass ? '✅ All checks passed - ready for merge!' : '⚠️ Some checks failed - please review and fix.'}`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+      - name: Auto-Approve if All Pass
+        if: steps.lint.outcome == 'success' && steps.types.outcome == 'success' && steps.tests.outcome == 'success' && steps.build.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.pulls.createReview({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event: 'APPROVE',
+              body: '✅ All automated checks passed. Ready for merge!'
+            });
+
+      - name: Request Changes if Any Fail
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.pulls.createReview({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event: 'REQUEST_CHANGES',
+              body: '❌ Some checks failed. Please review the logs and fix issues.'
+            });

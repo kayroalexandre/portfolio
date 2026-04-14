@@ -18,7 +18,12 @@
     "validate": "npm run lint && npm run type-check && npm run test",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
-    "release:major": "standard-version --release-as major"
+    "release:major": "standard-version --release-as major",
+    "scope-analyze": "node scripts/scope-analyzer.js",
+    "new-task": "gh workflow run auto-branch-create.yml -f request=\"$1\" -f scope_type=auto",
+    "new-feature": "gh workflow run auto-branch-create.yml -f request=\"$1\" -f scope_type=feature",
+    "new-bug": "gh workflow run auto-branch-create.yml -f request=\"$1\" -f scope_type=bugfix",
+    "new-docs": "gh workflow run auto-branch-create.yml -f request=\"$1\" -f scope_type=docs"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

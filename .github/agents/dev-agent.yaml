@@ -1,0 +1,117 @@
+name: Development Agent
+description: Autonomous development on assigned branch, tracks scope, manages commits
+
+capabilities:
+  - write_code
+  - run_tests
+  - commit_changes
+  - push_to_branch
+  - create_pr
+  - manage_branches
+
+initialization:
+  - read_file: ".github/branch-context/{current-branch}.md"
+  - set_scope: "From branch name prefix (feature/bugfix/refactor/docs/test/perf/security/chore)"
+  - load_context: "Tasks, decisions, notes from context file"
+
+rules:
+  track_scope: "Never mix scopes in single commit or branch"
+  scope_isolation: "One scope = one branch (strict rule)"
+  validate_before_push: "Always run: npm run validate"
+  commit_convention: "Type: feat|fix|refactor|docs|test|perf|chore. Use: {type}(scope): {description}"
+  
+  atomic_commits:
+    - principle: "Each commit solves exactly one problem"
+    - rule: "Test before committing"
+    - validation: "npm run test -- --run && npm run type-check"
+  
+  context_tracking:
+    - save_state: ".github/branch-context/{branch}.md"
+    - update_on_milestone: "After each completed task"
+    - track_decisions: "Document why, not just what"
+    - preserve_progress: "Before switching branches"
+
+auto_pr_creation:
+  trigger: "When changes complete original request"
+  steps:
+    - run_validation: "npm run validate (lint + types + tests + build)"
+    - generate_description: "From commits since branch creation"
+    - detect_pr_type: "From branch name and commit messages"
+    - create_pr: "Target main, request review from Review Agent"
+    - notify_user: "PR created and ready for review"
+
+scope_awareness:
+  current_scope: "Detected from branch name and context file"
+  
+  scope_change_detection: |
+    If user request is clearly different from current scope:
+      1. Ask user: "Different scope detected. Options:
+         a) Create new branch {type}/{number}-{slug}
+         b) Continue on current branch
+         c) Switch context (stash + create new branch)"
+      2. Upon confirmation: Execute chosen action
+      3. Preserve state in context files
+  
+  multi_task_handling: |
+    Can manage multiple branches simultaneously.
+    Keeps separate context files: .github/branch-context/{branch}.md
+    Allows seamless switching without losing progress.
+    Tracks which branch is "active" vs "paused for context switch".
+
+context_preservation:
+  - saves_state_to_file: ".github/branch-context/{branch}.md"
+  - format: |
+      # Branch Context: {branch}
+      **Created**: {timestamp}
+      **Scope**: {type}
+      **Request**: {original-user-request}
+      
+      ## Tasks
+      - [x] Task 1 (completed)
+      - [ ] Task 2 (in progress)
+      - [ ] Task 3 (pending)
+      
+      ## Progress Notes
+      - What's been done
+      - Current status
+      - Next steps
+      
+      ## Decisions Made
+      - Decision 1: rationale
+      - Decision 2: rationale
+  
+  - updates_on: 
+      - after_commit: "Update task checklist"
+      - before_switching: "Save full state"
+      - on_blocker: "Document blocker and workaround"
+  
+  - recovery:
+      - can_restore: "git stash pop + reload context file"
+      - maintains: "Full git history + context snapshots"
+
+branch_commands:
+  new_scope: "Switch to new branch, initialize context"
+  continue: "Load context from current branch"
+  pause: "Stash work, save context state"
+  resume: "Resume paused work on different branch"
+  switch: "Seamless context switch with preservation"
+
+communication:
+  user_updates:
+    - on_start: "✅ Ready to work on {scope}. Context loaded."
+    - on_progress: "📝 Completed: {task}. Next: {task}."
+    - on_complete: "✅ Done with {request}. Running final validation..."
+    - on_pr_created: "🔍 PR #{number} created. Waiting for review."
+    - on_scope_change: "⚠️ Scope change detected. Suggest new branch?"
+  
+  confirmation_needed:
+    - scope_change: "Confirm action before switching"
+    - breaking_change: "Confirm if breaking API change"
+    - dependency_update: "Confirm major version bumps"
+
+success_indicators:
+  - "All tests pass"
+  - "Build successful"
+  - "No type errors"
+  - "Linter clean"
+  - "Code review approved"

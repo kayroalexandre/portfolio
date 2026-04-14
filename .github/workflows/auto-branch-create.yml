@@ -1,0 +1,178 @@
+name: Auto Create Branch on New Scope
+
+on:
+  workflow_dispatch:
+    inputs:
+      request:
+        description: 'What do you want to build?'
+        required: true
+        type: string
+      scope_type:
+        description: 'Scope type (auto-detected or override)'
+        required: false
+        type: choice
+        options:
+          - auto
+          - feature
+          - bugfix
+          - refactor
+          - docs
+          - test
+          - perf
+          - security
+          - chore
+
+jobs:
+  detect_and_create:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Detect Scope Type
+        id: detect
+        run: |
+          REQUEST="${{ github.event.inputs.request }}"
+          SCOPE_TYPE="${{ github.event.inputs.scope_type }}"
+          
+          # If scope_type is 'auto', detect it
+          if [ "$SCOPE_TYPE" = "auto" ]; then
+            case "$REQUEST" in
+              *"add"*|*"new"*|*"create"*|*"implement"*|*"build"*|*"enable"*)
+                SCOPE_TYPE="feature"
+                ;;
+              *"fix"*|*"bug"*|*"issue"*|*"error"*|*"crash"*)
+                SCOPE_TYPE="bugfix"
+                ;;
+              *"refactor"*|*"improve"*|*"extract"*|*"simplify"*|*"reorganize"*)
+                SCOPE_TYPE="refactor"
+                ;;
+              *"document"*|*"write"*|*"readme"*|*"guide"*|*"tutorial"*)
+                SCOPE_TYPE="docs"
+                ;;
+              *"test"*|*"coverage"*|*"unit"*|*"verify"*)
+                SCOPE_TYPE="test"
+                ;;
+              *"optimize"*|*"perf"*|*"speed"*|*"slow"*|*"bundle"*)
+                SCOPE_TYPE="perf"
+                ;;
+              *"security"*|*"vulnerability"*|*"auth"*|*"token"*)
+                SCOPE_TYPE="security"
+                ;;
+              *)
+                SCOPE_TYPE="chore"
+                ;;
+            esac
+          fi
+          
+          echo "scope_type=$SCOPE_TYPE" >> $GITHUB_OUTPUT
+          
+          # Generate branch slug from request
+          SLUG=$(echo "$REQUEST" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 ]//g' | sed 's/ /-/g' | cut -c1-30)
+          echo "branch_slug=$SLUG" >> $GITHUB_OUTPUT
+          
+          # Get next sequential number from git tags or use timestamp
+          ISSUE_NUM=$(date +%s | tail -c 4)
+          echo "issue_number=$ISSUE_NUM" >> $GITHUB_OUTPUT
+
+      - name: Construct Branch Name
+        id: branch
+        run: |
+          SCOPE_TYPE="${{ steps.detect.outputs.scope_type }}"
+          ISSUE_NUM="${{ steps.detect.outputs.issue_number }}"
+          SLUG="${{ steps.detect.outputs.branch_slug }}"
+          BRANCH="${SCOPE_TYPE}/${ISSUE_NUM}-${SLUG}"
+          
+          echo "name=$BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Check Existing Branch
+        id: check
+        run: |
+          BRANCH="${{ steps.branch.outputs.name }}"
+          
+          if git rev-parse "remotes/origin/$BRANCH" >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create New Branch
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          git config user.name "GitHub Copilot Agent"
+          git config user.email "copilot@github.local"
+          
+          BRANCH="${{ steps.branch.outputs.name }}"
+          REQUEST="${{ github.event.inputs.request }}"
+          SCOPE_TYPE="${{ steps.detect.outputs.scope_type }}"
+          
+          # Create branch from main
+          git fetch origin main
+          git checkout -b "$BRANCH" origin/main
+          
+          # Create branch context directory
+          mkdir -p .github/branch-context
+          
+          # Create context file
+          cat > ".github/branch-context/${BRANCH}.md" << 'EOF'
+          # Branch Context: $BRANCH
+          
+          **Created**: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          **Scope Type**: $SCOPE_TYPE
+          **Request**: $REQUEST
+          **Branch**: $BRANCH
+          
+          ## Tasks
+          - [ ] Development complete
+          - [ ] Tests passing
+          - [ ] Code review requested
+          - [ ] PR merged
+          
+          ## Progress Notes
+          - Branch initialized by Copilot Agent
+          - Scope auto-detected from request
+          - Ready for development
+          
+          ## Related Issues/PRs
+          - TBD (created via PR)
+          
+          ## Decisions Made
+          - None yet
+          
+          EOF
+          
+          # Commit context file
+          git add ".github/branch-context/"
+          git commit -m "chore: initialize branch context for $BRANCH"
+          
+          # Push new branch
+          git push origin "$BRANCH"
+          
+          echo "✅ Branch created: $BRANCH"
+
+      - name: Output Status
+        run: |
+          BRANCH="${{ steps.branch.outputs.name }}"
+          EXISTS="${{ steps.check.outputs.exists }}"
+          
+          if [ "$EXISTS" = "true" ]; then
+            echo "ℹ️ Branch already exists: $BRANCH"
+          else
+            echo "✅ New branch created: $BRANCH"
+          fi
+          
+          echo ""
+          echo "Next steps:"
+          echo "  git checkout $BRANCH"
+          echo "  # Make your changes"
+          echo "  git push origin $BRANCH"

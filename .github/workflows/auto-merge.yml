@@ -1,0 +1,80 @@
+name: Auto-Merge on Approval
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    if: github.event.review.state == 'APPROVED'
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Merge Conditions
+        id: check
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            // Get all reviews
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            // Count approvals and change requests
+            const approvals = reviews.filter(r => r.state === 'APPROVED').length;
+            const changesRequested = reviews.filter(r => r.state === 'CHANGES_REQUESTED').length;
+
+            // Get branch type (security changes always require manual review)
+            const headRef = pr.head.ref;
+            const isSecurityChange = headRef.includes('security');
+
+            // Decision logic
+            const canAutoMerge = 
+              changesRequested === 0 &&
+              approvals >= 1 &&
+              !isSecurityChange &&
+              pr.mergeable === true;
+
+            core.setOutput('can_merge', canAutoMerge);
+            core.setOutput('reason', 
+              changesRequested > 0 ? 'Changes requested' :
+              approvals < 1 ? 'Not enough approvals' :
+              isSecurityChange ? 'Security change requires manual review' :
+              pr.mergeable === false ? 'Merge conflicts detected' :
+              'Ready to merge'
+            );
+
+      - name: Merge PR
+        if: steps.check.outputs.can_merge == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                merge_method: 'squash'
+              });
+              
+              console.log(`✅ PR #${context.issue.number} automatically merged`);
+            } catch (error) {
+              console.log(`⚠️ Could not auto-merge: ${error.message}`);
+            }
+
+      - name: Log Decision
+        run: |
+          echo "Can Auto-Merge: ${{ steps.check.outputs.can_merge }}"
+          echo "Reason: ${{ steps.check.outputs.reason }}"

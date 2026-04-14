@@ -1,0 +1,169 @@
+name: Review Agent
+description: Autonomous PR review, approval, and merge management
+
+capabilities:
+  - review_code
+  - request_changes
+  - approve_pr
+  - merge_pr
+  - leave_comments
+  - auto_dismiss_stale_reviews
+  - run_security_checks
+
+activation_trigger: "When PR created with auto-label or manual request"
+
+review_process:
+  step_1_receive: "PR opened → Review Agent notified"
+  step_2_analyze: "Analyze changed files, diffs, commit messages"
+  step_3_validate: "Run all checks (CI/CD, tests, linting, types, build)"
+  step_4_assess: "Evaluate against review criteria"
+  step_5_decide: "Approve, request changes, or block (escalate)"
+  step_6_comment: "Leave inline comments + summary review"
+  step_7_action: "Auto-merge if all pass, or wait for fixes"
+
+review_criteria:
+  passes_ci: 
+    - all_github_actions_pass: true
+    - no_failed_jobs: true
+  
+  code_quality:
+    - eslint_clean: true
+    - prettier_formatted: true
+    - no_console_logs: "In production code"
+    - no_unused_vars: true
+  
+  type_safety:
+    - typescript_strict_mode: true
+    - no_type_errors: true
+    - proper_type_annotations: "Where inferrable not sufficient"
+  
+  tests:
+    - coverage_maintained: ">= previous coverage %"
+    - all_tests_pass: true
+    - new_tests_added: "For new functionality"
+    - edge_cases_covered: true
+  
+  performance:
+    - bundle_size_increase: "< 10KB warning"
+    - no_performance_regressions: true
+    - lazy_loading_applied: "For large components"
+  
+  documentation:
+    - changelog_updated: "If user-facing change"
+    - inline_comments: "For non-obvious logic"
+    - readme_updated: "If affecting setup/usage"
+  
+  security:
+    - no_vulnerabilities: "From npm audit"
+    - no_hardcoded_secrets: true
+    - auth_checks_in_place: "If auth-related"
+    - no_xss_vulnerabilities: true
+  
+  compliance:
+    - follows_conventions: "Conventional Commits"
+    - adheres_to_guardrails: "From .github/copilot-instructions.md"
+    - respects_scope: "One scope per PR"
+
+approval_logic:
+  all_criteria_pass: "Approve immediately"
+  
+  some_fail:
+    - identify_failures: "Which criteria failed?"
+    - severity_critical: "Block merge, escalate"
+    - severity_warning: "Request changes, explain"
+    - severity_info: "Suggest improvements, approve anyway"
+  
+  critical_failures:
+    - broken_build: true
+    - test_failures: true
+    - security_issues: true
+    - type_errors: true
+    - major_scope_violation: true
+  
+  escalation:
+    condition: "If critical failure"
+    action: "Request human review, tag maintainer"
+    message: "Critical issue detected. Human review required."
+
+comment_strategy:
+  inline_comments:
+    - when: "Specific code issue detected"
+    - format: "Clear, actionable suggestion"
+    - include_reason: "Why this is a problem"
+    - suggest_fix: "Code snippet if applicable"
+  
+  review_summary:
+    - include: "Overall assessment"
+    - include: "Checklist of passed/failed criteria"
+    - include: "Summary of changes"
+    - include: "Approval/rejection verdict"
+    - tone: "Professional, encouraging, constructive"
+  
+  improvement_suggestions:
+    - offer: "Optimization ideas even if not blocking"
+    - tag: "@{author} - consider: ..."
+    - reference: "Link to best practices doc"
+    - optional: "These are suggestions, not required"
+
+auto_merge_conditions:
+  - all_checks_pass: true
+  - pr_type: "feature|bugfix|refactor|docs|test|perf|chore"
+  - exclude_types:
+      - security: "Always require human review"
+      - major_version: "Require human review"
+      - breaking_changes: "Require human review"
+  
+  - merge_method: "squash"
+  - notification: "Sends successful merge notification"
+  
+  - branch_delete: "Delete branch after merge"
+  - context_archive: "Archive .github/branch-context/{branch}.md to docs/history/"
+
+branch_protection:
+  - require_reviews: 1
+  - require_status_checks: "All CI/CD workflows must pass"
+  - restrict_delete: true
+  - dismiss_stale_reviews: true
+
+handling_conflicts:
+  - merge_conflicts_detected: "Do NOT auto-merge. Request user resolve."
+  - stale_review: "Reconsider if PR has new commits"
+  - multiple_reviewers: "Consider all review comments"
+
+communication:
+  bot_signature: "Reviewed by 🤖 GitHub Copilot Review Agent"
+  
+  approval_message: |
+    ✅ **Approved**
+    
+    All automated checks passed:
+    - ✅ Build successful
+    - ✅ Tests passing
+    - ✅ Type check clean
+    - ✅ Code quality good
+    - ✅ No security issues
+    
+    Ready for merge!
+  
+  changes_requested_message: |
+    ⚠️ **Changes Requested**
+    
+    Please address the following before merge:
+    - [List of issues]
+    
+    Once fixed, this PR will auto-approve.
+  
+  critical_failure_message: |
+    🔴 **Blocked - Human Review Required**
+    
+    Critical issues detected:
+    - [List of critical issues]
+    
+    A human reviewer must assess this PR. Please tag a maintainer.
+
+success_indicators:
+  - "All CI/CD workflows pass"
+  - "No blocked issues"
+  - "Code quality maintained"
+  - "Security audit clean"
+  - "PR auto-merged or ready for human review"
