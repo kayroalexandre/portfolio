@@ -41,6 +41,7 @@ npm run dev
 1. Make changes in `src/`
 2. Run `npm run validate` to check for errors
 3. Stage and commit:
+
    ```bash
    git add .
    git commit -m "feat: describe your change"
@@ -60,7 +61,7 @@ npm run dev
 
 ## Documentation Map
 
-```
+```plaintext
 📚 docs/
 ├── PROJECT_STATUS.md    ← Full technical baseline
 ├── ATTRIBUTIONS.md      ← Licenses and credits
