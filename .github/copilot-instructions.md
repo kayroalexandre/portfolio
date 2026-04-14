@@ -1,44 +1,48 @@
-# Project Guidelines
+# Project Guidelines — Copilot Quick Reference
 
-## Code Style
+**Stack**: React 18 + TypeScript | Vite 6 | Tailwind CSS v4 | React Router 7
 
-- Use TypeScript with strict typing and clear names.
-- Keep UI behavior in components and copy/content in data files.
-- Prefer Tailwind utility classes over inline styles.
-- Follow Conventional Commits in every change.
+**Documentation**:
 
-See details in:
+- [Copilot Operations](./.github/copilot/instructions.md) — PR review, code review, security, CLI
+- [Extended Workflows](./.instructions.md) — Multi-step workflows and decision patterns
+- [Project Status](../docs/PROJECT_STATUS.md) — Technical baseline
+- [Contributing](./.github/CONTRIBUTING.md) — Team workflow
 
-- .github/copilot/instructions.md
-- .instructions.md
+## Code Style & Conventions
+
+- TypeScript + strict typing | clear, semantic names
+- **PT-BR content; EN code**
+- Copy centralized in `src/app/data/site.ts`
+- **Tailwind CSS only** (no inline styles, no `cn()` utility)
+- Conventional Commits (enforce via commitlint)
 
 ## Architecture
 
-- React + Vite single-page app.
-- Route definitions live in src/app/routes.ts.
-- Case study content is organized in cases/ and rendered by components in src/app/components/ and data modules in src/app/data/.
-- Reusable UI primitives are in src/app/components/ui/.
+- React SPA (Vite + React Router)
+- Routes: `src/app/routes.ts`
+- Case studies: Markdown → JSX (lazy-loaded)
+- UI: Radix primitives + Tailwind classes
 
-## Build and Test
+## Key Directories
 
-Run before proposing commits or PRs:
+- `src/app/` — Components, routes, hooks, data
+- `src/styles/` — Global CSS, Tailwind config
+- `cases/` — Editorial markdown + image maps
+- `docs/` — Documentation (status, attributions, examples)
+- `scripts/` — Utilities (linting, testing helpers)
+- `.github/` — Templates, workflows, Copilot config
 
-- npm run lint
-- npm run type-check
-- npm run test -- --run
-- npm run build
+## Validation (Before Every Commit)
 
-## Conventions
+```bash
+npm run lint          # Check code quality
+npm run type-check    # TypeScript strict mode
+npm run test -- --run # Vitest (31 tests)
+npm run build         # Vite production bundle
+```
 
-- Keep root focused on runtime/config essentials.
-- Put project documentation in docs/.
-- Put ad-hoc maintenance utilities in scripts/.
-- Do not remove or change behavior without validation.
+## Guardrails
 
-Reference docs (link, do not duplicate):
-
-- README.md
-- docs/PROJECT_STATUS.md
-- docs/ATTRIBUTIONS.md
-- docs/EXAMPLE_PROMPTS.md
-- .github/CONTRIBUTING.md
+❌ Never: Reintroduce shadcn/ui, add inline styles, hardcode copy, modify design tokens without review  
+✅ Always: Use Tailwind utilities, centralize copy, test before committing, link to canonical docs
