@@ -14,24 +14,28 @@ describe('router configuration', () => {
     const rootRoute = appRoutes[0];
     const indexRoute = rootRoute.children!.find((route) => route.index === true);
     expect(indexRoute).toBeDefined();
+    expect(indexRoute?.handle).toEqual({ pageKey: 'home' });
   });
 
   it('defines /projects route', () => {
     const rootRoute = appRoutes[0];
     const projectsRoute = rootRoute.children!.find((route) => route.path === 'projects');
     expect(projectsRoute).toBeDefined();
+    expect(projectsRoute?.handle).toEqual({ pageKey: 'projects' });
   });
 
   it('defines /about route', () => {
     const rootRoute = appRoutes[0];
     const aboutRoute = rootRoute.children!.find((route) => route.path === 'about');
     expect(aboutRoute).toBeDefined();
+    expect(aboutRoute?.handle).toEqual({ pageKey: 'about' });
   });
 
   it('defines /contact route', () => {
     const rootRoute = appRoutes[0];
     const contactRoute = rootRoute.children!.find((route) => route.path === 'contact');
     expect(contactRoute).toBeDefined();
+    expect(contactRoute?.handle).toEqual({ pageKey: 'contact' });
   });
 
   it('defines /project/:slug dynamic route', () => {
@@ -44,6 +48,7 @@ describe('router configuration', () => {
     const rootRoute = appRoutes[0];
     const catchAllRoute = rootRoute.children!.find((route) => route.path === '*');
     expect(catchAllRoute).toBeDefined();
+    expect(catchAllRoute?.handle).toEqual({ pageKey: 'notFound' });
   });
 
   it('has error boundary configured for runtime errors', () => {

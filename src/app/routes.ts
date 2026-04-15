@@ -8,6 +8,7 @@ import { HomePage } from './components/HomePage';
 import { Layout } from './components/Layout';
 import { NotFoundPage } from './components/NotFoundPage';
 import { ProjectsPage } from './components/ProjectsPage';
+import { routePageKeyByPath } from './data/page-metadata';
 
 export const appRoutes = [
   {
@@ -15,12 +16,20 @@ export const appRoutes = [
     Component: Layout,
     ErrorBoundary,
     children: [
-      { index: true, Component: HomePage },
-      { path: 'projects', Component: ProjectsPage },
-      { path: 'about', Component: AboutPage },
-      { path: 'contact', Component: ContactPage },
+      { index: true, Component: HomePage, handle: { pageKey: routePageKeyByPath['/'] } },
+      {
+        path: 'projects',
+        Component: ProjectsPage,
+        handle: { pageKey: routePageKeyByPath['/projects'] },
+      },
+      { path: 'about', Component: AboutPage, handle: { pageKey: routePageKeyByPath['/about'] } },
+      {
+        path: 'contact',
+        Component: ContactPage,
+        handle: { pageKey: routePageKeyByPath['/contact'] },
+      },
       { path: 'project/:slug', Component: CaseStudyPage },
-      { path: '*', Component: NotFoundPage },
+      { path: '*', Component: NotFoundPage, handle: { pageKey: routePageKeyByPath['*'] } },
     ],
   },
 ];

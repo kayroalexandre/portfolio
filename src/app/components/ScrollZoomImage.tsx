@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { uiEventBus } from '../lib/ui-events';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface ScrollZoomImageProps {
@@ -25,13 +26,15 @@ export function ScrollZoomImage({ src, alt, className }: ScrollZoomImageProps) {
       );
 
       // Scale from 1.3 (zoomed) down to 1.0 (normal)
-      setScale(1.3 - progress * 0.3);
+      const nextScale = Number((1.3 - progress * 0.3).toFixed(4));
+      setScale(nextScale);
+      uiEventBus.emit('image:scroll-zoom', { src, scale: nextScale });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [src]);
 
   return (
     <div ref={containerRef} className="w-full h-full overflow-hidden">
