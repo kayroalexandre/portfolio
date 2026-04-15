@@ -7,29 +7,29 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="px-6 md:px-12 py-12 border-t border-white/10">
+    <footer id="contact" className="px-6 md:px-12 py-12 border-t border-shell-border">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20" style={{ fontSize: '0.8rem' }}>
-        <p className="text-neutral-500">
+        <p className="text-shell-muted-foreground">
           &copy;{year} {siteConfig.name}
         </p>
         <div>
-          <p className="text-white mb-1">{siteConfig.footerCta}</p>
-          <p className="text-neutral-500">
+          <p className="text-shell-foreground mb-1">{siteConfig.footerCta}</p>
+          <p className="text-shell-muted-foreground">
             {siteConfig.publicEmail ?? 'Canal público de contato em atualização.'}
           </p>
         </div>
-        <div className="text-neutral-500 space-y-2">
-          <Link to="/projects" className="block hover:text-white transition-colors">
+        <div className="text-shell-muted-foreground space-y-2">
+          <Link to="/projects" className="block hover:text-shell-foreground transition-colors">
             Ver estudos de caso
           </Link>
-          <Link to="/contact" className="block hover:text-white transition-colors">
+          <Link to="/contact" className="block hover:text-shell-foreground transition-colors">
             Abrir página de contato
           </Link>
         </div>
       </div>
 
       <div className="w-full">
-        <DynamicName as="h2" className="text-white" />
+        <DynamicName as="h2" className="text-shell-foreground" />
       </div>
     </footer>
   );

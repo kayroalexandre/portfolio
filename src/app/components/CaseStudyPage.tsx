@@ -6,6 +6,7 @@ import { caseStudyContentMap } from '../data/project-cases';
 import { getProjectBySlug, getProjectNavigation } from '../data/projects';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Button } from './ui/button';
 
 export function CaseStudyPage() {
   const { slug } = useParams();
@@ -18,13 +19,9 @@ export function CaseStudyPage() {
     return (
       <div className="px-6 md:px-12 py-40 text-center">
         <p className="text-neutral-400 mb-6">Projeto não encontrado.</p>
-        <Link
-          to="/"
-          className="bg-white text-black rounded-full px-5 py-2 hover:bg-white/80 transition-colors"
-          style={{ fontSize: '0.8rem' }}
-        >
-          Voltar ao início
-        </Link>
+        <Button asChild>
+          <Link to="/">Voltar ao início</Link>
+        </Button>
       </div>
     );
   }
@@ -114,13 +111,9 @@ export function CaseStudyPage() {
             </div>
           </button>
 
-          <Link
-            to="/projects"
-            className="text-neutral-500 hover:text-white transition-colors hidden md:block"
-            style={{ fontSize: '0.8rem' }}
-          >
-            Todos os cases
-          </Link>
+          <Button asChild variant="ghost" className="hidden md:inline-flex">
+            <Link to="/projects">Todos os cases</Link>
+          </Button>
 
           <button
             type="button"

@@ -6,6 +6,7 @@ export function Header() {
   const location = useLocation();
   const isHome = location.pathname === '/';
   const isProjects = location.pathname === '/projects' || location.pathname.startsWith('/project/');
+  const navLinkClass = 'hover:text-shell-foreground transition-colors';
 
   return (
     <>
@@ -21,28 +22,28 @@ export function Header() {
       >
         <Link
           to="/"
-          className={`${isHome ? 'text-white' : 'text-neutral-400'} hover:text-white transition-colors`}
+          className={`${isHome ? 'text-shell-foreground' : 'text-shell-muted-foreground'} ${navLinkClass}`}
           aria-current={isHome ? 'page' : undefined}
         >
           Início
         </Link>
         <Link
           to="/projects"
-          className={`${isProjects ? 'text-white' : 'text-neutral-400'} hover:text-white transition-colors`}
+          className={`${isProjects ? 'text-shell-foreground' : 'text-shell-muted-foreground'} ${navLinkClass}`}
           aria-current={isProjects ? 'page' : undefined}
         >
           Projetos
         </Link>
         <Link
           to="/about"
-          className={`${location.pathname === '/about' ? 'text-white' : 'text-neutral-400'} hover:text-white transition-colors`}
+          className={`${location.pathname === '/about' ? 'text-shell-foreground' : 'text-shell-muted-foreground'} ${navLinkClass}`}
           aria-current={location.pathname === '/about' ? 'page' : undefined}
         >
           Sobre
         </Link>
         <Link
           to="/contact"
-          className={`${location.pathname === '/contact' ? 'text-white' : 'text-neutral-400'} hover:text-white transition-colors`}
+          className={`${location.pathname === '/contact' ? 'text-shell-foreground' : 'text-shell-muted-foreground'} ${navLinkClass}`}
           aria-current={location.pathname === '/contact' ? 'page' : undefined}
         >
           Contato
