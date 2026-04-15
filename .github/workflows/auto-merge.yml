@@ -55,6 +55,7 @@ jobs:
               approvals < 1 ? 'Not enough approvals' :
               pr.base.ref !== 'develop' ? 'Auto-merge allowed only for develop' :
               isSecurityChange ? 'Security change requires manual review' :
+              pr.mergeable == null ? 'Mergeability still being calculated' :
               pr.mergeable === false ? 'Merge conflicts detected' :
               pr.mergeable_state !== 'clean' ? `Mergeable state: ${pr.mergeable_state}` :
               'Ready to merge'

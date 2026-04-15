@@ -23,7 +23,7 @@ O recurso **Merge Queue** ainda nao foi aceito pela API/plano atual do repositor
 O script abaixo:
 
 - Le a protecao atual da `main`
-- Reaplica a mesma configuracao incluindo `required_merge_queue=true`
+- Reaplica a protecao via endpoint de branch protection incluindo `required_merge_queue=true`
 - Verifica se o retorno passou a refletir o recurso
 - Se nao refletir, informa que o recurso ainda nao esta disponivel
 
@@ -72,16 +72,25 @@ json.dump(payload, open(dst, 'w'))
 print('payload criado em', dst)
 PY
 
-echo "[3/4] Aplicando probe (sem alterar os checks existentes)..."
-gh api --method PUT "repos/${OWNER}/${REPO}/branches/${BRANCH}/protection" --input /tmp/main-protection-mergequeue-probe.json > /tmp/main-protection-after-probe.json
-
-echo "[4/4] Verificando suporte no retorno..."
-if rg -q "merge_queue|required_merge_queue" /tmp/main-protection-after-probe.json; then
-  echo "OK: Merge Queue parece disponivel no retorno da API."
-  echo "Revise tambem na UI: Settings -> Branches/Rulesets -> main."
+echo "[3/4] Aplicando probe (pode falhar quando o recurso nao esta disponivel)..."
+if gh api --method PUT "repos/${OWNER}/${REPO}/branches/${BRANCH}/protection" --input /tmp/main-protection-mergequeue-probe.json > /tmp/main-protection-after-probe.json 2> /tmp/main-protection-after-probe-error.txt; then
+  echo "[4/4] Verificando suporte no retorno..."
+  if rg -q "merge_queue|required_merge_queue" /tmp/main-protection-after-probe.json; then
+    echo "OK: Merge Queue parece disponivel no retorno da API."
+    echo "Revise tambem na UI: Settings -> Branches/Rulesets -> main."
+  else
+    echo "NOT AVAILABLE: recurso ainda nao exposto para este plano/UI/API."
+    echo "A API aceitou o payload, mas o retorno nao refletiu suporte ao recurso."
+    echo "Mantenha o agendamento periodico deste script."
+  fi
 else
+  echo "[4/4] Verificando suporte no retorno..."
   echo "NOT AVAILABLE: recurso ainda nao exposto para este plano/UI/API."
+  echo "A API rejeitou o campo de probe durante o PUT."
+  echo "Resposta do GitHub:"
+  cat /tmp/main-protection-after-probe-error.txt
   echo "Mantenha o agendamento periodico deste script."
+  exit 0
 fi
 ```
 
@@ -92,7 +101,9 @@ fi
 
 ## Observacoes
 
-- O script nao remove protecoes existentes: ele reaplica a protecao atual com o campo de probe.
+- O endpoint `PUT /branches/{branch}/protection` substitui a configuracao de protecao da branch.
+- Campos nao incluidos no payload podem ser resetados ou removidos; revise o payload com cuidado antes de executar.
+- Quando possivel, prefira Rulesets API/fluxo na UI para reduzir risco de sobrescrever opcoes nao mapeadas.
 - Se o GitHub passar a suportar Merge Queue para este repositorio, a recomendacao oficial continua:
   - manter PR obrigatorio
   - manter status checks obrigatorios
