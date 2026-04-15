@@ -1,33 +1,17 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 
-import { projects } from '../data/projects';
+import { caseStudyContentMap } from '../data/project-cases';
+import { getProjectBySlug, getProjectNavigation } from '../data/projects';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-
-const MonetixContent = lazy(() =>
-  import('../data/monetixContent').then(({ MonetixContent }) => ({
-    default: MonetixContent,
-  }))
-);
-
-const UnimedPayContent = lazy(() =>
-  import('../data/unimedpayContent').then(({ UnimedPayContent }) => ({
-    default: UnimedPayContent,
-  }))
-);
-
-const caseStudyContentMap = {
-  monetix: MonetixContent,
-  unimedpay: UnimedPayContent,
-} as const;
 
 export function CaseStudyPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const currentProjectIndex = projects.findIndex((project) => project.slug === slug);
-  const project = projects[currentProjectIndex];
+  const project = slug ? getProjectBySlug(slug) : undefined;
+  const navigation = slug ? getProjectNavigation(slug) : null;
   useDocumentTitle(project ? project.title : 'Projeto não encontrado');
 
   if (!project) {
@@ -45,8 +29,6 @@ export function CaseStudyPage() {
     );
   }
 
-  const nextProject = projects[(currentProjectIndex + 1) % projects.length];
-  const previousProject = projects[(currentProjectIndex - 1 + projects.length) % projects.length];
   const ContentComponent = project.caseStudy ? caseStudyContentMap[project.caseStudy] : null;
 
   return (
@@ -120,7 +102,7 @@ export function CaseStudyPage() {
         <div className="flex justify-between items-center">
           <button
             type="button"
-            onClick={() => navigate(`/project/${previousProject.slug}`)}
+            onClick={() => navigate(`/project/${navigation?.previous.slug ?? project.slug}`)}
             className="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors group"
           >
             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
@@ -128,7 +110,7 @@ export function CaseStudyPage() {
               <p className="text-neutral-500" style={{ fontSize: '0.7rem' }}>
                 Anterior
               </p>
-              <p style={{ fontSize: '0.85rem' }}>{previousProject.title}</p>
+              <p style={{ fontSize: '0.85rem' }}>{navigation?.previous.title ?? project.title}</p>
             </div>
           </button>
 
@@ -142,14 +124,14 @@ export function CaseStudyPage() {
 
           <button
             type="button"
-            onClick={() => navigate(`/project/${nextProject.slug}`)}
+            onClick={() => navigate(`/project/${navigation?.next.slug ?? project.slug}`)}
             className="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors group"
           >
             <div className="text-right">
               <p className="text-neutral-500" style={{ fontSize: '0.7rem' }}>
                 Próximo
               </p>
-              <p style={{ fontSize: '0.85rem' }}>{nextProject.title}</p>
+              <p style={{ fontSize: '0.85rem' }}>{navigation?.next.title ?? project.title}</p>
             </div>
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
