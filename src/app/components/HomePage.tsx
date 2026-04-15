@@ -6,6 +6,9 @@ import { siteConfig } from '../data/site';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ScrollZoomImage } from './ScrollZoomImage';
+import { SectionDivider } from './SectionDivider';
+import { SectionHeader } from './SectionHeader';
+import { Button } from './ui/button';
 
 export function HomePage() {
   useDocumentTitle();
@@ -27,20 +30,12 @@ export function HomePage() {
             {siteConfig.heroSupport}
           </p>
           <div className="flex gap-3 mb-10">
-            <Link
-              to="/projects"
-              className="bg-white text-black rounded-full px-5 py-2 hover:bg-white/80 transition-colors"
-              style={{ fontSize: '0.8rem' }}
-            >
-              Ver projetos
-            </Link>
-            <Link
-              to="/contact"
-              className="border border-white/30 rounded-full px-5 py-2 text-white hover:bg-white hover:text-black transition-colors"
-              style={{ fontSize: '0.8rem' }}
-            >
-              Preparar briefing
-            </Link>
+            <Button asChild>
+              <Link to="/projects">Ver projetos</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/contact">Preparar briefing</Link>
+            </Button>
           </div>
         </div>
 
@@ -54,39 +49,20 @@ export function HomePage() {
       </section>
 
       <section id="projects" className="px-6 md:px-12 py-20">
-        <div className="flex flex-col md:flex-row gap-8 mb-12">
-          <div
-            className="flex items-start gap-2 text-neutral-400 md:w-1/4"
-            style={{ fontSize: '0.85rem' }}
-          >
-            <FolderOpen size={16} className="mt-0.5" />
-            <span>Projetos</span>
-          </div>
-          <div className="md:w-3/4 max-w-lg">
-            <h2 className="text-white mb-4" style={{ fontSize: '2rem', fontWeight: 600 }}>
-              Estudos de caso
-            </h2>
-            <p className="text-neutral-400 mb-6" style={{ fontSize: '0.85rem', lineHeight: 1.7 }}>
-              {siteConfig.projectsIntro}
-            </p>
-            <Link
-              to="/projects"
-              className="bg-white text-black rounded-full px-5 py-2 hover:bg-white/80 transition-colors"
-              style={{ fontSize: '0.8rem' }}
-            >
-              Ver todos os cases
-            </Link>
-          </div>
-        </div>
+        <SectionHeader
+          icon={<FolderOpen size={16} />}
+          label="Projetos"
+          title="Estudos de caso"
+          description={siteConfig.projectsIntro}
+          className="mb-12"
+          descriptionClassName="mb-6"
+        />
 
-        <div
-          className="flex justify-between px-8 mb-8 text-neutral-600"
-          style={{ fontSize: '1.2rem' }}
-        >
-          <span>+</span>
-          <span>+</span>
-          <span>+</span>
-        </div>
+        <Button asChild>
+          <Link to="/projects">Ver todos os cases</Link>
+        </Button>
+
+        <SectionDivider className="px-8 mb-8 mt-12" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
@@ -121,20 +97,13 @@ export function HomePage() {
       </section>
 
       <section id="about" className="px-6 md:px-12 py-20 border-t border-white/10">
-        <div className="flex flex-col md:flex-row gap-8 mb-16">
-          <div
-            className="flex items-start gap-2 text-neutral-400 md:w-1/4"
-            style={{ fontSize: '0.85rem' }}
-          >
-            <Layers size={16} className="mt-0.5" />
-            <span>Serviços</span>
-          </div>
-          <div className="md:w-3/4 max-w-lg">
-            <p className="text-neutral-400" style={{ fontSize: '0.85rem', lineHeight: 1.7 }}>
-              {siteConfig.servicesIntro}
-            </p>
-          </div>
-        </div>
+        <SectionHeader
+          icon={<Layers size={16} />}
+          label="Serviços"
+          title="O que eu faço"
+          description={siteConfig.servicesIntro}
+          className="mb-16"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 border-t border-white/10 pt-10">
           <div>

@@ -3,6 +3,9 @@ import { useSearchParams } from 'react-router';
 
 import { siteConfig } from '../data/site';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { SectionDivider } from './SectionDivider';
+import { SectionHeader } from './SectionHeader';
+import { Button } from './ui/button';
 
 const formSubmitAction = import.meta.env.VITE_FORMSUBMIT_ACTION?.trim() ?? '';
 const siteUrl = import.meta.env.VITE_SITE_URL?.trim() ?? '';
@@ -33,32 +36,15 @@ export function ContactPage() {
   return (
     <div className="pb-20">
       <section className="px-6 md:px-12 pt-16 pb-20">
-        <div className="flex flex-col md:flex-row gap-8 mb-16">
-          <div
-            className="flex items-start gap-2 text-neutral-400 md:w-1/4"
-            style={{ fontSize: '0.85rem' }}
-          >
-            <Send size={16} className="mt-0.5" />
-            <span>Contato</span>
-          </div>
-          <div className="md:w-3/4 max-w-lg">
-            <h2 className="text-white mb-4" style={{ fontSize: '2rem', fontWeight: 600 }}>
-              Contato
-            </h2>
-            <p className="text-neutral-400" style={{ fontSize: '0.85rem', lineHeight: 1.7 }}>
-              {siteConfig.contactIntro}
-            </p>
-          </div>
-        </div>
+        <SectionHeader
+          icon={<Send size={16} />}
+          label="Contato"
+          title="Contato"
+          description={siteConfig.contactIntro}
+          className="mb-16"
+        />
 
-        <div
-          className="flex justify-between px-4 mb-12 text-neutral-600"
-          style={{ fontSize: '1.2rem' }}
-        >
-          <span>+</span>
-          <span>+</span>
-          <span>+</span>
-        </div>
+        <SectionDivider className="px-4 mb-12" />
 
         <div className="flex flex-col md:flex-row gap-16">
           <div className="md:w-1/4">
@@ -174,14 +160,9 @@ export function ContactPage() {
                 />
               </div>
               <div>
-                <button
-                  type="submit"
-                  disabled={!isConfigured}
-                  className="bg-white text-black px-6 py-3 rounded-full hover:bg-white/80 transition-colors cursor-pointer disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-neutral-500"
-                  style={{ fontSize: '0.8rem' }}
-                >
+                <Button type="submit" disabled={!isConfigured}>
                   {isConfigured ? 'Enviar mensagem' : 'Canal em configuração'}
-                </button>
+                </Button>
               </div>
             </form>
           </div>

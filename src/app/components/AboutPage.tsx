@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { siteConfig } from '../data/site';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { SectionDivider } from './SectionDivider';
+import { SectionHeader } from './SectionHeader';
 
 export function AboutPage() {
   const [openService, setOpenService] = useState(0);
@@ -12,37 +14,26 @@ export function AboutPage() {
   return (
     <div className="pb-20">
       <section className="px-6 md:px-12 pt-16 pb-16">
-        <div className="flex flex-col md:flex-row gap-8 mb-16">
-          <div
-            className="flex items-start gap-2 text-neutral-400 md:w-1/4"
-            style={{ fontSize: '0.85rem' }}
-          >
-            <User size={16} className="mt-0.5" />
-            <span>Sobre</span>
-          </div>
-          <div className="md:w-3/4 max-w-lg">
-            <h2 className="text-white mb-4" style={{ fontSize: '2rem', fontWeight: 600 }}>
-              Sobre
-            </h2>
-            <p className="text-neutral-300 mb-4" style={{ fontSize: '0.85rem', lineHeight: 1.7 }}>
-              {siteConfig.aboutIntro}
-            </p>
-            <p className="text-neutral-400" style={{ fontSize: '0.85rem', lineHeight: 1.7 }}>
-              {siteConfig.aboutSupport}
-            </p>
-          </div>
-        </div>
+        <SectionHeader
+          icon={<User size={16} />}
+          label="Sobre"
+          title="Sobre"
+          description={
+            <>
+              <span className="block text-shell-foreground mb-4" style={{ lineHeight: 1.7 }}>
+                {siteConfig.aboutIntro}
+              </span>
+              <span className="block text-shell-muted-foreground" style={{ lineHeight: 1.7 }}>
+                {siteConfig.aboutSupport}
+              </span>
+            </>
+          }
+          descriptionClassName="space-y-0"
+          className="mb-16"
+        />
 
         <div className="relative">
-          <div
-            className="flex justify-between px-4 mb-4 text-neutral-600"
-            style={{ fontSize: '1.2rem' }}
-          >
-            <span>+</span>
-            <span>+</span>
-            <span>+</span>
-            <span>+</span>
-          </div>
+          <SectionDivider count={4} className="px-4 mb-4" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {siteConfig.aboutGallery.map((image) => (
               <div key={image.alt} className="aspect-[4/5] rounded-lg overflow-hidden">
@@ -58,20 +49,13 @@ export function AboutPage() {
       </section>
 
       <section className="px-6 md:px-12 py-20 border-t border-white/10">
-        <div className="flex flex-col md:flex-row gap-8 mb-12">
-          <div
-            className="flex items-start gap-2 text-neutral-400 md:w-1/4"
-            style={{ fontSize: '0.85rem' }}
-          >
-            <Layers size={16} className="mt-0.5" />
-            <span>Serviços</span>
-          </div>
-          <div className="md:w-3/4 max-w-lg">
-            <p className="text-neutral-400" style={{ fontSize: '0.85rem', lineHeight: 1.7 }}>
-              {siteConfig.servicesIntro}
-            </p>
-          </div>
-        </div>
+        <SectionHeader
+          icon={<Layers size={16} />}
+          label="Serviços"
+          title="Serviços"
+          description={siteConfig.servicesIntro}
+          className="mb-12"
+        />
 
         <div className="md:ml-[25%]">
           {siteConfig.services.map((service, serviceIndex) => (
@@ -113,27 +97,18 @@ export function AboutPage() {
               </div>
             </div>
           ))}
-          <div className="border-t border-white/10" />
+          <div className="border-t border-shell-border" />
         </div>
       </section>
 
       <section className="px-6 md:px-12 py-20 border-t border-white/10">
-        <div className="flex flex-col md:flex-row gap-8 mb-12">
-          <div
-            className="flex items-start gap-2 text-neutral-400 md:w-1/4"
-            style={{ fontSize: '0.85rem' }}
-          >
-            <Briefcase size={16} className="mt-0.5" />
-            <span>Prática</span>
-          </div>
-          <div className="md:w-3/4 max-w-lg">
-            <p className="text-neutral-400" style={{ fontSize: '0.85rem', lineHeight: 1.7 }}>
-              Prefiro explicar o trabalho pela forma como ele é conduzido: entender o problema,
-              estruturar a decisão, dar forma à solução e deixar o sistema pronto para continuar
-              evoluindo.
-            </p>
-          </div>
-        </div>
+        <SectionHeader
+          icon={<Briefcase size={16} />}
+          label="Prática"
+          title="Prática"
+          description="Prefiro explicar o trabalho pela forma como ele é conduzido: entender o problema, estruturar a decisão, dar forma à solução e deixar o sistema pronto para continuar evoluindo."
+          className="mb-12"
+        />
 
         <div className="md:ml-[25%]">
           {siteConfig.practice.map((practiceEntry) => (
@@ -151,7 +126,7 @@ export function AboutPage() {
               </div>
             </div>
           ))}
-          <div className="border-t border-white/10" />
+          <div className="border-t border-shell-border" />
         </div>
       </section>
     </div>

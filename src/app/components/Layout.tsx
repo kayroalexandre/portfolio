@@ -6,7 +6,7 @@ import { ScrollToTop } from './ScrollToTop';
 
 export function Layout() {
   return (
-    <div className="min-h-screen bg-black text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
+    <div className="min-h-screen bg-shell-background text-shell-foreground font-sans">
       <ScrollToTop />
       <Header />
       <Outlet />
