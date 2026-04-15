@@ -91,7 +91,7 @@ export function MonetixCover({ className = '' }: CoverProps) {
               </div>
               <div className="flex-1 flex justify-center">
                 <div
-                  className="bg-white/5 rounded-[4px] px-[2%] py-[0.5%] text-white/20 text-[6px] font-mono truncate max-w-[40%]"
+                  className="bg-shell-surface rounded-[4px] px-[2%] py-[0.5%] text-shell-muted-foreground/40 text-[6px] font-mono truncate max-w-[40%]"
                   aria-hidden="true"
                 >
                   monetix.com.br

@@ -125,3 +125,9 @@ Referencias oficiais:
 - O repositório ainda carrega uma pasta `src/app/components/ui/` herdada do template original. A experiência principal atual do portfólio não depende dela.
 - O envio real do formulário depende da configuração pública de `VITE_FORMSUBMIT_ACTION` e `VITE_SITE_URL`.
 - Scripts auxiliares de manutenção ficam em `scripts/` para manter a raiz enxuta.
+
+## Limpeza recente
+
+- Páginas e conteúdos editoriais foram normalizados para usar Tailwind e tokens semânticos do shell.
+- O título dinâmico foi simplificado para evitar estilos inline fixos.
+- A lógica de contato e metadados de página continua centralizada em `src/app/data/` e `src/app/hooks/`.

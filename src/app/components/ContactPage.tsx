@@ -48,32 +48,26 @@ export function ContactPage() {
 
         <div className="flex flex-col md:flex-row gap-16">
           <div className="md:w-1/4">
-            <h3 className="text-white mb-8" style={{ fontSize: '0.95rem', fontWeight: 500 }}>
-              Como usar
-            </h3>
+            <h3 className="text-shell-foreground mb-8 text-[0.95rem] font-medium">Como usar</h3>
             <div className="space-y-6">
               <div>
-                <p className="text-white" style={{ fontSize: '0.8rem', fontWeight: 500 }}>
-                  Escopo ideal
-                </p>
-                <p className="text-neutral-500" style={{ fontSize: '0.8rem', lineHeight: 1.7 }}>
+                <p className="text-shell-foreground text-[0.8rem] font-medium">Escopo ideal</p>
+                <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
                   Produto digital, UX para operação complexa, redesign estrutural, design systems e
                   documentação de decisão.
                 </p>
               </div>
               <div>
-                <p className="text-white" style={{ fontSize: '0.8rem', fontWeight: 500 }}>
-                  Estado atual
-                </p>
-                <p className="text-neutral-500" style={{ fontSize: '0.8rem', lineHeight: 1.7 }}>
+                <p className="text-shell-foreground text-[0.8rem] font-medium">Estado atual</p>
+                <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
                   {formState.availabilityCopy}
                 </p>
               </div>
               <div>
-                <p className="text-white" style={{ fontSize: '0.8rem', fontWeight: 500 }}>
+                <p className="text-shell-foreground text-[0.8rem] font-medium">
                   Resultado do formulário
                 </p>
-                <p className="text-neutral-500" style={{ fontSize: '0.8rem', lineHeight: 1.7 }}>
+                <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
                   {formState.resultCopy}
                 </p>
               </div>
@@ -81,23 +75,19 @@ export function ContactPage() {
           </div>
 
           <div className="md:w-3/4 max-w-lg">
-            <h3 className="text-white mb-8" style={{ fontSize: '0.95rem', fontWeight: 500 }}>
+            <h3 className="text-shell-foreground mb-8 text-[0.95rem] font-medium">
               Enviar mensagem
             </h3>
             {formState.isSent ? (
               <div
                 aria-live="polite"
-                className="mb-8 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-emerald-100"
-                style={{ fontSize: '0.8rem', lineHeight: 1.6 }}
+                className="mb-8 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-emerald-100 text-[0.8rem] leading-[1.6]"
               >
                 {siteConfig.contactSuccessMessage}
               </div>
             ) : null}
             {!formState.isConfigured ? (
-              <div
-                className="mb-8 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-neutral-400"
-                style={{ fontSize: '0.8rem', lineHeight: 1.6 }}
-              >
+              <div className="mb-8 rounded-lg border border-shell-border bg-shell-surface px-4 py-3 text-shell-muted-foreground text-[0.8rem] leading-[1.6]">
                 Configure <code>VITE_FORMSUBMIT_ACTION</code> e <code>VITE_SITE_URL</code> para
                 ativar o envio real deste formulário.
               </div>
@@ -119,42 +109,39 @@ export function ContactPage() {
                 autoComplete="off"
               />
               <div>
-                <label className="block text-neutral-500 mb-2" style={{ fontSize: '0.75rem' }}>
+                <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
                   Nome
                 </label>
                 <input
                   type="text"
                   name="name"
-                  className="w-full bg-transparent border-b border-white/15 pb-3 text-white outline-none focus:border-white/40 transition-colors"
-                  style={{ fontSize: '0.85rem' }}
+                  className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors text-[0.85rem]"
                   placeholder="Seu nome"
                   autoComplete="name"
                   required
                 />
               </div>
               <div>
-                <label className="block text-neutral-500 mb-2" style={{ fontSize: '0.75rem' }}>
+                <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
                   E-mail
                 </label>
                 <input
                   type="email"
                   name="email"
-                  className="w-full bg-transparent border-b border-white/15 pb-3 text-white outline-none focus:border-white/40 transition-colors"
-                  style={{ fontSize: '0.85rem' }}
+                  className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors text-[0.85rem]"
                   placeholder="Seu e-mail"
                   autoComplete="email"
                   required
                 />
               </div>
               <div>
-                <label className="block text-neutral-500 mb-2" style={{ fontSize: '0.75rem' }}>
+                <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
                   Mensagem
                 </label>
                 <textarea
                   name="message"
                   rows={4}
-                  className="w-full bg-transparent border-b border-white/15 pb-3 text-white outline-none focus:border-white/40 transition-colors resize-none"
-                  style={{ fontSize: '0.85rem' }}
+                  className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors resize-none text-[0.85rem]"
                   placeholder="Explique o desafio, o contexto e o que você precisa."
                   required
                 />

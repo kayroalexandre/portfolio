@@ -7,9 +7,9 @@ export function NotFoundPage() {
 
   return (
     <div className="px-6 md:px-12 py-40 text-center">
-      <h2 className="text-white text-3xl font-semibold mb-4">404</h2>
-      <p className="text-neutral-400 mb-2 text-[0.95rem]">Página não encontrada</p>
-      <p className="text-neutral-500 mb-8 text-[0.85rem] max-w-md mx-auto leading-[1.7]">
+      <h2 className="text-shell-foreground text-3xl font-semibold mb-4">404</h2>
+      <p className="text-shell-muted-foreground mb-2 text-[0.95rem]">Página não encontrada</p>
+      <p className="text-shell-muted-foreground mb-8 text-[0.85rem] max-w-md mx-auto leading-[1.7]">
         O endereço que você acessou não corresponde a nenhuma página deste portfólio.
       </p>
       <Link

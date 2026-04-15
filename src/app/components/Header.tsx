@@ -16,10 +16,7 @@ export function Header() {
         </Link>
       </div>
 
-      <nav
-        className="flex justify-between items-center w-full px-6 md:px-12 py-6"
-        style={{ fontSize: '0.875rem' }}
-      >
+      <nav className="flex justify-between items-center w-full px-6 md:px-12 py-6 text-[0.875rem]">
         <Link
           to="/"
           className={`${isHome ? 'text-shell-foreground' : 'text-shell-muted-foreground'} ${navLinkClass}`}

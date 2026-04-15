@@ -20,10 +20,10 @@ export function AboutPage() {
           title="Sobre"
           description={
             <>
-              <span className="block text-shell-foreground mb-4" style={{ lineHeight: 1.7 }}>
+              <span className="block text-shell-foreground mb-4 leading-[1.7]">
                 {siteConfig.aboutIntro}
               </span>
-              <span className="block text-shell-muted-foreground" style={{ lineHeight: 1.7 }}>
+              <span className="block text-shell-muted-foreground leading-[1.7]">
                 {siteConfig.aboutSupport}
               </span>
             </>
@@ -48,7 +48,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="px-6 md:px-12 py-20 border-t border-white/10">
+      <section className="px-6 md:px-12 py-20 border-t border-shell-border">
         <SectionHeader
           icon={<Layers size={16} />}
           label="Serviços"
@@ -59,7 +59,7 @@ export function AboutPage() {
 
         <div className="md:ml-[25%]">
           {siteConfig.services.map((service, serviceIndex) => (
-            <div key={service.num} className="border-t border-white/10">
+            <div key={service.num} className="border-t border-shell-border">
               <button
                 type="button"
                 onClick={() => setOpenService(openService === serviceIndex ? -1 : serviceIndex)}
@@ -67,15 +67,11 @@ export function AboutPage() {
                 aria-expanded={openService === serviceIndex}
                 aria-controls={`service-panel-${serviceIndex}`}
               >
-                <span className="text-neutral-500" style={{ fontSize: '0.8rem' }}>
-                  {service.num}
-                </span>
-                <span className="flex-1 text-white" style={{ fontSize: '0.9rem' }}>
-                  {service.title}
-                </span>
+                <span className="text-shell-muted-foreground text-[0.8rem]">{service.num}</span>
+                <span className="flex-1 text-shell-foreground text-[0.9rem]">{service.title}</span>
                 <Plus
                   size={16}
-                  className={`text-neutral-500 transition-transform duration-300 ${
+                  className={`text-shell-muted-foreground transition-transform duration-300 ${
                     openService === serviceIndex ? 'rotate-45' : ''
                   }`}
                 />
@@ -88,10 +84,7 @@ export function AboutPage() {
                   opacity: openService === serviceIndex ? 1 : 0,
                 }}
               >
-                <p
-                  className="text-neutral-400 pb-6 pl-14 max-w-md"
-                  style={{ fontSize: '0.8rem', lineHeight: 1.7 }}
-                >
+                <p className="text-shell-muted-foreground pb-6 pl-14 max-w-md text-[0.8rem] leading-[1.7]">
                   {service.description}
                 </p>
               </div>
@@ -101,7 +94,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="px-6 md:px-12 py-20 border-t border-white/10">
+      <section className="px-6 md:px-12 py-20 border-t border-shell-border">
         <SectionHeader
           icon={<Briefcase size={16} />}
           label="Prática"
@@ -114,15 +107,11 @@ export function AboutPage() {
           {siteConfig.practice.map((practiceEntry) => (
             <div
               key={practiceEntry.title}
-              className="border-t border-white/10 py-5 flex items-start justify-between"
+              className="border-t border-shell-border py-5 flex items-start justify-between"
             >
               <div className="max-w-xl">
-                <p className="text-white mb-1" style={{ fontSize: '0.9rem' }}>
-                  {practiceEntry.title}
-                </p>
-                <p className="text-neutral-500" style={{ fontSize: '0.8rem' }}>
-                  {practiceEntry.body}
-                </p>
+                <p className="text-shell-foreground mb-1 text-[0.9rem]">{practiceEntry.title}</p>
+                <p className="text-shell-muted-foreground text-[0.8rem]">{practiceEntry.body}</p>
               </div>
             </div>
           ))}

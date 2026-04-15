@@ -16,17 +16,11 @@ export function HomePage() {
   return (
     <>
       <section className="pb-4">
-        <div className="px-6 md:px-12" style={{ paddingTop: '160px' }}>
-          <p
-            className="max-w-md text-neutral-200 mb-4"
-            style={{ fontSize: '0.9rem', lineHeight: 1.6 }}
-          >
+        <div className="px-6 md:px-12 pt-40">
+          <p className="max-w-md text-shell-foreground mb-4 text-[0.9rem] leading-[1.6]">
             {siteConfig.heroIntro}
           </p>
-          <p
-            className="max-w-xl text-neutral-400 mb-8"
-            style={{ fontSize: '0.85rem', lineHeight: 1.8 }}
-          >
+          <p className="max-w-xl text-shell-muted-foreground mb-8 text-[0.85rem] leading-[1.8]">
             {siteConfig.heroSupport}
           </p>
           <div className="flex gap-3 mb-10">
@@ -80,23 +74,17 @@ export function HomePage() {
               </div>
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-white mb-1" style={{ fontSize: '0.9rem' }}>
-                    {project.title}
-                  </p>
-                  <p className="text-neutral-500" style={{ fontSize: '0.75rem' }}>
-                    {project.category}
-                  </p>
+                  <p className="text-shell-foreground mb-1 text-[0.9rem]">{project.title}</p>
+                  <p className="text-shell-muted-foreground text-[0.75rem]">{project.category}</p>
                 </div>
-                <span className="text-neutral-500" style={{ fontSize: '0.75rem' }}>
-                  {project.year}
-                </span>
+                <span className="text-shell-muted-foreground text-[0.75rem]">{project.year}</span>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section id="about" className="px-6 md:px-12 py-20 border-t border-white/10">
+      <section id="about" className="px-6 md:px-12 py-20 border-t border-shell-border">
         <SectionHeader
           icon={<Layers size={16} />}
           label="Serviços"
@@ -105,39 +93,33 @@ export function HomePage() {
           className="mb-16"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 border-t border-white/10 pt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 border-t border-shell-border pt-10">
           <div>
-            <p className="text-neutral-500 mb-4" style={{ fontSize: '0.75rem' }}>
-              Escopo:
-            </p>
-            <ul className="space-y-1 text-white" style={{ fontSize: '0.85rem' }}>
+            <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Escopo:</p>
+            <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
               <li>Discovery</li>
               <li>Arquitetura de informação</li>
               <li>UX transacional</li>
-              <li className="text-neutral-500">Handoff para implementação</li>
+              <li className="text-shell-muted-foreground">Handoff para implementação</li>
             </ul>
           </div>
           <div>
-            <p className="text-neutral-500 mb-4" style={{ fontSize: '0.75rem' }}>
-              Foco:
-            </p>
-            <ul className="space-y-1 text-white" style={{ fontSize: '0.85rem' }}>
+            <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Foco:</p>
+            <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
               <li>Fintech</li>
               <li>Healthtech</li>
               <li>Fluxos operacionais</li>
               <li>Dados e confiança</li>
-              <li className="text-neutral-500">Produtos complexos</li>
+              <li className="text-shell-muted-foreground">Produtos complexos</li>
             </ul>
           </div>
           <div>
-            <p className="text-neutral-500 mb-4" style={{ fontSize: '0.75rem' }}>
-              Entregáveis:
-            </p>
-            <ul className="space-y-1 text-white" style={{ fontSize: '0.85rem' }}>
+            <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Entregáveis:</p>
+            <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
               <li>Fluxos e protótipos</li>
               <li>Interfaces e estados</li>
               <li>Design systems</li>
-              <li className="text-neutral-500">Documentação de decisão</li>
+              <li className="text-shell-muted-foreground">Documentação de decisão</li>
             </ul>
           </div>
         </div>

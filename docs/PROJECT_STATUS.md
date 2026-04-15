@@ -64,12 +64,20 @@ codex-skills/    skill local para reconstrução de cases
 - Vitest + jsdom environment
 - React Testing Library para testes de componentes
 - jest-dom/vitest para matchers do DOM
-- 28 testes passando
+- 55 testes passando
 - Setup: src/test/setup.ts
 - Testes de dados: validam estrutura de site.ts e projects.ts
 - Testes de componentes: renderização, interações, validação de formulário
 - Testes de rotas: verificam configuração do router
 - Arquivos de teste colocados junto ao fonte (\*.test.tsx)
+
+## Limpeza Recente
+
+- Removidos estilos inline estáticos de páginas e conteúdos editoriais
+- Padronizados tokens semânticos de shell para fundo, texto e borda
+- Simplificado o título dinâmico com classes utilitárias Tailwind
+- Mantida apenas estilização inline dinâmica onde a lógica depende de estado ou cálculo
+- Consolidado o resumo de padrões em data, componentes e documentação
 
 ## CI/CD
 
