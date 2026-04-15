@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { projects } from './projects';
+import { getProjectBySlug, getProjectNavigation, projects } from './projects';
 
 describe('projects', () => {
   it('exports an array', () => {
@@ -41,5 +41,23 @@ describe('projects', () => {
         expect(project.caseStudy).toBe(project.slug);
       }
     }
+  });
+
+  it('finds a project by slug', () => {
+    const project = getProjectBySlug('monetix');
+
+    expect(project?.title).toBe('Monetix');
+  });
+
+  it('returns navigation for an existing project', () => {
+    const navigation = getProjectNavigation('monetix');
+
+    expect(navigation?.current.slug).toBe('monetix');
+    expect(navigation?.next.slug).toBe('unimedpay');
+    expect(navigation?.previous.slug).toBe('unimedpay');
+  });
+
+  it('returns null for unknown navigation slug', () => {
+    expect(getProjectNavigation('unknown')).toBeNull();
   });
 });

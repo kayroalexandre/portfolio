@@ -1,7 +1,15 @@
+import type { ComponentType } from 'react';
+
+import { portfolioMedia } from '../data/project-media';
+import type { ProjectSlug } from '../data/projects';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface CoverProps {
   className?: string;
+}
+
+export interface ProjectCoverProps extends CoverProps {
+  slug: ProjectSlug;
 }
 
 /**
@@ -9,7 +17,7 @@ interface CoverProps {
  * Shows the app home screen inside a phone mockup on a dark gradient background.
  */
 export function UnimedPayCover({ className = '' }: CoverProps) {
-  const homeImage = new URL('../../../cases/telas-unimedpay/Home.png', import.meta.url).href;
+  const homeImage = portfolioMedia.unimedPayCoverImage;
 
   return (
     <div
@@ -60,10 +68,7 @@ export function UnimedPayCover({ className = '' }: CoverProps) {
  * Shows the web dashboard inside a browser mockup on a dark gradient background.
  */
 export function MonetixCover({ className = '' }: CoverProps) {
-  const terminalsImage = new URL(
-    '../../../cases/telas-monetix/Terminais de Pagamento.png',
-    import.meta.url
-  ).href;
+  const terminalsImage = portfolioMedia.monetixCoverImage;
 
   return (
     <div
@@ -121,7 +126,13 @@ export function MonetixCover({ className = '' }: CoverProps) {
 /**
  * Map of project slugs to their cover components.
  */
-export const projectCovers: Record<string, React.FC<CoverProps>> = {
+export const projectCovers: Record<ProjectSlug, ComponentType<CoverProps>> = {
   monetix: MonetixCover,
   unimedpay: UnimedPayCover,
 };
+
+export function ProjectCover({ slug, className = '' }: ProjectCoverProps) {
+  const CoverComponent = projectCovers[slug];
+
+  return <CoverComponent className={className} />;
+}
