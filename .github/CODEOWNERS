@@ -1,0 +1,6 @@
+# Code Owners
+
+/.github/workflows/ @kayroalexandre
+/.github/agents/ @kayroalexandre
+/.agent.md @kayroalexandre
+/scripts/ @kayroalexandre
