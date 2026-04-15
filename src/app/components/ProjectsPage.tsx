@@ -9,7 +9,7 @@ import { SectionDivider } from './SectionDivider';
 import { SectionHeader } from './SectionHeader';
 
 export function ProjectsPage() {
-  useDocumentTitle('Projetos');
+  useDocumentTitle('projects');
 
   return (
     <div className="pb-20">

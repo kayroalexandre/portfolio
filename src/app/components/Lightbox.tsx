@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { uiEventBus } from '../lib/ui-events';
+
 interface LightboxProps {
   src: string;
   alt: string;
@@ -31,10 +33,14 @@ export function Lightbox({ src, alt, onClose }: LightboxProps) {
   useEffect(() => {
     const original = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
+    uiEventBus.emit('lightbox:open', { src, alt });
+
     return () => {
       document.body.style.overflow = original;
+      uiEventBus.emit('lightbox:close', { src, alt });
     };
-  }, []);
+  }, [alt, src]);
 
   const handleOverlayClick = useCallback(
     (mouseEvent: React.MouseEvent) => {

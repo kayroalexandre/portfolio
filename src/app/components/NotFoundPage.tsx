@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export function NotFoundPage() {
-  useDocumentTitle('Página não encontrada');
+  useDocumentTitle('notFound');
 
   return (
     <div className="px-6 md:px-12 py-40 text-center">

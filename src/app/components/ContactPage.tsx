@@ -1,6 +1,7 @@
 import { Send } from 'lucide-react';
 import { useSearchParams } from 'react-router';
 
+import { createContactFormState } from '../data/contact-form-state';
 import { siteConfig } from '../data/site';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { SectionDivider } from './SectionDivider';
@@ -24,14 +25,13 @@ function buildContactReturnUrl(baseUrl: string) {
 
 export function ContactPage() {
   const [searchParams] = useSearchParams();
-  useDocumentTitle('Contato');
+  useDocumentTitle('contact');
   const returnUrl = buildContactReturnUrl(siteUrl);
-  const isConfigured = Boolean(formSubmitAction && returnUrl);
-  const isSent = searchParams.get('sent') === '1';
-  const availabilityCopy = isConfigured
-    ? siteConfig.contactAvailabilityReady
-    : siteConfig.contactAvailabilityPending;
-  const resultCopy = isConfigured ? siteConfig.contactResultReady : siteConfig.contactResultPending;
+  const formState = createContactFormState({
+    formSubmitAction,
+    returnUrl,
+    isSent: searchParams.get('sent') === '1',
+  });
 
   return (
     <div className="pb-20">
@@ -66,7 +66,7 @@ export function ContactPage() {
                   Estado atual
                 </p>
                 <p className="text-neutral-500" style={{ fontSize: '0.8rem', lineHeight: 1.7 }}>
-                  {availabilityCopy}
+                  {formState.availabilityCopy}
                 </p>
               </div>
               <div>
@@ -74,7 +74,7 @@ export function ContactPage() {
                   Resultado do formulário
                 </p>
                 <p className="text-neutral-500" style={{ fontSize: '0.8rem', lineHeight: 1.7 }}>
-                  {resultCopy}
+                  {formState.resultCopy}
                 </p>
               </div>
             </div>
@@ -84,7 +84,7 @@ export function ContactPage() {
             <h3 className="text-white mb-8" style={{ fontSize: '0.95rem', fontWeight: 500 }}>
               Enviar mensagem
             </h3>
-            {isSent ? (
+            {formState.isSent ? (
               <div
                 aria-live="polite"
                 className="mb-8 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-emerald-100"
@@ -93,7 +93,7 @@ export function ContactPage() {
                 {siteConfig.contactSuccessMessage}
               </div>
             ) : null}
-            {!isConfigured ? (
+            {!formState.isConfigured ? (
               <div
                 className="mb-8 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-neutral-400"
                 style={{ fontSize: '0.8rem', lineHeight: 1.6 }}
@@ -103,7 +103,7 @@ export function ContactPage() {
               </div>
             ) : null}
             <form
-              action={isConfigured ? formSubmitAction : undefined}
+              action={formState.isConfigured ? formSubmitAction : undefined}
               method="POST"
               className="flex flex-col gap-6"
             >
@@ -160,8 +160,8 @@ export function ContactPage() {
                 />
               </div>
               <div>
-                <Button type="submit" disabled={!isConfigured}>
-                  {isConfigured ? 'Enviar mensagem' : 'Canal em configuração'}
+                <Button type="submit" disabled={formState.isSubmitDisabled}>
+                  {formState.submitLabel}
                 </Button>
               </div>
             </form>

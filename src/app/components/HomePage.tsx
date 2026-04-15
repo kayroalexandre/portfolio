@@ -11,7 +11,7 @@ import { SectionHeader } from './SectionHeader';
 import { Button } from './ui/button';
 
 export function HomePage() {
-  useDocumentTitle();
+  useDocumentTitle('home');
 
   return (
     <>

@@ -9,7 +9,7 @@ import { SectionHeader } from './SectionHeader';
 
 export function AboutPage() {
   const [openService, setOpenService] = useState(0);
-  useDocumentTitle('Sobre');
+  useDocumentTitle('about');
 
   return (
     <div className="pb-20">
