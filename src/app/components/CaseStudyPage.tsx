@@ -7,6 +7,7 @@ import { getProjectBySlug, getProjectNavigation } from '../data/projects';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';
+import { SidebarLayout } from './ui/layout-sidebar';
 
 export function CaseStudyPage() {
   const { slug } = useParams();
@@ -43,28 +44,31 @@ export function CaseStudyPage() {
           {project.title}
         </h2>
 
-        <div className="flex flex-col md:flex-row gap-12">
-          <div className="md:w-1/3 space-y-6">
-            <div>
-              <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Cliente</p>
-              <p className="text-shell-foreground text-[0.85rem]">{project.client}</p>
+        <SidebarLayout
+          sidebarWidth="1/3"
+          gap="spacious"
+          sidebar={
+            <div className="space-y-6">
+              <div>
+                <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Cliente</p>
+                <p className="text-shell-foreground text-[0.85rem]">{project.client}</p>
+              </div>
+              <div>
+                <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Categoria</p>
+                <p className="text-shell-foreground text-[0.85rem]">{project.category}</p>
+              </div>
+              <div>
+                <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Ano</p>
+                <p className="text-shell-foreground text-[0.85rem]">{project.year}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Categoria</p>
-              <p className="text-shell-foreground text-[0.85rem]">{project.category}</p>
-            </div>
-            <div>
-              <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Ano</p>
-              <p className="text-shell-foreground text-[0.85rem]">{project.year}</p>
-            </div>
-          </div>
-
-          <div className="md:w-2/3">
+          }
+          main={
             <p className="text-shell-muted-foreground max-w-xl text-[0.9rem] leading-[1.8]">
               {project.description}
             </p>
-          </div>
-        </div>
+          }
+        />
       </div>
 
       {ContentComponent ? (
