@@ -7,8 +7,7 @@ export function SectionDivider({ count = 3, className = '' }: SectionDividerProp
   return (
     <div
       aria-hidden="true"
-      className={`flex justify-between text-shell-muted-foreground ${className}`.trim()}
-      style={{ fontSize: '1.2rem' }}
+      className={`flex justify-between text-shell-muted-foreground text-[1.2rem] ${className}`.trim()}
     >
       {Array.from({ length: count }).map((_, index) => (
         <span key={`divider-dot-${index}`}>+</span>

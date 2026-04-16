@@ -28,7 +28,7 @@ export function ProjectsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projects.map((project) => (
             <Link key={project.slug} to={`/project/${project.slug}`} className="group block">
-              <div className="aspect-[16/10] rounded-lg overflow-hidden mb-4 border border-white/10">
+              <div className="aspect-[16/10] rounded-lg overflow-hidden mb-4 border border-shell-border">
                 <ImageWithFallback
                   src={project.image}
                   alt={project.title}
@@ -37,22 +37,15 @@ export function ProjectsPage() {
               </div>
               <div className="flex items-start justify-between gap-6">
                 <div className="max-w-lg">
-                  <p className="text-white mb-1" style={{ fontSize: '1rem' }}>
-                    {project.title}
-                  </p>
-                  <p className="text-shell-muted-foreground mb-2" style={{ fontSize: '0.75rem' }}>
+                  <p className="text-shell-foreground mb-1 text-[1rem]">{project.title}</p>
+                  <p className="text-shell-muted-foreground mb-2 text-[0.75rem]">
                     {project.category} · {project.client}
                   </p>
-                  <p
-                    className="text-shell-muted-foreground"
-                    style={{ fontSize: '0.85rem', lineHeight: 1.7 }}
-                  >
+                  <p className="text-shell-muted-foreground text-[0.85rem] leading-[1.7]">
                     {project.description}
                   </p>
                 </div>
-                <span className="text-shell-muted-foreground" style={{ fontSize: '0.75rem' }}>
-                  {project.year}
-                </span>
+                <span className="text-shell-muted-foreground text-[0.75rem]">{project.year}</span>
               </div>
             </Link>
           ))}

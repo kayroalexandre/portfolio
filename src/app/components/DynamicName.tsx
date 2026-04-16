@@ -1,14 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 interface DynamicNameProps {
   className?: string;
-  as?: "h1" | "h2";
+  as?: 'h1' | 'h2';
 }
 
-export function DynamicName({
-  className = "",
-  as: Tag = "h1",
-}: DynamicNameProps) {
+const dynamicNameText = 'KAYRO GOMES';
+
+export function DynamicName({ className = '', as: Tag = 'h1' }: DynamicNameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
 
@@ -21,10 +20,10 @@ export function DynamicName({
       }
 
       // Mede o texto sem tracking para redistribuir o spacing com mais precisão.
-      textRef.current.style.letterSpacing = "0px";
+      textRef.current.style.letterSpacing = '0px';
       const containerWidth = containerRef.current.offsetWidth;
       const textWidth = textRef.current.offsetWidth;
-      const text = textRef.current.textContent || "";
+      const text = textRef.current.textContent || '';
       const gaps = text.length - 1;
 
       const fontSizePx = parseFloat(window.getComputedStyle(textRef.current).fontSize);
@@ -35,7 +34,7 @@ export function DynamicName({
       if (diff > 0 && gaps > 0) {
         textRef.current.style.letterSpacing = `${diff / gaps}px`;
       } else {
-        textRef.current.style.letterSpacing = "0px";
+        textRef.current.style.letterSpacing = '0px';
       }
     };
 
@@ -50,18 +49,18 @@ export function DynamicName({
     scheduledUpdate();
 
     let observer: ResizeObserver | null = null;
-    if (typeof ResizeObserver !== "undefined" && containerRef.current) {
+    if (typeof ResizeObserver !== 'undefined' && containerRef.current) {
       observer = new ResizeObserver(() => scheduledUpdate());
       observer.observe(containerRef.current);
     }
 
-    window.addEventListener("resize", scheduledUpdate);
+    window.addEventListener('resize', scheduledUpdate);
 
     return () => {
       if (observer) {
         observer.disconnect();
       }
-      window.removeEventListener("resize", scheduledUpdate);
+      window.removeEventListener('resize', scheduledUpdate);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -70,15 +69,9 @@ export function DynamicName({
     <div ref={containerRef} className="w-full">
       <Tag
         ref={textRef}
-        className={`uppercase whitespace-nowrap inline-block ${className}`}
-        style={{
-          fontSize: "clamp(3rem, 12vw, 12rem)",
-          fontWeight: 900,
-          lineHeight: 0.9,
-          marginLeft: "-0.07em",
-        }}
+        className={`inline-block whitespace-nowrap uppercase text-[clamp(3rem,12vw,12rem)] font-black leading-[0.9] -ml-[0.07em] ${className}`.trim()}
       >
-        KAYRO GOMES
+        {dynamicNameText}
       </Tag>
     </div>
   );

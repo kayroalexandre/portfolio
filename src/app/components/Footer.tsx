@@ -8,7 +8,7 @@ export function Footer() {
 
   return (
     <footer id="contact" className="px-6 md:px-12 py-12 border-t border-shell-border">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20" style={{ fontSize: '0.8rem' }}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 text-[0.8rem]">
         <p className="text-shell-muted-foreground">
           &copy;{year} {siteConfig.name}
         </p>

@@ -45,8 +45,8 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: 'Kayro Gomes',
   title: 'Kayro Gomes | Product Design',
-  heroImage: portfolioMedia.unimedPayCoverImage,
-  heroImageAlt: 'Tela inicial do case UnimedPay',
+  heroImage: '/hero-profile.png',
+  heroImageAlt: 'Foto pessoal de Kayro Gomes',
   heroIntro:
     'Designer de produto focado em clareza operacional, UX transacional e sistemas escaláveis.',
   heroSupport:

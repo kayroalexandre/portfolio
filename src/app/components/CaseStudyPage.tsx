@@ -18,7 +18,7 @@ export function CaseStudyPage() {
   if (!project) {
     return (
       <div className="px-6 md:px-12 py-40 text-center">
-        <p className="text-neutral-400 mb-6">Projeto não encontrado.</p>
+        <p className="text-shell-muted-foreground mb-6">Projeto não encontrado.</p>
         <Button asChild>
           <Link to="/">Voltar ao início</Link>
         </Button>
@@ -39,46 +39,28 @@ export function CaseStudyPage() {
       </div>
 
       <div className="px-6 md:px-12 pt-16 pb-12">
-        <h2
-          className="text-white mb-8"
-          style={{ fontSize: '2.5rem', fontWeight: 700, lineHeight: 1.1 }}
-        >
+        <h2 className="text-shell-foreground mb-8 text-[2.5rem] font-bold leading-[1.1]">
           {project.title}
         </h2>
 
         <div className="flex flex-col md:flex-row gap-12">
           <div className="md:w-1/3 space-y-6">
             <div>
-              <p className="text-neutral-500 mb-1" style={{ fontSize: '0.75rem' }}>
-                Cliente
-              </p>
-              <p className="text-white" style={{ fontSize: '0.85rem' }}>
-                {project.client}
-              </p>
+              <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Cliente</p>
+              <p className="text-shell-foreground text-[0.85rem]">{project.client}</p>
             </div>
             <div>
-              <p className="text-neutral-500 mb-1" style={{ fontSize: '0.75rem' }}>
-                Categoria
-              </p>
-              <p className="text-white" style={{ fontSize: '0.85rem' }}>
-                {project.category}
-              </p>
+              <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Categoria</p>
+              <p className="text-shell-foreground text-[0.85rem]">{project.category}</p>
             </div>
             <div>
-              <p className="text-neutral-500 mb-1" style={{ fontSize: '0.75rem' }}>
-                Ano
-              </p>
-              <p className="text-white" style={{ fontSize: '0.85rem' }}>
-                {project.year}
-              </p>
+              <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Ano</p>
+              <p className="text-shell-foreground text-[0.85rem]">{project.year}</p>
             </div>
           </div>
 
           <div className="md:w-2/3">
-            <p
-              className="text-neutral-400 max-w-xl"
-              style={{ fontSize: '0.9rem', lineHeight: 1.8 }}
-            >
+            <p className="text-shell-muted-foreground max-w-xl text-[0.9rem] leading-[1.8]">
               {project.description}
             </p>
           </div>
@@ -88,26 +70,26 @@ export function CaseStudyPage() {
       {ContentComponent ? (
         <div className="px-6 md:px-12 pb-16 pt-8 flex justify-center">
           <Suspense
-            fallback={<p className="text-sm text-neutral-500">Carregando estudo de caso...</p>}
+            fallback={
+              <p className="text-sm text-shell-muted-foreground">Carregando estudo de caso...</p>
+            }
           >
             <ContentComponent />
           </Suspense>
         </div>
       ) : null}
 
-      <div className="px-6 md:px-12 mt-20 pt-12 border-t border-white/10">
+      <div className="px-6 md:px-12 mt-20 pt-12 border-t border-shell-border">
         <div className="flex justify-between items-center">
           <button
             type="button"
             onClick={() => navigate(`/project/${navigation?.previous.slug ?? project.slug}`)}
-            className="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors group"
+            className="flex items-center gap-3 text-shell-muted-foreground hover:text-shell-foreground transition-colors group"
           >
             <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             <div className="text-left">
-              <p className="text-neutral-500" style={{ fontSize: '0.7rem' }}>
-                Anterior
-              </p>
-              <p style={{ fontSize: '0.85rem' }}>{navigation?.previous.title ?? project.title}</p>
+              <p className="text-shell-muted-foreground text-[0.7rem]">Anterior</p>
+              <p className="text-[0.85rem]">{navigation?.previous.title ?? project.title}</p>
             </div>
           </button>
 
@@ -118,13 +100,11 @@ export function CaseStudyPage() {
           <button
             type="button"
             onClick={() => navigate(`/project/${navigation?.next.slug ?? project.slug}`)}
-            className="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors group"
+            className="flex items-center gap-3 text-shell-muted-foreground hover:text-shell-foreground transition-colors group"
           >
             <div className="text-right">
-              <p className="text-neutral-500" style={{ fontSize: '0.7rem' }}>
-                Próximo
-              </p>
-              <p style={{ fontSize: '0.85rem' }}>{navigation?.next.title ?? project.title}</p>
+              <p className="text-shell-muted-foreground text-[0.7rem]">Próximo</p>
+              <p className="text-[0.85rem]">{navigation?.next.title ?? project.title}</p>
             </div>
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
