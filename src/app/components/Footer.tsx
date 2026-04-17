@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import { siteConfig } from '../data/site';
+import { siteConfig, siteNavigationItems } from '../data/site';
 import { DynamicName } from './DynamicName';
 import { ThreeColumnLayout } from './ui/layout-three-column';
 
@@ -16,22 +16,20 @@ export function Footer() {
               &copy;{year} {siteConfig.name}
             </p>
           }
-          center={
-            <div>
-              <p className="text-shell-foreground mb-1">{siteConfig.footerCta}</p>
-              <p className="text-shell-muted-foreground">
-                {siteConfig.publicEmail ?? 'Canal público de contato em atualização.'}
-              </p>
-            </div>
-          }
+          center={<></>}
           right={
-            <div className="text-shell-muted-foreground space-y-2">
-              <Link to="/projects" className="block hover:text-shell-foreground transition-colors">
-                Ver estudos de caso
-              </Link>
-              <Link to="/contact" className="block hover:text-shell-foreground transition-colors">
-                Abrir página de contato
-              </Link>
+            <div className="flex flex-wrap items-center gap-6 text-shell-muted-foreground">
+              {siteNavigationItems
+                .filter((item) => item.href !== '/')
+                .map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className="block hover:text-shell-foreground transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
             </div>
           }
         />

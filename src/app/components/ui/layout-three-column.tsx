@@ -18,9 +18,8 @@ const GAP_CLASSES = {
 
 /**
  * Professional 3-column layout component
- * - Left aligned on desktop, centered on mobile
- * - Middle truly centered
- * - Right aligned on desktop
+ * - Blocks distributed across the full width on desktop (start/center/end)
+ * - All text remains left-aligned in every block
  * No negative margins, self-contained, responsive
  */
 export function ThreeColumnLayout({
@@ -39,9 +38,9 @@ export function ThreeColumnLayout({
         className
       )}
     >
-      <div className="md:text-left md:justify-self-start">{left}</div>
-      <div className="md:text-center md:justify-self-center">{center}</div>
-      <div className="md:text-right md:justify-self-end">{right}</div>
+      <div className="w-fit text-left md:justify-self-start">{left}</div>
+      <div className="w-fit text-left md:justify-self-center">{center}</div>
+      <div className="w-fit text-left md:justify-self-end">{right}</div>
     </div>
   );
 }

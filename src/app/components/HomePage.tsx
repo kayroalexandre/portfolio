@@ -6,7 +6,6 @@ import { siteConfig } from '../data/site';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ScrollZoomImage } from './ScrollZoomImage';
-import { SectionDivider } from './SectionDivider';
 import { SectionHeader } from './SectionHeader';
 import { Button } from './ui/button';
 import { ThreeColumnLayout } from './ui/layout-three-column';
@@ -52,12 +51,6 @@ export function HomePage() {
           className="mb-12"
           descriptionClassName="mb-6"
         />
-
-        <Button asChild>
-          <Link to="/projects">Ver todos os cases</Link>
-        </Button>
-
-        <SectionDivider className="px-8 mb-8 mt-12" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
