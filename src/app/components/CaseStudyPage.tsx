@@ -47,8 +47,9 @@ export function CaseStudyPage() {
         <SidebarLayout
           sidebarWidth="1/3"
           gap="spacious"
+          className="md:flex-row-reverse"
           sidebar={
-            <div className="space-y-6">
+            <div className="space-y-6 md:flex md:justify-end md:gap-10 md:space-y-0 md:text-right">
               <div>
                 <p className="text-shell-muted-foreground mb-1 text-[0.75rem]">Cliente</p>
                 <p className="text-shell-foreground text-[0.85rem]">{project.client}</p>

@@ -16,7 +16,7 @@ export function HomePage() {
   return (
     <>
       <section className="pb-4">
-        <div className="px-6 md:px-12 pt-35">
+        <div className="px-6 md:px-12 pt-24">
           <p className="max-w-md text-shell-foreground mb-4 text-[0.9rem] leading-[1.6]">
             {siteConfig.heroIntro}
           </p>
