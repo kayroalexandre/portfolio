@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "phase": 7,
+    "name": "prototype",
+    "title": "Unificação de 7 telas em página 🎬 Prototype com fluxo de prototipação",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "509:265",
+    "pageName": "🎬 Prototype",
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_portfolio_style_rules.md",
+      "feedback_delegation.md"
+    ]
+  },
+  "layout": {
+    "gridGapH": 200,
+    "gridGapV": 300,
+    "row1Y": 0,
+    "row2Y": 3144,
+    "note": "Row 1 (y=0): Home, Projects, About, Contact (4 frames). Row 2 (y=3144 = row1MaxH 2844 + GAP_V 300): Monetix, UnimedPay, 404 (3 frames). Todos os frames são 1440 de largura; gap horizontal 200 entre eles."
+  },
+  "frames": [
+    { "key": "home", "id": "69:41", "name": "Home / 1440", "x": 0, "y": 0, "w": 1440, "h": 2844 },
+    {
+      "key": "projects",
+      "id": "69:141",
+      "name": "Projects / 1440",
+      "x": 1640,
+      "y": 0,
+      "w": 1440,
+      "h": 1310
+    },
+    {
+      "key": "about",
+      "id": "69:198",
+      "name": "About / 1440",
+      "x": 3280,
+      "y": 0,
+      "w": 1440,
+      "h": 2838
+    },
+    {
+      "key": "contact",
+      "id": "69:311",
+      "name": "Contact / 1440",
+      "x": 4920,
+      "y": 0,
+      "w": 1440,
+      "h": 1177
+    },
+    {
+      "key": "monetix",
+      "id": "71:16",
+      "name": "Monetix / 1440",
+      "x": 0,
+      "y": 3144,
+      "w": 1440,
+      "h": 2760
+    },
+    {
+      "key": "unimedpay",
+      "id": "71:113",
+      "name": "UnimedPay / 1440",
+      "x": 1640,
+      "y": 3144,
+      "w": 1440,
+      "h": 2808
+    },
+    {
+      "key": "notfound",
+      "id": "69:378",
+      "name": "404 / 1440",
+      "x": 3280,
+      "y": 3144,
+      "w": 1440,
+      "h": 910
+    }
+  ],
+  "headerComponentSet": {
+    "id": "506:24",
+    "name": "Header",
+    "type": "COMPONENT_SET",
+    "prop": "active",
+    "defaultValue": "inicio",
+    "parentPage": "7:5 · 🧩 Components / Layout",
+    "namingConvention": "slug sem acento (glm-reviewer): active=inicio|projetos|sobre|contato",
+    "variants": [
+      {
+        "id": "17:2",
+        "value": "inicio",
+        "note": "master original convertido em variante; Início em content/primary, outros content/secondary"
+      },
+      { "id": "506:3", "value": "projetos", "note": "clone; Projetos em content/primary" },
+      { "id": "506:10", "value": "sobre", "note": "clone; Sobre em content/primary" },
+      { "id": "506:17", "value": "contato", "note": "clone; Contato em content/primary" }
+    ],
+    "previewInstance": "506:25",
+    "previewParent": "484:19 (preview frame no documental card da Etapa 6)",
+    "combineStrategy": "figma.combineAsVariants([master, clone_p, clone_s, clone_c], layoutPage); ordem define default (master = inicio)"
+  },
+  "headerAssignment": [
+    {
+      "frame": "home",
+      "header": "69:42",
+      "variant": "inicio",
+      "method": "inherited (master 17:2 virou active=inicio)"
+    },
+    {
+      "frame": "projects",
+      "header": "69:142",
+      "variant": "projetos",
+      "method": "swapComponent(506:3)"
+    },
+    { "frame": "about", "header": "69:199", "variant": "sobre", "method": "swapComponent(506:10)" },
+    {
+      "frame": "contact",
+      "header": "69:312",
+      "variant": "contato",
+      "method": "swapComponent(506:17)"
+    },
+    { "frame": "monetix", "header": "71:17", "variant": "inicio", "method": "inherited" },
+    { "frame": "unimedpay", "header": "71:114", "variant": "inicio", "method": "inherited" },
+    { "frame": "notfound", "header": "69:379", "variant": "inicio", "method": "inherited" }
+  ],
+  "reactions": {
+    "summary": "51 reactions ativas + 7 auto-referências rejeitadas por Figma (correto — aba ativa não deve navegar para si)",
+    "transition": { "type": "DISSOLVE", "easing": { "type": "EASE_OUT" }, "duration": 0.2 },
+    "trigger": { "type": "ON_CLICK" },
+    "actionShape": { "type": "NODE", "navigation": "NAVIGATE", "preserveScrollPosition": false },
+    "groups": [
+      {
+        "group": "Header nav (per-instance)",
+        "attempted": 28,
+        "ok": 24,
+        "rejectedSelfRef": 4,
+        "note": "7 Header instances × 4 nav items = 28 tentativas; rejeitadas: Início@Home, Projetos@Projects, Sobre@About, Contato@Contact",
+        "perInstance": [
+          {
+            "instance": "I69:42 (Home)",
+            "ok": ["Projetos→69:141", "Sobre→69:198", "Contato→69:311"],
+            "rejected": ["Início→69:41"]
+          },
+          {
+            "instance": "I69:142 (Projects)",
+            "ok": ["Início→69:41", "Sobre→69:198", "Contato→69:311"],
+            "rejected": ["Projetos→69:141"]
+          },
+          {
+            "instance": "I69:199 (About)",
+            "ok": ["Início→69:41", "Projetos→69:141", "Contato→69:311"],
+            "rejected": ["Sobre→69:198"]
+          },
+          {
+            "instance": "I69:312 (Contact)",
+            "ok": ["Início→69:41", "Projetos→69:141", "Sobre→69:198"],
+            "rejected": ["Contato→69:311"]
+          },
+          {
+            "instance": "I71:17 (Monetix)",
+            "ok": ["Início→69:41", "Projetos→69:141", "Sobre→69:198", "Contato→69:311"],
+            "rejected": []
+          },
+          {
+            "instance": "I71:114 (UnimedPay)",
+            "ok": ["Início→69:41", "Projetos→69:141", "Sobre→69:198", "Contato→69:311"],
+            "rejected": []
+          },
+          {
+            "instance": "I69:379 (404)",
+            "ok": ["Início→69:41", "Projetos→69:141", "Sobre→69:198", "Contato→69:311"],
+            "rejected": []
+          }
+        ]
+      },
+      {
+        "group": "Footer nav (per-instance)",
+        "attempted": 21,
+        "ok": 18,
+        "rejectedSelfRef": 3,
+        "note": "7 Footer instances × 3 nav items (Projetos/Sobre/Contato; Footer não tem Início); rejeitadas em Projects/About/Contact (self-ref)"
+      },
+      {
+        "group": "Home project cards",
+        "count": 2,
+        "items": [
+          { "id": "69:70", "label": "home-card-1-monetix", "dest": "71:16" },
+          { "id": "69:78", "label": "home-card-2-unimedpay", "dest": "71:113" }
+        ]
+      },
+      {
+        "group": "Projects project cards",
+        "count": 2,
+        "items": [
+          { "id": "69:161", "label": "projects-card-1-monetix", "dest": "71:16" },
+          { "id": "69:169", "label": "projects-card-2-unimedpay", "dest": "71:113" }
+        ]
+      },
+      {
+        "group": "Case prev/next (loop entre 2 cases)",
+        "count": 4,
+        "items": [
+          { "id": "I71:68;64:34", "label": "monetix-prev", "dest": "71:113 (UnimedPay)" },
+          { "id": "I71:68;64:43", "label": "monetix-next", "dest": "71:113 (UnimedPay)" },
+          { "id": "I71:165;64:34", "label": "unimedpay-prev", "dest": "71:16 (Monetix)" },
+          { "id": "I71:165;64:43", "label": "unimedpay-next", "dest": "71:16 (Monetix)" }
+        ]
+      },
+      {
+        "group": "404 button 'Início'",
+        "count": 1,
+        "items": [{ "id": "69:390", "label": "back-to-home", "dest": "69:41" }]
+      }
+    ]
+  },
+  "flowStartingPoints": [{ "nodeId": "69:41", "name": "Portfólio — Kayro Gomes" }],
+  "pagesRemoved": [
+    { "id": "7:8", "name": "📄 Pages / Home", "reason": "vazia após move para Prototype" },
+    { "id": "7:9", "name": "📄 Pages / Projects", "reason": "vazia após move" },
+    { "id": "7:10", "name": "📄 Pages / About", "reason": "vazia após move" },
+    { "id": "7:11", "name": "📄 Pages / Contact", "reason": "vazia após move" },
+    { "id": "7:12", "name": "📄 Pages / Case — Monetix", "reason": "vazia após move" },
+    { "id": "7:13", "name": "📄 Pages / Case — UnimedPay", "reason": "vazia após move" },
+    { "id": "7:14", "name": "📄 Pages / 404", "reason": "vazia após move" },
+    { "id": "206:260", "name": "(unnamed single-space)", "reason": "já estava vazia" },
+    { "id": "206:261", "name": "(unnamed single-space)", "reason": "já estava vazia" },
+    { "id": "206:262", "name": "(unnamed single-space)", "reason": "já estava vazia" }
+  ],
+  "remainingPages": [
+    { "id": "0:1", "name": "🏠 Cover", "childCount": 1 },
+    { "id": "62:2", "name": "🪷 Icons", "childCount": 3 },
+    { "id": "7:2", "name": "🎨 Foundations", "childCount": 11 },
+    { "id": "7:5", "name": "🧩 Components / Layout", "childCount": 2 },
+    { "id": "7:4", "name": "🧩 Buttons", "childCount": 9 },
+    { "id": "7:6", "name": "🧩 Components / Content", "childCount": 1 },
+    { "id": "509:265", "name": "🎬 Prototype", "childCount": 7 }
+  ],
+  "bindingsAudit": {
+    "status": "clean",
+    "telasAuditadas": 7,
+    "fillsBound": 256,
+    "hexSoltos": 0,
+    "textosComStyle": "224 / 226",
+    "issues": [
+      {
+        "nodeId": "I71:68;479:7;417:300",
+        "name": "label",
+        "problem": "TEXT Inter Medium 14 sem textStyleId",
+        "location": "Monetix · Prev-Next Nav",
+        "severity": "cosmético"
+      },
+      {
+        "nodeId": "I71:165;479:7;417:300",
+        "name": "label",
+        "problem": "TEXT Inter Medium 14 sem textStyleId",
+        "location": "UnimedPay · Prev-Next Nav",
+        "severity": "cosmético"
+      }
+    ],
+    "deferred": "2 issues são cosméticos (valor visual já correto; falta só a associação formal ao text style). Deferido para follow-up; não bloqueia V1."
+  },
+  "knownIssues": [
+    "Reactions em TEXT nodes dentro de COMPONENT masters (variant nav items) falharam com 'Reaction at index 0 was invalid'. Workaround aplicado: reactions por instância (7 × 7 = 49 tentativas; 42 ok + 7 self-ref). Investigar futuramente se setReactionsAsync no master funcionaria.",
+    "2 TEXT sem textStyleId em Prev-Next Nav (ver bindingsAudit.issues) — deferido."
+  ],
+  "notes": "Etapa 7 unifica 7 layouts (Home, Projects, About, Contact, Monetix, UnimedPay, 404) numa única página de prototipação com fluxo conectado. Decisões do usuário: (1) criar 4 variantes do Header com prop 'active' — não aceitar V1 travada; (2) 404 acessível apenas selecionando o frame direto (sem botão invisível na Home); (3) inspecionar CTAs secundárias da Home antes de criar novas — inspeção revelou 2 CTAs já existentes no hero (Ver projetos + Preparar briefing) que cobrem Home→Projects/Contact, tornando CTAs abaixo dos cards redundantes. Delegação: mimo-reasoner validou ordem de operações (ComponentSet ANTES de mover, swap ANTES de mover, reactions DEPOIS), glm-reviewer rascunhou esqueleto do script + convenção de naming das variantes (slug sem acento). Opus orquestrou 3 chamadas use_figma.",
+  "capturedAt": "2026-04-18T18:00:00Z"
+}

@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "phase": 3,
+    "name": "cover",
+    "title": "Página Cover",
+    "concludedAt": "2026-04-17",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": null,
+    "pageName": "🏠 Cover",
+    "backfillMethod": "documental",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_portfolio_style_rules.md",
+      "feedback_figma_page_isolation.md"
+    ]
+  },
+  "layout": {
+    "frame": { "name": "Cover / 1920x960", "width": 1920, "height": 960 },
+    "padding": [120, 120, 96, 120],
+    "sectionFill": "surface/background"
+  },
+  "tree": [
+    {
+      "id": "381:2",
+      "name": "Cover / 1920x960",
+      "type": "FRAME",
+      "w": 1920,
+      "h": 960,
+      "children": [
+        {
+          "name": "rail",
+          "note": "eyebrow PORTFÓLIO · DESIGN SYSTEM + título Kayro Gomes (Display/Hero) + subtítulo Senior Product Designer (Heading/H3) + desc pt-BR (Body/Large 820w) + divider 60×2"
+        },
+        {
+          "name": "meta grid",
+          "note": "8 colunas inferior: PÁGINAS, FOUNDATIONS, COMPONENTES, TEXT STYLES, EFFECT STYLES, VARIÁVEIS, MODES, VERSÃO"
+        },
+        { "name": "marker 00 | COVER", "note": "posicionamento ABSOLUTE canto superior direito" }
+      ]
+    }
+  ],
+  "components": [],
+  "componentSets": [],
+  "variables": { "created": [] },
+  "styles": { "text": [], "effect": [], "paint": [] },
+  "fonts": ["Inter"],
+  "cleanup": [
+    "Removidas 3 SECTIONs órfãs que vazaram para Cover: 07 Shadows, 08 Glass, 09 Motion (do rebuild da Foundations)"
+  ],
+  "rejections": [
+    {
+      "date": "2026-04-17",
+      "reason": "Primeira tentativa: aurora magenta/roxa, glass panel, badge verde neon, texto em inglês — fugiu do padrão sóbrio do sistema.",
+      "outcome": "Reconstruída seguindo padrão 00 · Page Header da Foundations. Regra salva em project_portfolio_style_rules.md e feedback_figma_page_isolation.md."
+    }
+  ],
+  "notes": "Única página a usar 1920×960 (as demais internas são 1440×H). Marker é ABSOLUTE — SECTION não aceita layoutPositioning=ABSOLUTE em filhos; usar FRAME ou posição x/y direta."
+}

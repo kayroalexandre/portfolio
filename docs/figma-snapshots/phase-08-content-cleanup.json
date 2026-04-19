@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "phase": 8,
+    "name": "content-cleanup",
+    "title": "Limpeza cosmética + Audit Components/Content — masters 1344→1440, labels, textStyle Button, confirmação overrides",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "7:6",
+    "pageName": "🧩 Components / Content",
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_foundations_card_pattern.md",
+      "feedback_figma_plugin_gotchas.md"
+    ]
+  },
+  "layout": {
+    "sectionWidth": 1600,
+    "padding": 80,
+    "contentWidth": 1440,
+    "sectionFill": "surface/background",
+    "headerType": "FRAME (documental)",
+    "note": "Página gêmea de Components/Layout; mesmo padrão SECTION 1600 com content FRAME 1440-interno padding 80."
+  },
+  "tree": [
+    {
+      "id": "486:9",
+      "name": "Content Components",
+      "type": "SECTION",
+      "x": 0,
+      "y": 0,
+      "w": 1600,
+      "h": 2575,
+      "childCount": 1
+    }
+  ],
+  "components": [
+    {
+      "id": "16:8",
+      "name": "Project Card",
+      "key": "74781e6ddcf7469450301ac14d0340ea3fb3b0d5",
+      "w": 580,
+      "h": 547
+    },
+    {
+      "id": "64:15",
+      "name": "Case / Hero 21:9",
+      "key": "31bed03823208e5663a9b34afa8689179b32e945",
+      "w": 1440,
+      "h": 617
+    },
+    {
+      "id": "64:30",
+      "name": "Case / Title + Meta",
+      "key": "f5f5c2f4bdddfb533290dcaa197b10a018e226b9",
+      "w": 1440,
+      "h": 120,
+      "note": "Resize 1344→1440 em 2026-04-18"
+    },
+    {
+      "id": "64:50",
+      "name": "Case / Prev-Next Nav",
+      "key": "8a80799d1eccbba0fce2ce0270fffa58abd73833",
+      "w": 1440,
+      "h": 149,
+      "note": "Resize 1344→1440 em 2026-04-18"
+    }
+  ],
+  "componentSets": [],
+  "projectCardProperties": {
+    "id": "16:8",
+    "properties": [
+      { "key": "Title#16:3", "type": "TEXT", "defaultValue": "Monetix" },
+      { "key": "Category#16:4", "type": "TEXT", "defaultValue": "Product Design" },
+      { "key": "Year#16:5", "type": "TEXT", "defaultValue": "2024" }
+    ],
+    "note": "Projeto Card expõe 3 TEXT component properties. Overrides de title em Prototype devem usar instance.setProperties({'Title#16:3': ...}) — walk + textNode.characters NÃO funciona (retorna o valor herdado, não muda a property)."
+  },
+  "changes": {
+    "summary": "Etapa 8 — limpeza cosmética e padronização 1440 full-bleed na página Content",
+    "resizes": [
+      { "id": "64:30", "name": "Case / Title + Meta", "from": "1344×120", "to": "1440×120" },
+      { "id": "64:50", "name": "Case / Prev-Next Nav", "from": "1344×149", "to": "1440×149" }
+    ],
+    "usageLabels": [
+      {
+        "id": "486:44",
+        "from": "1344 × 120 · layout 2-col (título+resumo / meta)",
+        "to": "1440 × 120 · layout 2-col · título + resumo à esquerda · meta à direita"
+      },
+      {
+        "id": "486:54",
+        "from": "1344 × 149 · fim do case study · centraliza Button ghost md",
+        "to": "1440 × 149 · fim do case study · Button ghost md centralizado"
+      }
+    ],
+    "textStyleFixes": [
+      {
+        "id": "I71:68;479:7;417:300",
+        "page": "🎬 Prototype",
+        "chars": "Todos os cases",
+        "from": null,
+        "to": "Button",
+        "note": "Label Button ghost md do Prev-Next Nav da tela Monetix"
+      },
+      {
+        "id": "I71:165;479:7;417:300",
+        "page": "🎬 Prototype",
+        "chars": "Todos os cases",
+        "from": null,
+        "to": "Button",
+        "note": "Label Button ghost md do Prev-Next Nav da tela UnimedPay"
+      }
+    ],
+    "titleOverridesConfirmed": [
+      {
+        "id": "69:78",
+        "page": "🎬 Prototype",
+        "Title#16:3": "UnimedPay",
+        "Category#16:4": "Product Design",
+        "Year#16:5": "2023",
+        "note": "Confirmado: override já estava aplicado desde Etapa 7. Premissa do gap analysis (Monetix duplicado) era inválida."
+      },
+      {
+        "id": "69:169",
+        "page": "🎬 Prototype",
+        "Title#16:3": "UnimedPay",
+        "Category#16:4": "Product Design",
+        "Year#16:5": "2023",
+        "note": "Idem"
+      }
+    ],
+    "bindingsAudit": {
+      "status": "clean",
+      "textNodesAudited": 42,
+      "hexSoltos": 0,
+      "divergencesFromFoundations": 0,
+      "note": "Diferente da Etapa 6 (Layout) que teve 3 bindings divergentes (eyebrow Body/Base em vez de Label/Eyebrow, desc content/primary em vez de secondary, nav items inativos primary). A Content já estava totalmente conforme o padrão Foundations. Padrão verificado: eyebrows em Label/Eyebrow+content/tertiary, titles em Display/Section ou Heading/H3+content/primary, descs em Body/Small+content/secondary, info/usage em Body/Meta+content/primary e Code/Small+content/tertiary."
+    }
+  },
+  "newGapsIdentified": [
+    {
+      "id": "project-card-16:8-variables",
+      "severity": "média",
+      "description": "Project Card master (16:8) tem 4 TEXT children bound a VariableID:3:3 e VariableID:3:4, que não aparecem em figma.variables.getLocalVariables(). Apontam para collection externa ou removida.",
+      "affectedNodes": [
+        { "id": "16:10", "name": "Imagem do projeto", "fillVar": "VariableID:3:4" },
+        { "id": "16:13", "name": "Monetix", "fillVar": "VariableID:3:3" },
+        { "id": "16:14", "name": "Product Design", "fillVar": "VariableID:3:4" },
+        { "id": "16:15", "name": "2024", "fillVar": "VariableID:3:4" }
+      ],
+      "fix": "Migrar para tokens semânticos atuais (content/primary para título, content/secondary para categoria/ano).",
+      "deferredTo": "Etapa 9 (Foundations · Input tokens) ou etapa dedicada de migração."
+    },
+    {
+      "id": "prev-next-master-label-no-style",
+      "severity": "baixa",
+      "description": "No audit da Content, node I479:7;417:300 (label 'Todos os cases' dentro do master Case/Prev-Next Nav 64:50) aparece sem textStyleId. Corrigido POR INSTÂNCIA no Prototype (2 labels), mas o master permanece com o bug. Todas as futuras instâncias herdarão null.",
+      "fix": "Setar textStyleId=Button no TEXT label do Button interno do master do Prev-Next Nav. Alternativa: corrigir no Button ComponentSet master (417:632) se a causa for herdada dele.",
+      "deferredTo": "Etapa de manutenção dedicada ou inclusão no audit da próxima etapa de Components."
+    }
+  ],
+  "delegation": {
+    "mimo-reasoner": "Validou ordem de operações (2 calls por isolamento de página), enumerou 7 edge cases (gotcha #2/#6/#8/#10 + componentProperties vs characters override). Argumento decisivo: usar setProperties para instância com TEXT props, não walk+characters.",
+    "glm-reviewer": "Rascunhou copy dos usage labels (versão final aplicada). Esqueleto do pseudocode serviu como ponto de partida; bug do .children em TEXT node foi caught no retry (fallout de redação inicial sem hasKids guard).",
+    "opus": "3 MCP calls efetivas + 1 snapshot = 4 calls totais. Detectou que findByName retorna FRAME homônimo ao COMPONENT (usou getNodeByIdAsync direto). Identificou que Project Card usa componentProperties — mudou estratégia de walk+.characters para setProperties. Descobriu que premissa Monetix-duplicado do gap analysis era inválida."
+  },
+  "notes": "Etapa 8 corrige dívidas cosméticas pendentes das Etapas 6/7 e confirma que Components/Content já estava alinhada ao padrão Foundations. Gaps residuais (variáveis antigas no Project Card e label do Prev-Next Nav master sem textStyleId) ficaram documentados como backlog técnico. Nenhuma regressão introduzida. Próxima etapa aprovada (9 — Foundations · Input tokens + audit Light mode WCAG) pode começar sem bloqueios.",
+  "capturedAt": "2026-04-18T18:52:19.162Z"
+}

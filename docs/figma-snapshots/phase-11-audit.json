@@ -1,0 +1,530 @@
+{
+  "meta": {
+    "phase": 11,
+    "name": "audit-consolidated",
+    "title": "Auditoria consolidada das etapas 1-10 — matriz autoritativa de gaps, débitos e componentes ausentes",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": null,
+    "pageName": null,
+    "backfillMethod": "documental",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_foundations_card_pattern.md",
+      "project_portfolio_style_rules.md",
+      "project_figma_foundations.md",
+      "project_bridge_dark_only.md"
+    ],
+    "notes": "Esta etapa não tocou no Figma. Produziu matriz autoritativa via kimi-longctx lendo os 11 snapshots + 4 memórias, reclassificada por Opus e validada por mimo-reasoner. Orienta as Etapas 12-18."
+  },
+  "executiveSummary": [
+    "Forms (Phase 10) usa FRAME em vez de SECTION com cards 200×HUG — DIVERGÊNCIA CONSCIENTE documentada; reavaliar se unifica ou mantém como padrão para páginas de primitives documentais.",
+    "Project Card (16:8) tem bindings ativos para VariableID:3:3 e VariableID:3:4 (coleção removida) — bug real, bloqueia export limpo.",
+    "5 falhas WCAG Light críticas/altas (Phase 9) + 3 bugs #000000 em surface/overlay + interactive/outline/bg + interactive/ghost/bg — Dark-only V1 escapa mas Light fica inutilizável sem fix.",
+    "TextField/Textarea não expõem component properties (TEXT/BOOLEAN) — polish deferido da Phase 10, necessário antes do bridge para Code Connect idiomático.",
+    "Largura 1600 (Layout/Content) vs 1440 (Foundations/Forms/Buttons) — decisão consciente (SECTION 1600 + padding 80 = content 1440) mas inconsistente; ponto de decisão de design, não bug.",
+    "Label 'Todos os cases' no master Case/Prev-Next Nav (I479:7;417:300) sem textStyleId — propaga bug visual em toda nova instância.",
+    "Error-focus combo (7º estado de input) foi sugerido por mimo e deferido — avaliar na Etapa 13 junto com component properties.",
+    "25+ componentes ausentes para cobrir um portfolio real: Select/Checkbox/Radio/Switch (formulários), Dialog/Toast/Tooltip/Badge (feedback/overlay), Breadcrumb/Tabs/Avatar/Skeleton (navegação/dados), Stat/Metric (específico de cases).",
+    "Memória project_foundations_card_pattern.md declara 'SECTION 1600' mas Foundations atual é 1440 — débito de documentação, atualizar na Etapa 12.",
+    "Reactions em TEXT masters falham (Plugin API limitation) e MCP tem teto ~12 ops async — limitações conhecidas, não débitos; documentar no playbook."
+  ],
+  "inventory": {
+    "pages": [
+      {
+        "name": "🏠 Cover",
+        "type": "isolated frame",
+        "dimensions": "1920×960",
+        "elements": ["Cover/1920x960", "Marker 00|COVER"],
+        "primaryIds": ["381:2"],
+        "status": "estável",
+        "notes": "Padding [120,120,96,120]. Única página em 1920."
+      },
+      {
+        "name": "🎨 Foundations",
+        "type": "documentation page",
+        "dimensions": "1440×H (padding 80)",
+        "elements": "11 sections (00-11): Colors, Alpha, Semantic, Typography, Dimensions, Borders, Shadows, Glass&Blur, Motion, Interactive States, Input Tokens",
+        "primaryIds": ["7:2", "531:2 (Input Tokens)"],
+        "status": "canônico",
+        "notes": "16 text styles + 3 effect styles + 4 variable collections. Memória ainda diz 1600 — outdated."
+      },
+      {
+        "name": "🪷 Icons",
+        "type": "library page",
+        "dimensions": "1600×H (padding 80)",
+        "elements": "3 sections + 24 ícones Lucide",
+        "primaryIds": ["62:2", "406:2", "406:41", "407:58"],
+        "status": "estável",
+        "notes": "Largura 1600 consistente com Components/*."
+      },
+      {
+        "name": "🧩 Buttons",
+        "type": "components page",
+        "dimensions": "1440×H",
+        "elements": "9 sections + 2 ComponentSets (Button 90 variants, IconButton 90 variants)",
+        "primaryIds": ["7:4", "417:632", "419:377"],
+        "status": "estável"
+      },
+      {
+        "name": "🧩 Components / Layout",
+        "type": "components page",
+        "dimensions": "1600×H (content 1440 + padding 80)",
+        "elements": "Header (4 variants), Section Header, Section Divider, Footer",
+        "primaryIds": ["7:5", "17:2", "64:10", "64:12", "17:10"],
+        "status": "estável com débitos"
+      },
+      {
+        "name": "🧩 Components / Content",
+        "type": "components page",
+        "dimensions": "1600×H (content 1440 + padding 80)",
+        "elements": "Project Card, Case/Hero 21:9, Case/Title+Meta, Case/Prev-Next Nav",
+        "primaryIds": ["7:6", "16:8", "64:15", "64:30", "64:50"],
+        "status": "estável com 2 débitos (VariableID fantasmas + label sem textStyle)"
+      },
+      {
+        "name": "🎬 Prototype",
+        "type": "flow page",
+        "dimensions": "1440×H (variável por tela)",
+        "elements": "7 frames (Home, Projects, About, Contact, Monetix, UnimedPay, 404) + Header CS (4 variants)",
+        "primaryIds": [
+          "509:265",
+          "69:41",
+          "69:141",
+          "69:198",
+          "69:311",
+          "71:16",
+          "71:113",
+          "69:378",
+          "506:24"
+        ],
+        "status": "estável",
+        "notes": "51 reactions ativas + 7 self-ref rejeitadas. DISSOLVE 200ms."
+      },
+      {
+        "name": "🧩 Forms",
+        "type": "components page",
+        "dimensions": "1440×4223 (outer FRAME, não SECTION)",
+        "elements": "8 seções + TextField 36v + Textarea 18v",
+        "primaryIds": ["536:2", "553:38", "548:38", "550:68"],
+        "status": "divergência estrutural consciente",
+        "notes": "Outer é FRAME vertical e tokens cards usam 200×HUG em vez do 200×172 canônico. Documentado em phase-10 patternDivergencesFromButtons."
+      }
+    ]
+  },
+  "divergences": [
+    {
+      "id": "DIV-01",
+      "topic": "Estrutura Forms (FRAME vs SECTION)",
+      "location": "Page 🧩 Forms — outer 553:38",
+      "reclassification": "decisão-consciente",
+      "originalPriority": "crítica (kimi)",
+      "finalPriority": "média (decisão de design pendente)",
+      "rationale": "Documentada em phase-10.patternDivergencesFromButtons como simplificação para auto-layout vertical contíguo. Decisão: aceitar como padrão para páginas de primitives documentais OU migrar para SECTION 1600 + content 1440 como Layout/Content. Ponto de alinhamento, não bug.",
+      "affectedNodes": ["536:2", "553:38"]
+    },
+    {
+      "id": "DIV-02",
+      "topic": "Cards de tokens Forms 200×HUG vs 200×172 canônico",
+      "location": "🧩 Forms seção 06",
+      "reclassification": "decisão-consciente",
+      "originalPriority": "alta (kimi)",
+      "finalPriority": "baixa",
+      "rationale": "Documentada em phase-10 como 'paridade visual adequada para documental compacto' porque chips de input são retangulares (168×48). Reverter para 200×172 exigiria inflar chips artificialmente."
+    },
+    {
+      "id": "DIV-03",
+      "topic": "Largura 1600 (Layout/Content/Icons) vs 1440 (Foundations/Buttons/Forms/Prototype)",
+      "location": "pages-wide",
+      "reclassification": "decisão-consciente",
+      "originalPriority": "alta (kimi)",
+      "finalPriority": "informativo",
+      "rationale": "SECTION 1600 + padding 80 → content 1440 é molde para páginas com muitos componentes gráficos de referência. Foundations abandonou o molde na Etapa 9 (section 11 criada em 1440 sem margin). Decisão pendente: unificar tudo em 1440 OU restaurar 1600 como padrão documental."
+    },
+    {
+      "id": "DIV-04",
+      "topic": "Forms subsections sem header padronizado",
+      "location": "🧩 Forms — todas as seções",
+      "reclassification": "divergência real",
+      "finalPriority": "média",
+      "rationale": "As subseções Forms não seguem o molde gap 20 com eyebrow + Heading/H3 + Body/Small 760w. Corrigir se Forms passar a seguir padrão Foundations."
+    }
+  ],
+  "technicalDebts": [
+    {
+      "id": "DT-01",
+      "topic": "Bindings fantasmas Project Card",
+      "severity": "crítica",
+      "blocksBridge": true,
+      "location": "Project Card master 16:8 — children 16:10, 16:13, 16:14, 16:15",
+      "description": "4 children bound a VariableID:3:3 e VariableID:3:4 (coleção externa removida). Não resolvem em figma.variables.getLocalVariables().",
+      "fix": "Migrar para content/primary (título) + content/secondary (categoria/ano/imagem).",
+      "targetStage": "Etapa 14 (Limpeza de débitos)"
+    },
+    {
+      "id": "DT-02",
+      "topic": "Master Prev-Next sem textStyleId",
+      "severity": "alta",
+      "blocksBridge": false,
+      "location": "Case/Prev-Next Nav 64:50 — node I479:7;417:300 'Todos os cases'",
+      "description": "Label do Button interno do master não tem textStyleId. Corrigido por instância na Etapa 8, master poluído permanece. Novas instâncias herdarão null.",
+      "fix": "Setar textStyleId=Button no TEXT label do master. Investigar se origina do Button ComponentSet 417:632.",
+      "targetStage": "Etapa 14"
+    },
+    {
+      "id": "DT-03",
+      "topic": "Component properties não expostas TextField/Textarea",
+      "severity": "alta",
+      "blocksBridge": true,
+      "location": "TextField 548:38 + Textarea 550:68",
+      "description": "Sem TEXT props (label/placeholder/helperText/value) nem BOOLEAN (showLabel/showHelper/showIconEnd). Bloqueia Code Connect idiomático.",
+      "fix": "addComponentProperty + componentPropertyReferences em batching ≤6 instâncias/call.",
+      "targetStage": "Etapa 13"
+    },
+    {
+      "id": "DT-04",
+      "topic": "Estado error-focus ausente em inputs",
+      "severity": "média",
+      "blocksBridge": false,
+      "location": "TextField 548:38 + Textarea 550:68",
+      "description": "Sugestão do mimo na Phase 10: combo error+focus como 7º estado. Deferido.",
+      "fix": "Avaliar necessidade após criar primitives em código. Se passar, +12 TextField variants (size×hasIcon) + 3 Textarea variants.",
+      "targetStage": "Etapa 13 (decisão + build se aprovado)"
+    },
+    {
+      "id": "DT-05",
+      "topic": "Falhas WCAG Light mode críticas (3 bugs #000000)",
+      "severity": "crítica",
+      "blocksBridge": false,
+      "blocksLightV1": true,
+      "location": "Semantic · Theme collection — mode Light",
+      "pairs": [
+        "content/primary / surface/overlay = 1.06",
+        "interactive/outline/fg / interactive/outline/bg = 1.06",
+        "interactive/ghost/fg / interactive/ghost/bg = 1.06"
+      ],
+      "description": "surface/overlay, interactive/outline/bg, interactive/ghost/bg todos = #000000 no Light mode. Claro bug de configuração.",
+      "fix": "Inspecionar primitivos Light e corrigir valores para não-#000000.",
+      "targetStage": "Etapa 12 (opcional, pós-launch)"
+    },
+    {
+      "id": "DT-06",
+      "topic": "Falhas WCAG Light mode altas",
+      "severity": "alta",
+      "blocksBridge": false,
+      "blocksLightV1": true,
+      "location": "Semantic · Theme collection — mode Light",
+      "pairs": [
+        "content/tertiary / surface/page = 2.54",
+        "content/placeholder / surface/page = 2.54",
+        "input/placeholder / input/bg = 2.13",
+        "feedback/warning/content / feedback/warning/bg = 2.86"
+      ],
+      "description": "Contrastes insuficientes para AA body.",
+      "fix": "Escurecer primitivos (#9ca3af → #6b7280, #d97706 → #b45309, etc.).",
+      "targetStage": "Etapa 12"
+    },
+    {
+      "id": "DT-07",
+      "topic": "Memória project_foundations_card_pattern.md desatualizada",
+      "severity": "baixa",
+      "blocksBridge": false,
+      "location": "memory file",
+      "description": "Memória diz SECTION 1600 mas Foundations atual é 1440 (mudado implicitamente na Etapa 9).",
+      "fix": "Atualizar memória para refletir estado real, OU decidir unificar e aplicar.",
+      "targetStage": "Etapa 12 ou 14 (cosmético)"
+    },
+    {
+      "id": "DT-08",
+      "topic": "surface/background vs surface/page",
+      "severity": "baixa",
+      "blocksBridge": false,
+      "location": "memória + snapshots antigos",
+      "description": "Memórias citam surface/background, nome real é surface/page.",
+      "fix": "Padronizar em memórias.",
+      "targetStage": "Etapa 14"
+    }
+  ],
+  "orphanTokens": [
+    {
+      "id": "VariableID:3:3",
+      "type": "color variable",
+      "status": "órfão",
+      "affectedComponents": ["Project Card 16:8 — child 16:13 'Monetix' (text color)"],
+      "resolution": "Migrar para content/primary."
+    },
+    {
+      "id": "VariableID:3:4",
+      "type": "color variable",
+      "status": "órfão",
+      "affectedComponents": [
+        "Project Card 16:8 — child 16:10 'Imagem do projeto' (fill)",
+        "Project Card 16:8 — child 16:14 'Product Design' (text color)",
+        "Project Card 16:8 — child 16:15 '2024' (text color)"
+      ],
+      "resolution": "Migrar para content/secondary (16:14, 16:15) e surface/subtle (16:10 fill de placeholder de imagem)."
+    },
+    {
+      "id": "Label/Meta",
+      "type": "text style",
+      "status": "inexistente mas referenciado",
+      "affectedComponents": ["Forms (fallback aplicado para Body/Meta)"],
+      "resolution": "Aceitar Body/Meta como substituto oficial OU criar Label/Meta no sistema."
+    },
+    {
+      "id": "Label/Small",
+      "type": "text style",
+      "status": "inexistente mas referenciado em docs",
+      "affectedComponents": ["documentação de roadmap"],
+      "resolution": "Remover referência ou criar."
+    },
+    {
+      "id": "surface/base",
+      "type": "color variable",
+      "status": "inexistente — substituído por surface/page",
+      "affectedComponents": ["memória de roadmap"],
+      "resolution": "Atualizar memória."
+    }
+  ],
+  "intentionalTokenPatterns": [
+    {
+      "topic": "input/placeholder-disabled → content/disabled",
+      "finding": "Kimi levantou como suspeito (input/placeholder vai para content/tertiary; input/placeholder-disabled vai para content/disabled).",
+      "verdict": "CORRETO — intencional. Estado desabilitado mapeia para token mais apagado. Não é inconsistência.",
+      "action": "nenhuma"
+    }
+  ],
+  "missingComponents": {
+    "formsAndInputs": [
+      {
+        "name": "Select / Dropdown",
+        "priority": "crítica-launch",
+        "rationale": "Filtros de Projects + campos de Contact."
+      },
+      {
+        "name": "Checkbox",
+        "priority": "crítica-launch",
+        "rationale": "Consentimento LGPD/GDPR + multi-select."
+      },
+      {
+        "name": "Radio / RadioGroup",
+        "priority": "crítica-launch",
+        "rationale": "Seleção única em formulários."
+      },
+      { "name": "Switch / Toggle", "priority": "alta", "rationale": "Preferências binárias." },
+      {
+        "name": "FormField wrapper",
+        "priority": "alta",
+        "rationale": "Composição consistente label+input+helper+error."
+      },
+      {
+        "name": "Combobox / Autocomplete",
+        "priority": "média",
+        "rationale": "Busca avançada — nice-to-have."
+      },
+      { "name": "DatePicker", "priority": "média", "rationale": "Se houver campo de data." },
+      { "name": "FileUpload", "priority": "baixa", "rationale": "Possível anexo em Contact." }
+    ],
+    "feedbackAndOverlay": [
+      {
+        "name": "Dialog / Modal",
+        "priority": "crítica-launch",
+        "rationale": "Confirmações, detalhes rápidos, privacidade."
+      },
+      {
+        "name": "Toast / Notification",
+        "priority": "alta",
+        "rationale": "Feedback de envio de formulário."
+      },
+      {
+        "name": "Tooltip",
+        "priority": "alta",
+        "rationale": "Explicação de ícones + a11y de campos."
+      },
+      {
+        "name": "Badge / Tag / Chip",
+        "priority": "alta",
+        "rationale": "Categorias em Project Card + filtros."
+      },
+      {
+        "name": "Alert inline",
+        "priority": "média",
+        "rationale": "Erros contextualizados em forms."
+      },
+      { "name": "Banner", "priority": "baixa", "rationale": "Anúncios no topo (opcional)." },
+      {
+        "name": "Popover",
+        "priority": "baixa",
+        "rationale": "Menus de ação (coberto por Dialog/Dropdown)."
+      }
+    ],
+    "navigationAndData": [
+      { "name": "Breadcrumb", "priority": "alta", "rationale": "Navegação hierárquica em cases." },
+      {
+        "name": "Tabs",
+        "priority": "média",
+        "rationale": "Conteúdo denso em cases (Process / Results)."
+      },
+      { "name": "Avatar", "priority": "média", "rationale": "Foto pessoal + depoimentos." },
+      {
+        "name": "Skeleton / Loading",
+        "priority": "média",
+        "rationale": "Loading de imagens de projeto."
+      },
+      {
+        "name": "Empty State",
+        "priority": "média",
+        "rationale": "Filtros sem resultado + 404 alt."
+      },
+      { "name": "Pagination", "priority": "baixa", "rationale": "Se lista de projetos crescer." },
+      {
+        "name": "Divider standalone",
+        "priority": "baixa",
+        "rationale": "Já existe Section Divider."
+      },
+      {
+        "name": "Progress / Spinner",
+        "priority": "baixa",
+        "rationale": "Envio de forms (coberto por disabled state)."
+      },
+      { "name": "Accordion", "priority": "baixa", "rationale": "FAQ opcional." }
+    ],
+    "prototypeSpecific": [
+      {
+        "name": "Stat / Metric",
+        "priority": "alta",
+        "rationale": "Números em cases (conversão, usuários, ROI)."
+      },
+      {
+        "name": "CharCounter",
+        "priority": "média",
+        "rationale": "Limite de caracteres em Contact message."
+      },
+      {
+        "name": "Timeline / Stepper",
+        "priority": "baixa",
+        "rationale": "Processo de design em cases."
+      },
+      { "name": "SocialProof / Logos", "priority": "baixa", "rationale": "Clientes atendidos." }
+    ]
+  },
+  "knownApiLimitations": [
+    {
+      "topic": "Reactions em TEXT masters",
+      "workaround": "Aplicar reaction por instância, não no master.",
+      "referenceSnapshot": "phase-07-prototype.json"
+    },
+    {
+      "topic": "MCP async ceiling ~12 ops/call",
+      "workaround": "Batching por size/tipo, não loop único.",
+      "referenceSnapshot": "phase-10-form-primitives.json"
+    },
+    {
+      "topic": "loadAllPagesAsync não suportado",
+      "workaround": "page.loadAsync() por página alvo.",
+      "referenceSnapshot": "phase-10-form-primitives.json"
+    }
+  ],
+  "delegation": {
+    "kimi-longctx": "Leu os 11 snapshots + 4 memórias; produziu matriz bruta em 5 seções + resumo executivo. 133k tokens, 36 tool calls.",
+    "opus": "Reclassificou 3 itens do kimi (DIV-01/02/03 de crítica→consciente, input/placeholder-disabled de suspeito→correto) com base em memória e snapshot de phase-10.",
+    "mimo-reasoner": "Encontrou 30 omissões que o kimi não cobriu (a11y operacional, mobile, motion, governance, launch prep). 28k tokens, 1 call."
+  },
+  "completenessValidation": {
+    "source": "mimo-reasoner",
+    "omissionsFound": 30,
+    "criticalGaps": [
+      {
+        "id": "GAP-01",
+        "topic": "Focus visible cross-component não auditado",
+        "description": "Token interactive/*/focus existe, mas não há evidência de outline/ring 2px em Button/IconButton/TextField/Textarea/Header nav/Prev-Next.",
+        "targetStage": "Etapa 13 (polish com audit cross-component)"
+      },
+      {
+        "id": "GAP-02",
+        "topic": "Estratégia mobile/responsive totalmente ausente",
+        "description": "Design é 1440 fixo. Zero menção a 768 (tablet) e 390/414 (mobile). Portfolio público sem responsivo = launch-blocker em 2026.",
+        "targetStage": "Nova Etapa 17.5 (Mobile/Responsive)"
+      },
+      {
+        "id": "GAP-03",
+        "topic": "Header mobile drawer + collapse patterns",
+        "description": "4 variants de Header são por página (aria-current); nenhum é hamburger/drawer. Footer grid idem.",
+        "targetStage": "Etapa 17.5"
+      },
+      {
+        "id": "GAP-04",
+        "topic": "SEO / OG / favicon multi-size ausentes",
+        "description": "Favicon multi-size (16/32/180/192/512), og:image 1200×630, twitter:card, robots.txt, sitemap.xml, meta description, structured data — nada planejado.",
+        "targetStage": "Nova Etapa 19 (Launch Prep)"
+      }
+    ],
+    "highGapsByStage": {
+      "etapa-13-polish": [
+        "Loading state em Button/IconButton (7º estado com spinner)",
+        "Read-only state em TextField/Textarea (distinto de disabled)",
+        "Focus-visible ring audit cross-component"
+      ],
+      "etapa-14-debitos": [
+        "aria-current visual em Header nav (4 variants)",
+        "Hardcoded hex hunt (varrer fills/strokes não bound)"
+      ],
+      "etapa-15-form-family": [
+        "Icons faltantes: chevron-down, check, minus (indeterminate)",
+        "Error message library + validation em tempo real"
+      ],
+      "etapa-16-feedback-overlay": [
+        "Z-index scale tokens (overlay/modal/toast/tooltip)",
+        "Effect styles: elevation/modal, elevation/toast",
+        "Motion tokens: duration (75/150/300) + easing + keyframes (pulse/slide/fadeIn)",
+        "Icons faltantes: x, check-circle, alert-circle, info, alert-triangle"
+      ],
+      "etapa-17-navigation-data": [
+        "Empty state em Project Card (sem imagem / coming soon)",
+        "Icons faltantes: chevron-left/right, user, search-x, inbox, file-question"
+      ],
+      "etapa-17-5-mobile": [
+        "Breakpoint tokens (sm/md/lg/xl)",
+        "Project Card stacking mobile (1 col + aspect ratio diferente)",
+        "Header drawer + Footer mobile layout"
+      ],
+      "etapa-18-bridge": [
+        "Roles semânticos + ARIA labels por componente",
+        "Keyboard navigation teste real (Tab order + VoiceOver)",
+        "prefers-reduced-motion no tokens.css",
+        "Touch target audit (IconButton sm 32 < 44)",
+        "Theme switcher + color-scheme meta + data-theme=dark",
+        "Image pipeline (lazy, srcset, WebP/AVIF)",
+        "Testing strategy (Vitest + Testing Library mínimo)",
+        "Design system versioning + changelog",
+        "Component acceptance criteria",
+        "Sync policy Figma ↔ código",
+        "Migration plan theme.css → tokens.css com kill date"
+      ],
+      "etapa-19-launch-prep": [
+        "Favicon multi-size",
+        "OG tags + twitter:card",
+        "robots.txt + sitemap.xml",
+        "Meta description por página",
+        "Structured data (Person/CreativeWork)",
+        "Consent banner LGPD (+Analytics setup)"
+      ]
+    }
+  },
+  "nextSteps": {
+    "immediate": "Aprovação do usuário para roadmap revisto (13→14→15→16→17→17.5→18→19, 12 opcional).",
+    "recommendedOrder": [
+      "Etapa 13 — Polish Form primitives + focus-visible audit + loading state Button + read-only inputs",
+      "Etapa 14 — Limpeza de débitos + aria-current Header + hardcoded hex hunt",
+      "Etapa 15 — Form family (Select/Checkbox/Radio/Switch/FormField) + icons novos + error copy lib",
+      "Etapa 16 — Feedback & Overlay (Dialog/Toast/Tooltip/Badge/Alert) + z-index scale + effect styles modal/toast + motion tokens + icons",
+      "Etapa 17 — Navegação & Dados (Breadcrumb/Tabs/Avatar/Skeleton/EmptyState/Stat) + icons",
+      "Etapa 17.5 — Mobile/Responsive (breakpoint tokens + Header drawer + Card stacking + adaptações cross-component)",
+      "Etapa 18 — Bridge Figma → Vite (tokens.css Dark-only + fonts + Code Connect + a11y docs + test setup + governance)",
+      "Etapa 19 — Launch Prep (SEO, OG, favicon, robots, sitemap, structured data, LGPD consent)",
+      "Etapa 12 — Fix WCAG Light (opcional, pós-launch)"
+    ]
+  },
+  "capturedAt": "2026-04-18T21:30:00Z"
+}

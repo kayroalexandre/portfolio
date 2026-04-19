@@ -1,0 +1,307 @@
+{
+  "meta": {
+    "phase": 6,
+    "name": "components-layout",
+    "title": "Audit Components/Layout — padronização 1440 full-bleed + bindings corrigidos",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "7:5",
+    "pageName": "🧩 Components / Layout",
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_foundations_card_pattern.md",
+      "project_portfolio_style_rules.md"
+    ]
+  },
+  "layout": {
+    "sectionWidth": 1600,
+    "padding": 80,
+    "contentWidth": 1440,
+    "sectionFill": "surface/background",
+    "headerType": "FRAME (documental, dentro do content)",
+    "subsectionGap": 48,
+    "note": "SECTION 1600 é desvio consciente do 1440 interno: componentes de layout são eles mesmos 1440 full-bleed — padding 80 deixa exatamente 1440 de área útil."
+  },
+  "tree": [
+    {
+      "id": "484:3",
+      "name": "Layout Components",
+      "type": "SECTION",
+      "x": 0,
+      "y": 0,
+      "w": 1600,
+      "h": 1583,
+      "childCount": 1,
+      "note": "SECTION envelope; filho único 'content' FRAME com header documental + 3 subsections"
+    }
+  ],
+  "content": {
+    "id": "484:4",
+    "name": "content",
+    "type": "FRAME",
+    "w": 1600,
+    "h": 1583,
+    "subsections": [
+      {
+        "id": "484:5",
+        "name": "header (documental)",
+        "type": "FRAME",
+        "y": 80,
+        "h": 146,
+        "eyebrow": "COMPONENTS · LAYOUT",
+        "title": "01 · Layout",
+        "desc": "Componentes estruturais sitewide. Definem a moldura de navegação (Header), os marcos semânticos de conteúdo (Section Header + Divider) e o fechamento institucional (Footer).",
+        "dividerSize": "60×2 border/strong"
+      },
+      {
+        "id": "484:10",
+        "name": "Header",
+        "type": "FRAME",
+        "y": 290,
+        "h": 347,
+        "familyLabel": "NAVEGAÇÃO",
+        "cards": [
+          { "name": "Header", "masterId": "17:2", "usage": "1440 × 192 · topo de todas as páginas" }
+        ]
+      },
+      {
+        "id": "484:20",
+        "name": "Section Header + Divider",
+        "type": "FRAME",
+        "y": 701,
+        "h": 339,
+        "familyLabel": "TIPOGRAFIA DE SEÇÃO",
+        "cards": [
+          {
+            "name": "Section Header",
+            "masterId": "64:10",
+            "usage": "1440 × 82 · eyebrow + título + descrição"
+          },
+          {
+            "name": "Section Divider",
+            "masterId": "64:12",
+            "usage": "1440 × 1 · linha horizontal border/subtle",
+            "previewHeight": 48,
+            "previewNote": "minPreviewH 48 aplicado (master é 1px, preview precisa ser visível)"
+          }
+        ]
+      },
+      {
+        "id": "484:35",
+        "name": "Footer",
+        "type": "FRAME",
+        "y": 1104,
+        "h": 399,
+        "familyLabel": "RODAPÉ",
+        "cards": [
+          { "name": "Footer", "masterId": "17:10", "usage": "1440 × 264 · fim de todas as páginas" }
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "17:2",
+      "name": "Header",
+      "key": "8846541ab01aea0364fc721bb2293063762e3765",
+      "w": 1440,
+      "h": 192,
+      "children": [
+        {
+          "id": "50:2",
+          "name": "KAYRO GOMES",
+          "type": "TEXT",
+          "textStyle": "Display/Hero",
+          "fill": "content/primary"
+        },
+        {
+          "id": "50:3",
+          "name": "Nav",
+          "type": "FRAME",
+          "items": [
+            {
+              "id": "50:4",
+              "chars": "Início",
+              "textStyle": "Body/Base",
+              "fill": "content/primary",
+              "note": "ativo"
+            },
+            {
+              "id": "50:5",
+              "chars": "Projetos",
+              "textStyle": "Body/Base",
+              "fill": "content/secondary",
+              "note": "inativo — corrigido 2026-04-18"
+            },
+            {
+              "id": "50:6",
+              "chars": "Sobre",
+              "textStyle": "Body/Base",
+              "fill": "content/secondary",
+              "note": "inativo — corrigido 2026-04-18"
+            },
+            {
+              "id": "50:7",
+              "chars": "Contato",
+              "textStyle": "Body/Base",
+              "fill": "content/secondary",
+              "note": "inativo — corrigido 2026-04-18"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "64:10",
+      "name": "Section Header",
+      "key": "d4c8afb1bc97d9a414ae8238741c6ed6195c3bfe",
+      "w": 1440,
+      "h": 82,
+      "note": "Resize 1344 → 1440 em 2026-04-18 para padronizar full-bleed",
+      "children": [
+        {
+          "id": "64:2",
+          "name": "label",
+          "type": "FRAME",
+          "items": [
+            {
+              "id": "64:3",
+              "name": "folder-open",
+              "type": "INSTANCE",
+              "note": "ícone Lucide stroke color/neutral/050"
+            },
+            {
+              "id": "64:5",
+              "chars": "Projetos",
+              "textStyle": "Label/Eyebrow",
+              "fill": "content/tertiary",
+              "note": "corrigido 2026-04-18 (antes: Body/Base + content/primary)"
+            }
+          ]
+        },
+        {
+          "id": "64:6",
+          "name": "content",
+          "type": "FRAME",
+          "items": [
+            {
+              "id": "64:7",
+              "chars": "Estudos de caso",
+              "textStyle": "Display/Section",
+              "fill": "content/primary"
+            },
+            {
+              "id": "64:8",
+              "chars": "Descrição da seção — alinhada com o conteúdo do código fonte.",
+              "textStyle": "Body/Base",
+              "fill": "content/secondary",
+              "note": "corrigido 2026-04-18 (antes: content/primary)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "64:12",
+      "name": "Section Divider",
+      "key": "33c1340e5096595b93565f83fb46d163abd05bec",
+      "w": 1440,
+      "h": 1,
+      "note": "Resize 1344 → 1440 em 2026-04-18; RECTANGLE simples com stroke border/subtle"
+    },
+    {
+      "id": "17:10",
+      "name": "Footer",
+      "key": "62ec904fd7490a141e81712bb0c034f69cb5b76d",
+      "w": 1440,
+      "h": 264,
+      "stroke": "border/subtle (top)",
+      "children": [
+        {
+          "id": "50:8",
+          "name": "Copyright row",
+          "type": "FRAME",
+          "items": [
+            {
+              "id": "50:9",
+              "chars": "©2026 Kayro Gomes",
+              "textStyle": "Body/Base",
+              "fill": "content/primary"
+            },
+            {
+              "id": "50:10",
+              "name": "Nav",
+              "type": "FRAME",
+              "note": "Projetos / Sobre / Contato — Body/Base + content/primary (footer mantido em primary; não-inativos)"
+            }
+          ]
+        },
+        {
+          "id": "50:14",
+          "name": "KAYRO GOMES",
+          "type": "TEXT",
+          "textStyle": "Display/Hero",
+          "fill": "content/primary",
+          "note": "assinatura tipográfica inferior"
+        }
+      ]
+    }
+  ],
+  "componentSets": [],
+  "changes": {
+    "summary": "Padronização 1440 full-bleed + correção de 3 bindings divergentes do padrão Foundations",
+    "resizes": [
+      { "id": "64:10", "name": "Section Header", "from": "1344×82", "to": "1440×82" },
+      { "id": "64:12", "name": "Section Divider", "from": "1344×1", "to": "1440×1" }
+    ],
+    "usageLabels": [
+      {
+        "id": "484:28",
+        "from": "1344 × 82 · eyebrow + título + descrição",
+        "to": "1440 × 82 · eyebrow + título + descrição"
+      },
+      {
+        "id": "484:33",
+        "from": "1344 × 1 · linha horizontal border/subtle",
+        "to": "1440 × 1 · linha horizontal border/subtle"
+      }
+    ],
+    "bindings": [
+      {
+        "id": "64:5",
+        "target": "Section Header eyebrow",
+        "from": { "textStyle": "Body/Base", "fill": "content/primary" },
+        "to": { "textStyle": "Label/Eyebrow", "fill": "content/tertiary" }
+      },
+      {
+        "id": "64:8",
+        "target": "Section Header desc",
+        "from": { "fill": "content/primary" },
+        "to": { "fill": "content/secondary" }
+      },
+      {
+        "id": "50:5",
+        "target": "Header nav · Projetos (inativo)",
+        "from": { "fill": "content/primary" },
+        "to": { "fill": "content/secondary" }
+      },
+      {
+        "id": "50:6",
+        "target": "Header nav · Sobre (inativo)",
+        "from": { "fill": "content/primary" },
+        "to": { "fill": "content/secondary" }
+      },
+      {
+        "id": "50:7",
+        "target": "Header nav · Contato (inativo)",
+        "from": { "fill": "content/primary" },
+        "to": { "fill": "content/secondary" }
+      }
+    ]
+  },
+  "fonts": ["Inter"],
+  "notes": "Auditoria pedida antes de avançar para novas páginas Components. Padrão documental (SECTION 1600 + header + subsections) já estava aplicado anteriormente pela skill figma-foundations. Esta etapa corrige divergências acumuladas: larguras heterogêneas (Section Header/Divider em 1344) e bindings legados (eyebrow Body/Base em vez de Label/Eyebrow; nav items todos primary em vez de primary/secondary). Decisão do usuário: manter apenas os 3 componentes existentes (Header, Section Header+Divider, Footer), não adicionar Container/Breadcrumb/Sidebar nesta etapa.",
+  "capturedAt": "2026-04-18T17:15:07.165Z"
+}

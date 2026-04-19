@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "manifestVersion": 1,
+  "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+  "updatedAt": "2026-04-18T23:45Z",
+  "notes": "Índice dos snapshots do design system no Figma. Atualizar sempre que uma etapa nova fechar. Ver README.md para schema.",
+  "phases": [
+    {
+      "phase": 1,
+      "slug": "tokens",
+      "title": "Revisão e ajuste dos tokens e styles",
+      "status": "completed",
+      "concludedAt": "2026-04-17",
+      "pageId": null,
+      "pageName": null,
+      "snapshot": "phase-01-tokens.json",
+      "backfillMethod": "documental"
+    },
+    {
+      "phase": 2,
+      "slug": "foundations",
+      "title": "Página 🎨 Foundations",
+      "status": "completed",
+      "concludedAt": "2026-04-17",
+      "pageId": "7:2",
+      "pageName": "🎨 Foundations",
+      "snapshot": "phase-02-foundations.json",
+      "backfillMethod": "documental"
+    },
+    {
+      "phase": 3,
+      "slug": "cover",
+      "title": "Página 🏠 Cover",
+      "status": "completed",
+      "concludedAt": "2026-04-17",
+      "pageId": null,
+      "pageName": "🏠 Cover",
+      "snapshot": "phase-03-cover.json",
+      "backfillMethod": "documental"
+    },
+    {
+      "phase": 4,
+      "slug": "icons",
+      "title": "Página 🪷 Icons",
+      "status": "completed",
+      "concludedAt": "2026-04-17",
+      "pageId": null,
+      "pageName": "🪷 Icons",
+      "snapshot": "phase-04-icons.json",
+      "backfillMethod": "documental"
+    },
+    {
+      "phase": 5,
+      "slug": "buttons",
+      "title": "Página 🧩 Buttons",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": null,
+      "pageName": "🧩 Buttons",
+      "snapshot": "phase-05-buttons.json",
+      "backfillMethod": "documental"
+    },
+    {
+      "phase": 6,
+      "slug": "components-layout",
+      "title": "Audit 🧩 Components / Layout — 1440 full-bleed + bindings",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": "7:5",
+      "pageName": "🧩 Components / Layout",
+      "snapshot": "phase-06-components-layout.json",
+      "backfillMethod": "mcp-full"
+    },
+    {
+      "phase": 7,
+      "slug": "prototype",
+      "title": "Unificação de 7 telas em 🎬 Prototype com fluxo conectado",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": "509:265",
+      "pageName": "🎬 Prototype",
+      "snapshot": "phase-07-prototype.json",
+      "backfillMethod": "mcp-full"
+    },
+    {
+      "phase": 8,
+      "slug": "content-cleanup",
+      "title": "Limpeza + Audit 🧩 Components / Content — masters 1344→1440, textStyle Button, titles confirmados",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": "7:6",
+      "pageName": "🧩 Components / Content",
+      "snapshot": "phase-08-content-cleanup.json",
+      "backfillMethod": "mcp-full"
+    },
+    {
+      "phase": 9,
+      "slug": "foundations-input-tokens",
+      "title": "Foundations · Input tokens (gap-fill 8 vars) + audit WCAG Light mode + Seção 11",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": "7:2",
+      "pageName": "🎨 Foundations",
+      "snapshot": "phase-09-foundations-input-tokens.json",
+      "backfillMethod": "mcp-full"
+    },
+    {
+      "phase": 10,
+      "slug": "form-primitives",
+      "title": "Form primitives — TextField (36 variantes) + Textarea (18 variantes) + página 🧩 Forms documental",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": "536:2",
+      "pageName": "🧩 Forms",
+      "snapshot": "phase-10-form-primitives.json",
+      "backfillMethod": "mcp-full"
+    },
+    {
+      "phase": 11,
+      "slug": "audit-consolidated",
+      "title": "Auditoria consolidada etapas 1-10 — matriz de gaps, débitos, componentes ausentes + roadmap 12-19 revisto",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": null,
+      "pageName": null,
+      "snapshot": "phase-11-audit.json",
+      "backfillMethod": "documental"
+    },
+    {
+      "phase": 13,
+      "slug": "form-polish-properties-states",
+      "title": "Polish Form primitives — component properties TextField/Textarea (5 props × 54 variants) + focus-visible audit (39/39 ok) + decisão error-focus (resolver via CSS, não variant)",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": "536:2",
+      "pageName": "🧩 Forms",
+      "snapshot": "phase-13-polish.json",
+      "backfillMethod": "mcp-full"
+    },
+    {
+      "phase": 14,
+      "slug": "tech-debt-cleanup",
+      "title": "Limpeza de débitos técnicos — Project Card VariableID órfãos migrados + Prev-Next master textStyleId resolvido + hex hunt clean (0/6 masters) + Header aria-current reconciliação (já era ComponentSet) + memórias atualizadas",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": null,
+      "pageName": null,
+      "snapshot": "phase-14-tech-debt.json",
+      "backfillMethod": "mcp-full"
+    },
+    {
+      "phase": "15a",
+      "slug": "form-family-part1",
+      "title": "Form Family Part 1 — Checkbox (30) + Radio (20) + Select (30) + SelectPanel standalone + minus icon; débitos IconButton INSTANCE_SWAP e TextField iconEnd arquivados (API limit + low ROI)",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": "536:2",
+      "pageName": "🧩 Forms",
+      "snapshot": "phase-15a-form-family-part1.json",
+      "backfillMethod": "mcp-full"
+    },
+    {
+      "phase": "15b",
+      "slug": "form-family-part2",
+      "title": "Form Family Part 2 — Switch (16) + FormField (2) + biblioteca de erros pt-BR (10) + 6 seções de documentação visual na página 🧩 Forms (08 Checkbox, 09 Radio, 10 Select, 11 Switch, 12 FormField, 13 Erros)",
+      "status": "completed",
+      "concludedAt": "2026-04-18",
+      "pageId": "536:2",
+      "pageName": "🧩 Forms",
+      "snapshot": "phase-15b-form-family-part2.json",
+      "backfillMethod": "mcp-full"
+    }
+  ],
+  "next": {
+    "phase": 16,
+    "slug": "tbd",
+    "title": "Escopo a definir — candidatos: Feedback family (Toast/Banner/Dialog/Tooltip), Navigation family (Tabs/Breadcrumb/Pagination), Data display (Table/List/Badge/Chip), ou início da Etapa 18 (Bridge tokens.css para V1 Dark)",
+    "status": "pending-scope-approval",
+    "note": "Form family fechada (7 ComponentSets, 152 variants, 13 seções documentadas). Etapa 12 (WCAG Light) permanece opcional/pós-launch. Dark-only V1. Ver phase-15b snapshot para inventário completo."
+  }
+}
