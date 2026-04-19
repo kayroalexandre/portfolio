@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { Button } from './ui/button';
 
 export function NotFoundPage() {
   useDocumentTitle('notFound');
@@ -12,12 +13,9 @@ export function NotFoundPage() {
       <p className="text-shell-muted-foreground mb-8 text-[0.85rem] max-w-md mx-auto leading-[1.7]">
         O endereço que você acessou não corresponde a nenhuma página deste portfólio.
       </p>
-      <Link
-        to="/"
-        className="bg-white text-black rounded-full px-5 py-2 hover:bg-white/80 transition-colors text-[0.8rem]"
-      >
-        Voltar ao início
-      </Link>
+      <Button asChild>
+        <Link to="/">Voltar ao início</Link>
+      </Button>
     </div>
   );
 }

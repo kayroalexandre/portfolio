@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__aitk-bridge__ask_glm",
+      "Read(//mnt/c/Users/**)",
+      "Read(//home/kayro/**)",
+      "Read(//home/kayro/dev/portfolio/=== Windows /mnt/c/Users/kayro/**)",
+      "Bash(set -e)",
+      "Bash(rsync -a --update /mnt/c/Users/kayro/.claude/projects/-mnt-c-Users-kayro-Projetos-Oriel/ /mnt/c/Users/kayro/.claude/projects/c--Users-kayro-Projetos-Oriel/)",
+      "Bash(rm -rf /mnt/c/Users/kayro/.claude/projects/-mnt-c-Users-kayro-Projetos-Oriel)",
+      "Bash(ln -s c--Users-kayro-Projetos-Oriel /mnt/c/Users/kayro/.claude/projects/-mnt-c-Users-kayro-Projetos-Oriel)"
+    ],
+    "additionalDirectories": ["/home/kayro/.claude", "/home/kayro/.claude/commands"]
+  }
+}

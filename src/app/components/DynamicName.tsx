@@ -69,7 +69,7 @@ export function DynamicName({ className = '', as: Tag = 'h1' }: DynamicNameProps
     <div ref={containerRef} className="w-full">
       <Tag
         ref={textRef}
-        className={`inline-block whitespace-nowrap uppercase text-[clamp(3rem,12vw,12rem)] font-black leading-[0.9] -ml-[0.07em] ${className}`.trim()}
+        className={`block w-full whitespace-nowrap uppercase text-[clamp(3rem,12vw,12rem)] font-black leading-[0.9] -ml-[0.07em] ${className}`.trim()}
       >
         {dynamicNameText}
       </Tag>

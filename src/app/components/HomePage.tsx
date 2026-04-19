@@ -6,9 +6,9 @@ import { siteConfig } from '../data/site';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ScrollZoomImage } from './ScrollZoomImage';
-import { SectionDivider } from './SectionDivider';
 import { SectionHeader } from './SectionHeader';
 import { Button } from './ui/button';
+import { ThreeColumnLayout } from './ui/layout-three-column';
 
 export function HomePage() {
   useDocumentTitle('home');
@@ -16,7 +16,7 @@ export function HomePage() {
   return (
     <>
       <section className="pb-4">
-        <div className="px-6 md:px-12 pt-40">
+        <div className="px-6 md:px-12 pt-24">
           <p className="max-w-md text-shell-foreground mb-4 text-[0.9rem] leading-[1.6]">
             {siteConfig.heroIntro}
           </p>
@@ -51,12 +51,6 @@ export function HomePage() {
           className="mb-12"
           descriptionClassName="mb-6"
         />
-
-        <Button asChild>
-          <Link to="/projects">Ver todos os cases</Link>
-        </Button>
-
-        <SectionDivider className="px-8 mb-8 mt-12" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
@@ -93,35 +87,43 @@ export function HomePage() {
           className="mb-16"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 border-t border-shell-border pt-10">
-          <div>
-            <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Escopo:</p>
-            <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
-              <li>Discovery</li>
-              <li>Arquitetura de informação</li>
-              <li>UX transacional</li>
-              <li className="text-shell-muted-foreground">Handoff para implementação</li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Foco:</p>
-            <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
-              <li>Fintech</li>
-              <li>Healthtech</li>
-              <li>Fluxos operacionais</li>
-              <li>Dados e confiança</li>
-              <li className="text-shell-muted-foreground">Produtos complexos</li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Entregáveis:</p>
-            <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
-              <li>Fluxos e protótipos</li>
-              <li>Interfaces e estados</li>
-              <li>Design systems</li>
-              <li className="text-shell-muted-foreground">Documentação de decisão</li>
-            </ul>
-          </div>
+        <div className="border-t border-shell-border pt-10">
+          <ThreeColumnLayout
+            left={
+              <div>
+                <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Escopo:</p>
+                <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
+                  <li>Discovery</li>
+                  <li>Arquitetura de informação</li>
+                  <li>UX transacional</li>
+                  <li className="text-shell-muted-foreground">Handoff para implementação</li>
+                </ul>
+              </div>
+            }
+            center={
+              <div>
+                <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Foco:</p>
+                <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
+                  <li>Fintech</li>
+                  <li>Healthtech</li>
+                  <li>Fluxos operacionais</li>
+                  <li>Dados e confiança</li>
+                  <li className="text-shell-muted-foreground">Produtos complexos</li>
+                </ul>
+              </div>
+            }
+            right={
+              <div>
+                <p className="text-shell-muted-foreground mb-4 text-[0.75rem]">Entregáveis:</p>
+                <ul className="space-y-1 text-shell-foreground text-[0.85rem]">
+                  <li>Fluxos e protótipos</li>
+                  <li>Interfaces e estados</li>
+                  <li>Design systems</li>
+                  <li className="text-shell-muted-foreground">Documentação de decisão</li>
+                </ul>
+              </div>
+            }
+          />
         </div>
       </section>
     </>

@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "phase": 14,
+    "name": "tech-debt-cleanup",
+    "title": "Limpeza de débitos técnicos — Project Card VariableID órfãos + Prev-Next master textStyleId + hex hunt + Header aria-current reconciliation + memórias atualizadas",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": null,
+    "pageName": null,
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_foundations_card_pattern.md",
+      "project_bridge_dark_only.md",
+      "reference_figma_playbook.md",
+      "feedback_figma_plugin_gotchas.md"
+    ],
+    "notes": "Etapa reduzida em escopo após inspeção: 2 dos 6 débitos originais eram falsos-positivos (Header já é ComponentSet com aria-current parametrizado; zero hex hardcoded nos masters). 2 deferidos para Etapa 15 (IconButton icon swap + TextField showIconEnd). 2 executados (Project Card órfãos + Prev-Next textStyleId)."
+  },
+  "scopeDiscoveriesVsPlan": {
+    "originalPlan": [
+      "Migrar VariableID:3:3/3:4 órfãos no Project Card",
+      "Setar textStyleId faltante no master Prev-Next Nav",
+      "Parametrizar aria-current visual no Header (4 variants)",
+      "Adicionar IconButton INSTANCE_SWAP 'icon' property",
+      "Adicionar TextField BOOLEAN 'showIconEnd' + node iconEnd",
+      "Hardcoded hex hunt global",
+      "Atualizar memórias desatualizadas"
+    ],
+    "actualExecution": {
+      "done": [
+        "Project Card — 4 children migrados (surface/subtle + content/primary + content/secondary × 2)",
+        "Prev-Next Nav — label 417:300 recebeu Button textStyle",
+        "Hex hunt global — 6 masters + 2 pages — ZERO débitos",
+        "Memórias atualizadas — project_portfolio_etapas.md (Etapa 14 section) + project_foundations_card_pattern.md (dualidade Shell/Theme) + MEMORY.md (index)"
+      ],
+      "falsePositives": [
+        "Header aria-current — 506:24 JÁ é ComponentSet com variant axis active=[inicio|projetos|sobre|contato]; nó 17:2 era variant, não master. Memória Etapa 7 estava correta desde sempre."
+      ],
+      "deferred": [
+        "IconButton INSTANCE_SWAP 'icon' property — absorvido em Etapa 15 (Form Family) para alinhar com expansão de icons",
+        "TextField BOOLEAN 'showIconEnd' + node iconEnd em 36 variants — absorvido em Etapa 15 pela mesma razão"
+      ]
+    }
+  },
+  "fixes": {
+    "projectCardVariableIDs": {
+      "masterId": "16:8",
+      "masterName": "Project Card",
+      "masterType": "COMPONENT",
+      "migratedChildren": [
+        {
+          "nodeId": "16:10",
+          "name": "Imagem do projeto",
+          "slot": "fill[0]",
+          "from": "VariableID:3:3 (órfão)",
+          "to": "surface/subtle (VariableID:93:5 / Semantic · Theme)"
+        },
+        {
+          "nodeId": "16:13",
+          "name": "Monetix",
+          "slot": "fill[0]",
+          "from": "VariableID:3:3 (órfão)",
+          "to": "content/primary (VariableID:93:22 / Semantic · Theme)"
+        },
+        {
+          "nodeId": "16:14",
+          "name": "Product Design",
+          "slot": "fill[0]",
+          "from": "VariableID:3:4 (órfão)",
+          "to": "content/secondary (VariableID:93:23 / Semantic · Theme)"
+        },
+        {
+          "nodeId": "16:15",
+          "name": "2024",
+          "slot": "fill[0]",
+          "from": "VariableID:3:4 (órfão)",
+          "to": "content/secondary (VariableID:93:23 / Semantic · Theme)"
+        }
+      ],
+      "method": "figma.variables.setBoundVariableForPaint(paint, 'color', variable) preservando resto do fills array",
+      "origin": "Débito herdado da Etapa 8 (audit Components/Content reportou as VariableIDs órfãs mas não migrou)"
+    },
+    "prevNextTextStyleId": {
+      "masterFamily": "Case / Prev-Next Nav",
+      "masterRootId": "64:50",
+      "variantPath": "variant=ghost / size=md / state=default → 417:296",
+      "fixedNodeId": "417:300",
+      "fixedNodeName": "label",
+      "from": "null (Inter Medium 14 sem style associado)",
+      "to": "Button textStyle (S:3ac4b0501b29237ff19c5a521cc01f0cb1c009c1,)",
+      "method": "labelNode.setTextStyleIdAsync(buttonStyle.id)",
+      "origin": "Débito herdado da Etapa 7 (deferido) → resolvido por instância na Etapa 8 → agora resolvido no master para novas instâncias herdarem"
+    }
+  },
+  "hexHunt": {
+    "scope": "6 masters (Project Card 16:8, Header 17:2, Button ComponentSet 417:632, IconButton ComponentSet 419:377, TextField ComponentSet 548:38, Textarea ComponentSet 550:68) + page Components/Layout (7:5) + page Components/Content (7:6)",
+    "depth": 10,
+    "rulesApplied": [
+      "Ignorar fills com visible=false",
+      "Verificar boundVariables.color em cada paint SOLID",
+      "Aceitar fills sem binding apenas se opacity indicar paint já resolvido por alias"
+    ],
+    "results": {
+      "masters": {
+        "ProjectCard": 0,
+        "Header": 0,
+        "Button": 0,
+        "IconButton": 0,
+        "TextField": 0,
+        "Textarea": 0
+      },
+      "pages": {
+        "Components/Layout": "1 master (Header 506:24), 0 hex hits",
+        "Components/Content": "0 masters top-level"
+      }
+    },
+    "totalUnboundPaints": 0,
+    "verdict": "CLEAN — Call 1 (fixes Project Card) cobriu o único débito residual. Nenhum hex hardcoded em masters principais."
+  },
+  "headerReconciliation": {
+    "initialConfusion": "Call 1 reportou: 'Header 17:2 é COMPONENT simples, não ComponentSet' — conclusão opus que aria-current precisaria ComponentSet refactor na Etapa 15.",
+    "actualFinding": "Header 506:24 é COMPONENT_SET com 4 variants (active=[inicio|projetos|sobre|contato]). O nó 17:2 é um dos variants (active=inicio), não o master.",
+    "memoryStateWas": "CORRETO — memória da Etapa 7 sempre apontou Header ComponentSet 506:24 com 4 variants. O erro foi do opus ao inspecionar 17:2 diretamente sem checar parent.",
+    "lesson": "Ao inspecionar um nó suspeito de ser master, sempre verificar node.parent.type === 'COMPONENT_SET' antes de concluir que é single COMPONENT.",
+    "actionTaken": "Nenhuma — estrutura já correta. Só documentação."
+  },
+  "memoryUpdates": [
+    {
+      "file": "project_portfolio_etapas.md",
+      "changes": [
+        "Frontmatter description: etapas 1-11 + 13 + 14 concluídas",
+        "Added section 'Etapa 14 — Limpeza de débitos técnicos ✅' com fixes, falsos-positivos, deferidos, dualidade Shell/Theme, delegação e lessons",
+        "Roadmap: Etapa 14 marcada CONCLUÍDA; Etapa 15 absorve débitos IconButton/TextField deferidos"
+      ]
+    },
+    {
+      "file": "project_foundations_card_pattern.md",
+      "changes": [
+        "Section frame: largura 1440 (Foundations 01-11 + Forms) vs 1600 (Components/Layout + Content) — esclarecido",
+        "Bg: seções 01-10 bind surface/background (Semantic · Shell legacy); Seção 11 + Forms bind surface/page (Semantic · Theme moderno) — dualidade documentada como débito Etapa 18"
+      ]
+    },
+    {
+      "file": "MEMORY.md",
+      "changes": [
+        "Linha de etapas atualizada: 'etapas 1-11 + 13 + 14 concluídas; Project Card órfãos migrados + Prev-Next textStyle resolvido + hex hunt clean; próxima: Etapa 15 (Form Family absorve débitos 13/14 herdados); Dark-only V1'"
+      ]
+    }
+  ],
+  "architecturalFindings": {
+    "dualSurfaceCollections": {
+      "shell": {
+        "collectionName": "Semantic · Shell",
+        "variables": [
+          "surface/background (93:97)",
+          "surface/subtle (93:98)",
+          "surface/strong (93:99)",
+          "surface/elevated (93:100)",
+          "surface/overlay (93:101)"
+        ],
+        "usedBy": "Foundations Seções 01-10",
+        "status": "legacy — candidato a deprecation na Etapa 18"
+      },
+      "theme": {
+        "collectionName": "Semantic · Theme",
+        "variables": [
+          "surface/page (93:4)",
+          "surface/subtle (93:5)",
+          "surface/muted (93:6)",
+          "surface/card (93:7)",
+          "surface/popover (93:8)",
+          "surface/inset (93:9)",
+          "surface/raised (93:10)",
+          "surface/overlay (93:11)",
+          "surface/inverse (93:12)"
+        ],
+        "modes": ["Dark", "Light"],
+        "usedBy": "Foundations Seção 11 + Página Forms",
+        "status": "moderno — canônico para novos componentes"
+      },
+      "decision": "Não migrar nesta etapa (escopo: cleanup, não refactor semântico). Etapa 18 (bridge) resolve — provavelmente deprecating Shell em favor de Theme, ou documentando Shell como page-chrome-only."
+    }
+  },
+  "delegation": {
+    "opus": "3 MCP calls efetivas (Call 1 fixes + Call 2 hex hunt masters + Call 3 hex hunt pages) + 1 refaço de console.log → return pattern. Zero falhas funcionais.",
+    "glm-reviewer": "Não invocado — escopo era execução direta de débitos já catalogados.",
+    "mimo-reasoner": "Não invocado — decisões todas unânimes baseadas em catálogo Etapa 11.",
+    "kimi-longctx": "Não invocado — snapshots e memórias cabem confortavelmente em Opus context.",
+    "quorum-synth": "Não invocado — nenhuma decisão arquitetural contestada."
+  },
+  "knownIssues": [],
+  "deferredToFutureStages": [
+    "IconButton INSTANCE_SWAP 'icon' property → Etapa 15 (Form Family)",
+    "TextField BOOLEAN 'showIconEnd' + node iconEnd em 36 variants → Etapa 15 (Form Family)",
+    "Dualidade surface Shell/Theme → Etapa 18 (Bridge) — decide qual coleção é canônica no tokens.css"
+  ],
+  "capturedAt": "2026-04-18T23:15:00Z"
+}

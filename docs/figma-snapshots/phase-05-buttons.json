@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "phase": 5,
+    "name": "buttons",
+    "title": "Página Buttons — Button + IconButton ComponentSets",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": null,
+    "pageName": "🧩 Buttons",
+    "backfillMethod": "documental",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": ["project_portfolio_etapas.md", "feedback_figma_plugin_gotchas.md"]
+  },
+  "layout": {
+    "width": 1440,
+    "padding": 80,
+    "sectionGap": 48,
+    "sectionFill": "surface/background",
+    "headerType": "FRAME (não SECTION)"
+  },
+  "tree": [
+    {
+      "id": "424:152",
+      "name": "00 · Page Header",
+      "type": "FRAME",
+      "y": 0,
+      "h": 537,
+      "note": "meta grid 8 col: VARIANTES 5, TAMANHOS 3, ESTADOS 6, ÍCONES Inicial·Final·Apenas, TEXT STYLE Button, RADIUS Full, FAMÍLIA Inter, VERSÃO v0.1.0. Marker 01 | BUTTONS"
+    },
+    {
+      "id": "424:191",
+      "name": "01 · Anatomia",
+      "type": "SECTION",
+      "y": 577,
+      "h": 627,
+      "note": "5 cards: Container, Label, Ícone inicial, Ícone final, Focus ring"
+    },
+    {
+      "id": "425:175",
+      "name": "02 · Variantes",
+      "type": "SECTION",
+      "y": 1244,
+      "h": 1911,
+      "note": "5 subsections × 6 cards = 30 combinações base (estados por linha)"
+    },
+    {
+      "id": "426:260",
+      "name": "03 · Tamanhos",
+      "type": "SECTION",
+      "y": 3195,
+      "h": 627,
+      "note": "3 cards Small/Medium/Large"
+    },
+    {
+      "id": "426:338",
+      "name": "04 · Estados",
+      "type": "SECTION",
+      "y": 3862,
+      "h": 863,
+      "note": "matriz 5 × 6 (variantes × Default/Hover/Pressed/Focused/Disabled/Loading)"
+    },
+    {
+      "id": "435:354",
+      "name": "05 · Com ícones",
+      "type": "SECTION",
+      "y": 4805,
+      "h": 1624,
+      "note": "3 subsections: Ícone inicial, Ícone final, Ícones em ambos (× 5 cards)"
+    },
+    {
+      "id": "437:735",
+      "name": "06 · Icon Button",
+      "type": "SECTION",
+      "y": 6509,
+      "h": 1876,
+      "note": "Variantes 5, Tamanhos 3, Matriz 5×3"
+    },
+    {
+      "id": "439:524",
+      "name": "07 · Tokens",
+      "type": "SECTION",
+      "y": 8465,
+      "h": 2448,
+      "note": "5 subsections por variante: Primary 6 / Outline 5 / Ghost 5 / Secondary 4 / Destructive 6 tokens"
+    },
+    {
+      "id": "458:804",
+      "name": "08 · Componentes · Masters",
+      "type": "SECTION",
+      "y": 10953,
+      "h": 2928,
+      "note": "subsections 08.1 Button e 08.2 Icon Button — masters antes estavam jogados em (4000,200) e (5400,200)"
+    }
+  ],
+  "components": [],
+  "componentSets": [
+    {
+      "id": "417:632",
+      "name": "Button",
+      "variantCount": 90,
+      "axes": {
+        "variant": ["primary", "outline", "ghost", "secondary", "destructive"],
+        "size": ["sm", "md", "lg"],
+        "state": ["default", "hover", "pressed", "focused", "disabled", "loading"]
+      },
+      "componentProperties": [
+        { "name": "label", "id": "418:0", "type": "TEXT" },
+        { "name": "showIconStart", "id": "418:91", "type": "BOOLEAN" },
+        { "name": "showIconEnd", "id": "418:182", "type": "BOOLEAN" }
+      ],
+      "iconDefault": { "name": "arrow-up-right", "masterId": "399:21", "swap": "INSTANCE_SWAP" },
+      "focusedEffectStyle": "S:40abfab825652b8b3e4fd78125d6d608404b23e4,",
+      "focusedEffectName": "Focus/Ring",
+      "loadingSpinnerPath": "M21 12a9 9 0 1 1-6.219-8.56",
+      "sizing": { "primaryAxisSizingMode": "AUTO", "note": "HUG — cresce com o label" }
+    },
+    {
+      "id": "419:377",
+      "name": "IconButton",
+      "variantCount": 90,
+      "axes": {
+        "variant": ["primary", "outline", "ghost", "secondary", "destructive"],
+        "size": ["sm", "md", "lg"],
+        "state": ["default", "hover", "pressed", "focused", "disabled", "loading"]
+      },
+      "cellDimensions": {
+        "sm": { "cell": "28×28", "icon": 14 },
+        "md": { "cell": "36×36", "icon": 16 },
+        "lg": { "cell": "44×44", "icon": 18 }
+      },
+      "sizing": { "all": "FIXED/FIXED", "note": "quadrado, sem texto" }
+    }
+  ],
+  "variables": {
+    "collections": [{ "name": "Semantic · Theme", "modes": ["Dark", "Light"] }],
+    "created": [
+      { "id": "VariableID:415:2", "name": "interactive/outline/bg-pressed" },
+      { "id": "VariableID:415:3", "name": "interactive/destructive/bg-pressed" },
+      { "id": "VariableID:415:4", "name": "interactive/destructive/bg-disabled" },
+      { "id": "VariableID:415:5", "name": "interactive/destructive/fg-disabled" }
+    ],
+    "notes": "4 tokens novos para completar a matriz estados × variantes. Todos em Semantic · Theme, modes Dark + Light."
+  },
+  "styles": { "text": [], "effect": [], "paint": [] },
+  "fonts": ["Inter"],
+  "revisions": [
+    {
+      "date": "2026-04-18",
+      "kind": "in-place (não rebuild)",
+      "changes": [
+        "Largura 1600 → 1440 (match Foundations/Icons/Cover)",
+        "SECTIONs receberam fill bound surface/background (antes: cinza default Figma)",
+        "Header 00 convertido de SECTION para FRAME (Foundations usa FRAME; só 01-08 são SECTION)",
+        "Button width FIXED 120 → HUG (primaryAxisSizingMode=AUTO)",
+        "Ícone default arrow-up-right → plus (id 62:30, mais simétrico para mock)",
+        "Masters reorganizados em SECTION 08 · Componentes · Masters (id 458:804, y=10953) com subsections 08.1/08.2",
+        "CRÍTICO: 225 ícones com layoutPositioning=ABSOLUTE fixados em (0,0) → forçados para AUTO (bug visível como 'ícones descentralizados/desalinhados'). Gotcha #11."
+      ]
+    }
+  ],
+  "notes": "Componente de maior frequência. Seção 07 Tokens garante rastreabilidade: nenhum hex solto, tudo puxa de interactive/{variante}/{papel}. Replicar estrutura em Input/Select/Card/etc. — header FRAME + meta grid, seções numeradas SECTION 1440w com fill surface/background, seção de tokens + seção final para masters."
+}

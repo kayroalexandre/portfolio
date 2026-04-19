@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "phase": 10,
+    "name": "form-primitives",
+    "title": "Form primitives — TextField (36) + Textarea (18) + página 🧩 Forms documental",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "536:2",
+    "pageName": "🧩 Forms",
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_foundations_card_pattern.md",
+      "feedback_figma_plugin_gotchas.md",
+      "feedback_delegation.md"
+    ]
+  },
+  "scope": {
+    "axesTextField": {
+      "size": ["sm", "md", "lg"],
+      "state": ["default", "hover", "focus", "error", "disabled", "readonly"],
+      "hasIconStart": ["false", "true"]
+    },
+    "axesTextarea": {
+      "size": ["sm", "md", "lg"],
+      "state": ["default", "hover", "focus", "error", "disabled", "readonly"]
+    },
+    "totalVariants": 54,
+    "rationale": "Solicitação explícita do usuário 'faça as 54' após proposta inicial de 35. Matriz final: 3×6×2 + 3×6."
+  },
+  "stateDesign": {
+    "decisions": [
+      "filled descartado como estado visual (é consequência de valor preenchido, não estado)",
+      "readonly mantido como estado (não BOOLEAN) — distinto visualmente de hover/focus"
+    ],
+    "mapping": {
+      "default": {
+        "bg": "input/bg",
+        "border": "input/border",
+        "text": "input/placeholder",
+        "helper": "content/tertiary",
+        "focusRing": false
+      },
+      "hover": {
+        "bg": "input/bg",
+        "border": "input/border-hover",
+        "text": "input/placeholder",
+        "helper": "content/tertiary",
+        "focusRing": false
+      },
+      "focus": {
+        "bg": "input/bg",
+        "border": "input/border-focus",
+        "text": "input/placeholder",
+        "helper": "content/tertiary",
+        "focusRing": true
+      },
+      "error": {
+        "bg": "input/bg-error",
+        "border": "input/border-error",
+        "text": "input/placeholder",
+        "helper": "feedback/error/content",
+        "focusRing": false
+      },
+      "disabled": {
+        "bg": "input/bg-disabled",
+        "border": "input/border-disabled",
+        "text": "input/fg-disabled",
+        "helper": "content/disabled",
+        "focusRing": false
+      },
+      "readonly": {
+        "bg": "input/bg",
+        "border": "input/border",
+        "text": "input/fg-readonly",
+        "helper": "content/tertiary",
+        "focusRing": false
+      }
+    }
+  },
+  "sizeDesign": {
+    "textField": {
+      "sm": { "height": 32, "padX": 12, "textStyle": "Body/Small", "iconSize": 14, "gap": 8 },
+      "md": { "height": 40, "padX": 14, "textStyle": "Body/Base", "iconSize": 16, "gap": 8 },
+      "lg": { "height": 48, "padX": 16, "textStyle": "Body/Large", "iconSize": 20, "gap": 10 }
+    },
+    "textarea": {
+      "sm": { "height": 80, "padX": 12, "padY": 10, "textStyle": "Body/Small" },
+      "md": { "height": 96, "padX": 14, "padY": 12, "textStyle": "Body/Base" },
+      "lg": { "height": 120, "padX": 16, "padY": 14, "textStyle": "Body/Large" }
+    }
+  },
+  "componentSets": [
+    {
+      "id": "548:38",
+      "name": "TextField",
+      "key": "00740fef1dec35096c0decf76fa2154ac12310e8",
+      "variantCount": 36,
+      "width": 280,
+      "variantGroupProperties": {
+        "size": ["sm", "md", "lg"],
+        "state": ["default", "hover", "focus", "error", "disabled", "readonly"],
+        "hasIconStart": ["false", "true"]
+      },
+      "firstVariant": "size=sm, state=default, hasIconStart=false",
+      "lastVariant": "size=lg, state=readonly, hasIconStart=true"
+    },
+    {
+      "id": "550:68",
+      "name": "Textarea",
+      "key": "716005f3c7c8141eaba92dcdf50959fd4fa75b26",
+      "variantCount": 18,
+      "width": 360,
+      "variantGroupProperties": {
+        "size": ["sm", "md", "lg"],
+        "state": ["default", "hover", "focus", "error", "disabled", "readonly"]
+      },
+      "firstVariant": "size=sm, state=default",
+      "lastVariant": "size=lg, state=readonly"
+    }
+  ],
+  "page": {
+    "id": "536:2",
+    "name": "🧩 Forms",
+    "outerFrame": {
+      "id": "553:38",
+      "name": "🧩 Forms · Page",
+      "width": 1440,
+      "height": 4223,
+      "x": 0,
+      "y": 0,
+      "fill": "surface/page",
+      "layoutMode": "VERTICAL",
+      "sectionCount": 8
+    },
+    "sections": [
+      {
+        "num": "00",
+        "id": "553:39",
+        "name": "00 · Page Header",
+        "height": 404,
+        "showcase": "eyebrow FORMS · PRIMITIVES + título Forms em Display/Hero + desc 920px"
+      },
+      {
+        "num": "01",
+        "id": "553:44",
+        "name": "01 · TextField · Tamanhos",
+        "height": 445,
+        "showcase": "3 colunas sm/md/lg com TextField default hasIconStart=false"
+      },
+      {
+        "num": "02",
+        "id": "553:72",
+        "name": "02 · TextField · Estados",
+        "height": 579,
+        "showcase": "6 colunas em WRAP — md state=default/hover/focus/error/disabled/readonly"
+      },
+      {
+        "num": "03",
+        "id": "554:74",
+        "name": "03 · TextField · Com ícones",
+        "height": 441,
+        "showcase": "3 colunas sm/md/lg com hasIconStart=true, ícone Search bound"
+      },
+      {
+        "num": "04",
+        "id": "554:111",
+        "name": "04 · Textarea · Tamanhos",
+        "height": 513,
+        "showcase": "3 colunas sm/md/lg com Textarea default"
+      },
+      {
+        "num": "05",
+        "id": "554:139",
+        "name": "05 · Textarea · Estados",
+        "height": 687,
+        "showcase": "6 colunas em WRAP — md em 6 estados"
+      },
+      {
+        "num": "06",
+        "id": "555:131",
+        "name": "06 · Tokens de entrada",
+        "height": 707,
+        "showcase": "13 token cards 200×HUG — bg e fg como chip sólido, border como outline, name Body/Small"
+      },
+      {
+        "num": "07",
+        "id": "555:177",
+        "name": "07 · Componentes · Masters",
+        "height": 447,
+        "showcase": "2 master cards 400×HUG com título H3 + desc + ID em Code/Default"
+      }
+    ],
+    "patternDivergencesFromButtons": [
+      "Seções são FRAMEs (não SECTIONs) — molde Buttons usa SECTION 1440; aqui outer é FRAME 1440 com sections filhas FRAME para simplificar auto-layout vertical contíguo.",
+      "Tokens cards usam 200×HUG com chip 168×48 — não o card canônico 200×172 FIXED/FIXED da Foundations. Decisão: paridade visual adequada para documental compacto."
+    ]
+  },
+  "tokensUsed": [
+    "input/bg",
+    "input/bg-disabled",
+    "input/bg-error",
+    "input/border",
+    "input/border-hover",
+    "input/border-focus",
+    "input/border-error",
+    "input/border-disabled",
+    "input/fg",
+    "input/fg-disabled",
+    "input/fg-readonly",
+    "input/placeholder",
+    "input/placeholder-disabled",
+    "content/primary",
+    "content/secondary",
+    "content/tertiary",
+    "content/disabled",
+    "feedback/error/content",
+    "surface/page",
+    "border/strong",
+    "border/subtle"
+  ],
+  "effectStyles": ["Focus/Ring"],
+  "textStyles": [
+    "Display/Hero (page title)",
+    "Heading/H3 (section titles)",
+    "Label/Eyebrow (eyebrows)",
+    "Body/Base (descriptions, md input)",
+    "Body/Small (sm input, token name, master desc)",
+    "Body/Large (lg input)",
+    "Body/Meta (label + helper inside TextField/Textarea)",
+    "Code/Default (master IDs)"
+  ],
+  "iconUsed": {
+    "name": "Search",
+    "source": "🪷 Icons page",
+    "appliedIn": "18 TextField variants (hasIconStart=true × 3 sizes × 6 states)"
+  },
+  "delegation": {
+    "opus": "~14 MCP calls efetivas (3 batches TextField + 2 batches Textarea + combineAsVariants × 2 + 4 section builds + 2 audits + 1 reposition + snapshot). Decisão explícita de não combinar o build de 36 em call única após 2 falhas silenciosas — batching por size funcionou.",
+    "glm-reviewer": "Copy pt-BR esboçada em round anterior da sessão (pré-compact); reused no build direto.",
+    "mimo-reasoner": "Validou matriz de 54 com ajustes: descartou 'filled', moveu 'readonly' para state (não BOOLEAN). Sugestão de error-focus ortogonal NÃO aplicada nesta etapa (mantidos 6 estados; focus+error distinguíveis pelo bg-error)."
+  },
+  "knownIssues": [
+    "Label/Meta NÃO existe no arquivo — usado Body/Meta como fallback para label e helper dentro dos variants (Body/Meta tem a mesma métrica pretendida).",
+    "loadAllPagesAsync não é suportado nessa versão da Plugin API — substituir por page.loadAsync() por página alvo.",
+    "MCP calls com 36+ operações async em loop retornam silenciosamente — batching em 6-12 ops por call é o teto seguro observado."
+  ],
+  "deferredToFutureStages": [
+    "Component properties TEXT (label/placeholder/helperText/value) e BOOLEAN (showLabel/showHelper/showIconEnd) — expor via addComponentProperty + componentPropertyReferences. Requer mais 1-2 calls; deferido para etapa de polimento.",
+    "Error-focus combo (mimo sugeriu como 7º estado); avaliar se necessário quando consumir em React — se sim, pode virar Etapa 10.1.",
+    "Fix primitivos Light mode (herdado da Etapa 9) — integrado ao backlog de Etapa 15."
+  ],
+  "notes": "Etapa 10 entrega 54 variantes solicitadas + documentação visual. Decisão-chave: batching 6-12 ops por call após 2 falhas silenciosas no build de 36. Os ComponentSets usam variantGroupProperties expostas automaticamente por combineAsVariants — não precisou addComponentProperty adicional para os axes. Próxima etapa (11) é o bridge Figma → Next.js.",
+  "capturedAt": "2026-04-18T19:45:55.291Z"
+}
