@@ -7,6 +7,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { SectionDivider } from './SectionDivider';
 import { SectionHeader } from './SectionHeader';
 import { Button } from './ui/button';
+import { SidebarLayout } from './ui/layout-sidebar';
 
 const formSubmitAction = import.meta.env.VITE_FORMSUBMIT_ACTION?.trim() ?? '';
 const siteUrl = import.meta.env.VITE_SITE_URL?.trim() ?? '';
@@ -46,114 +47,119 @@ export function ContactPage() {
 
         <SectionDivider className="px-4 mb-12" />
 
-        <div className="flex flex-col md:flex-row gap-16">
-          <div className="md:w-1/4">
-            <h3 className="text-shell-foreground mb-8 text-[0.95rem] font-medium">Como usar</h3>
-            <div className="space-y-6">
-              <div>
-                <p className="text-shell-foreground text-[0.8rem] font-medium">Escopo ideal</p>
-                <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
-                  Produto digital, UX para operação complexa, redesign estrutural, design systems e
-                  documentação de decisão.
-                </p>
-              </div>
-              <div>
-                <p className="text-shell-foreground text-[0.8rem] font-medium">Estado atual</p>
-                <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
-                  {formState.availabilityCopy}
-                </p>
-              </div>
-              <div>
-                <p className="text-shell-foreground text-[0.8rem] font-medium">
-                  Resultado do formulário
-                </p>
-                <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
-                  {formState.resultCopy}
-                </p>
+        <SidebarLayout
+          sidebarWidth="1/4"
+          gap="loose"
+          sidebar={
+            <div>
+              <h3 className="text-shell-foreground mb-8 text-[0.95rem] font-medium">Como usar</h3>
+              <div className="space-y-6">
+                <div>
+                  <p className="text-shell-foreground text-[0.8rem] font-medium">Escopo ideal</p>
+                  <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
+                    Produto digital, UX para operação complexa, redesign estrutural, design systems
+                    e documentação de decisão.
+                  </p>
+                </div>
+                <div>
+                  <p className="text-shell-foreground text-[0.8rem] font-medium">Estado atual</p>
+                  <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
+                    {formState.availabilityCopy}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-shell-foreground text-[0.8rem] font-medium">
+                    Resultado do formulário
+                  </p>
+                  <p className="text-shell-muted-foreground text-[0.8rem] leading-[1.7]">
+                    {formState.resultCopy}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="md:w-3/4 max-w-lg">
-            <h3 className="text-shell-foreground mb-8 text-[0.95rem] font-medium">
-              Enviar mensagem
-            </h3>
-            {formState.isSent ? (
-              <div
-                aria-live="polite"
-                className="mb-8 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-emerald-100 text-[0.8rem] leading-[1.6]"
+          }
+          main={
+            <div className="max-w-lg">
+              <h3 className="text-shell-foreground mb-8 text-[0.95rem] font-medium">
+                Enviar mensagem
+              </h3>
+              {formState.isSent ? (
+                <div
+                  aria-live="polite"
+                  className="mb-8 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-emerald-100 text-[0.8rem] leading-[1.6]"
+                >
+                  {siteConfig.contactSuccessMessage}
+                </div>
+              ) : null}
+              {!formState.isConfigured ? (
+                <div className="mb-8 rounded-lg border border-shell-border bg-shell-surface px-4 py-3 text-shell-muted-foreground text-[0.8rem] leading-[1.6]">
+                  Configure <code>VITE_FORMSUBMIT_ACTION</code> e <code>VITE_SITE_URL</code> para
+                  ativar o envio real deste formulário.
+                </div>
+              ) : null}
+              <form
+                action={formState.isConfigured ? formSubmitAction : undefined}
+                method="POST"
+                className="flex flex-col gap-6"
               >
-                {siteConfig.contactSuccessMessage}
-              </div>
-            ) : null}
-            {!formState.isConfigured ? (
-              <div className="mb-8 rounded-lg border border-shell-border bg-shell-surface px-4 py-3 text-shell-muted-foreground text-[0.8rem] leading-[1.6]">
-                Configure <code>VITE_FORMSUBMIT_ACTION</code> e <code>VITE_SITE_URL</code> para
-                ativar o envio real deste formulário.
-              </div>
-            ) : null}
-            <form
-              action={formState.isConfigured ? formSubmitAction : undefined}
-              method="POST"
-              className="flex flex-col gap-6"
-            >
-              <input type="hidden" name="_subject" value={siteConfig.contactFormSubject} />
-              <input type="hidden" name="_next" value={returnUrl} />
-              <input type="hidden" name="_autoresponse" value={siteConfig.contactAutoResponse} />
-              <input type="hidden" name="_template" value="table" />
-              <input
-                type="text"
-                name="_honey"
-                className="hidden"
-                tabIndex={-1}
-                autoComplete="off"
-              />
-              <div>
-                <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
-                  Nome
-                </label>
+                <input type="hidden" name="_subject" value={siteConfig.contactFormSubject} />
+                <input type="hidden" name="_next" value={returnUrl} />
+                <input type="hidden" name="_autoresponse" value={siteConfig.contactAutoResponse} />
+                <input type="hidden" name="_template" value="table" />
                 <input
                   type="text"
-                  name="name"
-                  className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors text-[0.85rem]"
-                  placeholder="Seu nome"
-                  autoComplete="name"
-                  required
+                  name="_honey"
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
                 />
-              </div>
-              <div>
-                <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
-                  E-mail
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors text-[0.85rem]"
-                  placeholder="Seu e-mail"
-                  autoComplete="email"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
-                  Mensagem
-                </label>
-                <textarea
-                  name="message"
-                  rows={4}
-                  className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors resize-none text-[0.85rem]"
-                  placeholder="Explique o desafio, o contexto e o que você precisa."
-                  required
-                />
-              </div>
-              <div>
-                <Button type="submit" disabled={formState.isSubmitDisabled}>
-                  {formState.submitLabel}
-                </Button>
-              </div>
-            </form>
-          </div>
-        </div>
+                <div>
+                  <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors text-[0.85rem]"
+                    placeholder="Seu nome"
+                    autoComplete="name"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
+                    E-mail
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors text-[0.85rem]"
+                    placeholder="Seu e-mail"
+                    autoComplete="email"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-shell-muted-foreground mb-2 text-[0.75rem]">
+                    Mensagem
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    className="w-full bg-transparent border-b border-shell-border pb-3 text-shell-foreground outline-none focus:border-shell-muted-foreground transition-colors resize-none text-[0.85rem]"
+                    placeholder="Explique o desafio, o contexto e o que você precisa."
+                    required
+                  />
+                </div>
+                <div>
+                  <Button type="submit" disabled={formState.isSubmitDisabled}>
+                    {formState.submitLabel}
+                  </Button>
+                </div>
+              </form>
+            </div>
+          }
+        />
       </section>
     </div>
   );

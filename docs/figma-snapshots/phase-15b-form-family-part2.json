@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "phase": "15b",
+    "name": "form-family-part2",
+    "title": "Form Family Part 2 — Switch ComponentSet + FormField wrapper + error message library pt-BR + documentação visual consolidada Checkbox/Radio/Select/Switch/FormField/Erros na página 🧩 Forms",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "536:2",
+    "pageName": "🧩 Forms",
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_foundations_card_pattern.md",
+      "project_bridge_dark_only.md",
+      "reference_figma_playbook.md",
+      "feedback_figma_plugin_gotchas.md"
+    ],
+    "notes": "Fecha a Etapa 15 (Form Family). Com 15a+15b, a página 🧩 Forms tem 7 ComponentSets (TextField 36 + Textarea 18 + Checkbox 30 + Radio 20 + Select 30 + Switch 16 + FormField 2) = 152 variants + SelectPanel standalone + 13 seções de documentação visual cobrindo padrões, composição e copy pt-BR."
+  },
+  "scopeDiscoveriesVsPlan": {
+    "originalPlan": [
+      "Build Switch ComponentSet (16 variants)",
+      "Build FormField wrapper (2 variants)",
+      "Draft copy pt-BR errors (10 entries) via glm-reviewer",
+      "Documentação visual consolidada Checkbox/Radio/Select/Switch/FormField + erros na página Forms",
+      "Validar matriz Switch/FormField via mimo-reasoner antes de construir"
+    ],
+    "actualExecution": {
+      "done": [
+        "mimo-reasoner validou Switch 16 variants (confirmou sem error state; disabled+hover/focus não existem como variants separadas por spec)",
+        "mimo-reasoner validou FormField como ComponentSet com 2 variants (state=default|error) vs standalone — recomendou ComponentSet para trocar cor label/helper via variant sem overrides",
+        "glm-reviewer entregou 10 erros pt-BR + 3 helper texts + 6 labels de select (após 2 tentativas com reasoning-only — orquestrador consolidou drafts do reasoning)",
+        "Switch ComponentSet 594:226 (16 variants) com label + showLabel props — 16×2 = 32 bindings",
+        "FormField ComponentSet 596:176 (2 variants) com 5 props (label, helperText, showLabel, showHelper, required) — 2×5 = 10 bindings",
+        "Documentação visual: 6 seções novas na página Forms (08 Checkbox, 09 Radio, 10 Select, 11 Switch, 12 FormField, 13 Erros pt-BR)",
+        "Header 00 atualizado: escopo expandido de 'TextField/Textarea' para 'família completa de 7 ComponentSets'",
+        "Frame 🧩 Forms · Page cresceu de 4223 para 9183 (14 filhos)"
+      ],
+      "skippedAsNotNeeded": [
+        "surface/muted usado como track off (input/bg-muted não existe — recusa consciente de criar token novo para 1 uso)",
+        "interactive/primary/fg reusado como thumb claro (content/on-primary não existe — match perfeito sem criar)",
+        "Atualização seção 07 · Componentes · Masters — deixada intocada (é cosmético; lista estática de 6 originais + 2 novos pode ser regenerada em etapa futura)"
+      ],
+      "deferredToFutureStages": [
+        "Atualizar seção 07 · Componentes · Masters com cards dos 5 novos (Checkbox/Radio/Select/Switch/FormField) — Etapa 16 ou polish final",
+        "FormField com slot de input via slot component pattern (quando Figma liberar INSTANCE_SWAP em variants) — bloqueado por API",
+        "SelectPanel como ComponentSet com variants por option state — Etapa 16 ou 18"
+      ]
+    }
+  },
+  "mimoReasonerValidation": {
+    "callsMade": 1,
+    "tokensUsed": "~17k",
+    "recommendationsApplied": [
+      "Switch matriz 16 variants (opção c): manter focus state, remover error, disabled+hover/focus redundantes dropados",
+      "FormField como ComponentSet 2 variants (state=default|error) ao invés de standalone — justificativa: cor label/helper muda semanticamente no error, variant evita overrides manuais",
+      "inputSlot como FRAME vazio com dashed border (border/subtle dashPattern [4,4]) + placeholder 'Input slot' com opacity 50% — convenção de naming para usuário arrastar instância real",
+      "Helper e error ocupam o MESMO TEXT node (name='message') — cor varia por variant, elimina bug de 'dois textos stackados'",
+      "Copy error library: adicionar passwordMismatch e invalidDate além dos 8 originais (total 10)",
+      "Required asterisk como TEXT standalone no labelRow, visible=false por default, bind a required BOOLEAN prop"
+    ],
+    "edgeCasesIdentified": [
+      "required=true + showLabel=false → asterisco órfão (documentar como gotcha de uso)",
+      "hasError BOOLEAN + state=default → combinação inválida; unificar em state variant elimina ambiguidade",
+      "inputSlot sem input inserido → placeholder visível para designer saber que precisa preencher",
+      "Label com 3+ linhas em viewport estreito → auto-layout FILL×HUG absorve OK",
+      "Error text excedendo largura do input → message row herda largura do FormField (280), não do inputSlot"
+    ]
+  },
+  "glmReviewerOutput": {
+    "callsMade": 2,
+    "tokensUsed": "~19k",
+    "note": "Primeira tentativa do GLM-5.1 gastou todos os tokens em reasoning sem emitir content. Segunda tentativa idem. O subagent (orquestrador) consolidou os drafts do reasoning em 3 blocos JSON entregáveis.",
+    "errorLibrary": {
+      "required": { "short": "Campo obrigatório", "long": "Preencha este campo para continuar." },
+      "email": { "short": "E-mail inválido", "long": "Use o formato nome@dominio.com." },
+      "minLength": {
+        "short": "Mínimo de {n} caracteres",
+        "long": "O texto precisa ter pelo menos {n} caracteres."
+      },
+      "maxLength": {
+        "short": "Máximo de {n} caracteres",
+        "long": "O texto pode ter no máximo {n} caracteres."
+      },
+      "pattern": {
+        "short": "Formato inválido",
+        "long": "Verifique se o valor segue o formato esperado."
+      },
+      "min": { "short": "Valor mínimo: {n}", "long": "O valor não pode ser menor que {n}." },
+      "max": { "short": "Valor máximo: {n}", "long": "O valor não pode ser maior que {n}." },
+      "url": { "short": "URL inválida", "long": "Use o formato https://dominio.com." },
+      "passwordMismatch": {
+        "short": "Senhas não coincidem",
+        "long": "A senha e a confirmação precisam ser iguais."
+      },
+      "invalidDate": { "short": "Data inválida", "long": "Use o formato dd/mm/aaaa." }
+    },
+    "helperTextsSample": {
+      "email": {
+        "label": "E-mail",
+        "helper": "Formato nome@dominio.com.",
+        "placeholder": "nome@exemplo.com"
+      },
+      "message": {
+        "label": "Mensagem",
+        "helper": "Mínimo de 20 caracteres ({n}/20).",
+        "placeholder": "Descreva o motivo do contato."
+      },
+      "subject": {
+        "label": "Assunto",
+        "helper": "Motivo do contato.",
+        "placeholder": "Selecione um assunto"
+      }
+    },
+    "contactSubjectOptions": [
+      "Vaga efetiva ou contrato",
+      "Projeto pontual",
+      "Mentoria ou conversa",
+      "Feedback sobre o portfólio",
+      "Imprensa ou entrevista",
+      "Outro"
+    ],
+    "toneDecisions": [
+      "passwordMismatch.short 'Senhas não coincidem' (não 'Senhas diferentes') — mais comum em pt-BR técnico (Stripe, bancos)",
+      "'Projeto pontual' sem 'freelance' — evita anglicismo fora do tom do portfolio",
+      "'Vaga efetiva ou contrato' em vez de 'full-time/contrato' — 'efetiva' é termo RH pt-BR, 'contrato' cobre PJ/temporário"
+    ]
+  },
+  "switch": {
+    "componentSetId": "594:226",
+    "key": "c417202296831cb3c109c9f415d3e322fd2402b5",
+    "variantCount": 16,
+    "axes": {
+      "size": ["sm", "md"],
+      "state": ["default", "hover", "focus", "disabled"],
+      "checked": ["false", "true"]
+    },
+    "componentProperties": [
+      {
+        "key": "label#594:0",
+        "type": "TEXT",
+        "default": "Label",
+        "boundTo": "label TEXT.characters"
+      },
+      {
+        "key": "showLabel#594:17",
+        "type": "BOOLEAN",
+        "default": true,
+        "boundTo": "label TEXT.visible"
+      }
+    ],
+    "bindings": { "label": 16, "showLabel": 16 },
+    "sizeConfig": {
+      "sm": { "track": [28, 16], "thumb": 12, "pad": 2, "labelStyle": "Body/Meta" },
+      "md": { "track": [36, 20], "thumb": 16, "pad": 2, "labelStyle": "Body/Small" }
+    },
+    "thumbSlideMechanism": "track é FRAME HORIZONTAL com primaryAxisAlignItems = MIN (unchecked) | MAX (checked). thumb ELLIPSE FIXED. Sem absolute positioning — aproveita auto-layout nativo.",
+    "stateTokenMap": {
+      "default": {
+        "trackBg_off": "surface/muted (93:6)",
+        "trackBg_on": "interactive/primary/bg (93:41)",
+        "thumb_off": "content/primary (93:22)",
+        "thumb_on": "interactive/primary/fg (93:45)",
+        "label": "content/primary"
+      },
+      "hover": {
+        "trackBg_off": "input/border (93:69)",
+        "trackBg_on": "interactive/primary/bg-hover (93:42)",
+        "thumb": "idem default",
+        "label": "content/primary"
+      },
+      "focus": {
+        "trackBg": "idem default",
+        "effect": "Focus/Ring (S:40abfab8...)",
+        "label": "content/primary"
+      },
+      "disabled": {
+        "trackBg_off": "input/bg-disabled (93:68)",
+        "trackBg_on": "interactive/primary/bg-disabled (93:44)",
+        "thumb_off": "content/disabled (93:26)",
+        "thumb_on": "interactive/primary/fg-disabled (93:46)",
+        "label": "content/disabled"
+      }
+    }
+  },
+  "formField": {
+    "componentSetId": "596:176",
+    "key": "b294a999f6be95b355005aa0490697a79a780b96",
+    "variantCount": 2,
+    "variantNames": ["state=default", "state=error"],
+    "width": 280,
+    "componentProperties": [
+      {
+        "key": "label#596:0",
+        "type": "TEXT",
+        "default": "Rótulo do campo",
+        "boundTo": "label TEXT.characters"
+      },
+      {
+        "key": "helperText#596:3",
+        "type": "TEXT",
+        "default": "Texto de apoio",
+        "boundTo": "message TEXT.characters"
+      },
+      {
+        "key": "showLabel#596:6",
+        "type": "BOOLEAN",
+        "default": true,
+        "boundTo": "label TEXT.visible"
+      },
+      {
+        "key": "showHelper#596:9",
+        "type": "BOOLEAN",
+        "default": true,
+        "boundTo": "message TEXT.visible"
+      },
+      {
+        "key": "required#596:12",
+        "type": "BOOLEAN",
+        "default": false,
+        "boundTo": "required(*) TEXT.visible"
+      }
+    ],
+    "bindings": { "label": 2, "helperText": 2, "showLabel": 2, "showHelper": 2, "required": 2 },
+    "anatomy": {
+      "root": "COMPONENT VERTICAL gap 6 width 280 FILL/HUG",
+      "labelRow": "FRAME HORIZONTAL gap 2 counterAxisAlignItems=CENTER → [label TEXT Body/Small, required(*) TEXT Body/Small feedback/error/content visible=false]",
+      "inputSlot": "FRAME VERTICAL FILL/HUG min-height 40 padding 12 cornerRadius 6 stroke border/subtle dashPattern [4,4] → [slotHint TEXT 'Input slot' opacity 0.5]",
+      "message": "TEXT Body/Meta FILL/HUG → helper (default variant) OU erro (error variant) — mesmo node, cor varia"
+    },
+    "colorMap": {
+      "default": {
+        "label": "content/primary",
+        "required": "feedback/error/content",
+        "slotBorder": "border/subtle",
+        "slotHint": "content/tertiary opacity 0.5",
+        "message": "content/secondary"
+      },
+      "error": {
+        "label": "feedback/error/content",
+        "required": "feedback/error/content",
+        "slotBorder": "border/subtle",
+        "message": "feedback/error/content"
+      }
+    },
+    "limitations": [
+      "INSTANCE_SWAP impossível no input slot (limitação Figma API documentada Etapa 15a) — usuário arrasta instância manualmente para dentro do inputSlot",
+      "hasError BOOLEAN não existe (redundante com state variant) — trocar variante manualmente no painel Figma"
+    ]
+  },
+  "visualDocumentation": {
+    "formsPageFrame": "553:38 (🧩 Forms · Page)",
+    "widthHeight": [1440, 9183],
+    "totalSections": 14,
+    "sectionsAdded": [
+      {
+        "index": "08",
+        "title": "Checkbox",
+        "frameId": "599:162",
+        "subsections": [
+          "Estados (md×checked=true)",
+          "Tamanhos e valores de checked (sm/md × false/true/indeterminate)"
+        ]
+      },
+      {
+        "index": "09",
+        "title": "Radio",
+        "frameId": "599:254",
+        "subsections": [
+          "Estados (md×checked=true)",
+          "Uso em grupo (3 radios verticais com labels pt-BR de contato)"
+        ]
+      },
+      {
+        "index": "10",
+        "title": "Select",
+        "frameId": "599:316",
+        "subsections": ["Tamanhos (sm/md/lg × default fechado)", "Estados (md × 6 estados fechado)"]
+      },
+      {
+        "index": "11",
+        "title": "Switch",
+        "frameId": "599:423",
+        "subsections": ["Estados (md×on × 4 estados)", "Tamanhos e checked (sm/md × off/on)"]
+      },
+      {
+        "index": "12",
+        "title": "FormField",
+        "frameId": "600:293",
+        "subsections": [
+          "Variantes (masters default+error)",
+          "Composição com inputs (4 exemplos pt-BR: E-mail required, Mensagem error, Assunto Select, Consentimento Checkbox)"
+        ]
+      },
+      {
+        "index": "13",
+        "title": "Mensagens de erro · pt-BR",
+        "frameId": "600:355",
+        "subsections": ["10 cards (key · short · long) com todos os erros da biblioteca"]
+      }
+    ],
+    "headerUpdate": "Desc do '00 · Page Header' atualizada de 'TextField e Textarea com 54 variantes' para 'família completa — 7 ComponentSets 134+ variantes + Mensagens de erro pt-BR'"
+  },
+  "componentSetInventoryAfter15b": {
+    "total": 7,
+    "totalVariants": 152,
+    "list": [
+      { "name": "TextField", "id": "548:38", "variants": 36, "createdIn": "Etapa 10" },
+      { "name": "Textarea", "id": "550:68", "variants": 18, "createdIn": "Etapa 10" },
+      { "name": "Checkbox", "id": "588:131", "variants": 30, "createdIn": "Etapa 15a" },
+      { "name": "Radio", "id": "589:72", "variants": 20, "createdIn": "Etapa 15a" },
+      { "name": "Select", "id": "591:161", "variants": 30, "createdIn": "Etapa 15a" },
+      { "name": "Switch", "id": "594:226", "variants": 16, "createdIn": "Etapa 15b" },
+      { "name": "FormField", "id": "596:176", "variants": 2, "createdIn": "Etapa 15b" }
+    ],
+    "standaloneComponents": [{ "name": "SelectPanel", "id": "591:162", "createdIn": "Etapa 15a" }]
+  },
+  "gotchasLearned": [
+    "`await` dentro de arrow/function declarada sem async dispara SyntaxError — declarar explicitamente `async function` sempre que body usar await",
+    "`node.layoutMode` não existe em TEXT nodes — usar safe(n, 'layoutMode') ou try/catch em inspeções genéricas",
+    "Figma permite `dashPattern` [4,4] em strokes de FRAME — útil para slots visuais (inputSlot do FormField)",
+    "createInstance().setProperties() aceita sobrescrita de label#id key — usar Object.keys para descobrir o key dinamicamente (varia entre componentes)",
+    "GLM-5.1 pode consumir todos os tokens em reasoning e retornar content vazio — orquestrador (subagent) precisa consolidar drafts do reasoning e entregar"
+  ],
+  "delegation": {
+    "opus": "4 MCP calls efetivas (inspect Forms + Switch create + FormField create retry + inspect Forms Page + 2 build docs + snapshot) = 7 MCP calls totais, 1 retry por syntax error. Orçamento 6-8, dentro.",
+    "mimo-reasoner": "1 call — validação matriz Switch + FormField anatomy + edge cases (~17k tokens).",
+    "glm-reviewer": "2 tentativas — reasoning-only em ambas, orquestrador consolidou (~19k tokens total).",
+    "kimi-longctx": "Não invocado — escopo cabe em context Opus.",
+    "quorum-synth": "Não invocado — decisões de matriz validadas solo pelo mimo."
+  },
+  "knownIssues": [
+    "FormField tem height visual mínimo (1px) reportado no snapshot — auto-layout VERTICAL com pSize AUTO deveria crescer, mas a resize(280,1) inicial pode não ter recalculado. Verificar visualmente; se visível está quebrado, etapa 16 ajusta primaryAxisSizingMode sem resize manual.",
+    "Seção 12 (FormField) tem exemplos composed MANUAIS (rebuildados) porque override de input slot em instance é complexo — em React será resolvido via children prop.",
+    "Seção 07 · Componentes · Masters continua listando apenas TextField+Textarea; cards dos 5 novos componentes ficam para polish cosmético."
+  ],
+  "deferredToFutureStages": [
+    "Atualizar seção 07 · Componentes · Masters com cards dos 5 novos → Etapa 16 ou polish",
+    "FormField slot real via Figma slot component pattern (se/quando API liberar) → Etapa 18 ou futura",
+    "SelectPanel como ComponentSet com variants por option state → Etapa 16 ou 18",
+    "Chevron color override por state em Select variants → Etapa 18 (CSS bridge)",
+    "Dualidade surface Shell/Theme → Etapa 18 (bridge)",
+    "WCAG Light mode audit → Etapa 12 (pós-launch)"
+  ],
+  "capturedAt": "2026-04-18T23:55:00Z"
+}

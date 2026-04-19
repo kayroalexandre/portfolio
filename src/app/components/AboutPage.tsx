@@ -34,7 +34,7 @@ export function AboutPage() {
 
         <div className="relative">
           <SectionDivider count={4} className="px-4 mb-4" />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {siteConfig.aboutGallery.map((image) => (
               <div key={image.alt} className="aspect-[4/5] rounded-lg overflow-hidden">
                 <ImageWithFallback

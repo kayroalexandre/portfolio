@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "phase": 9,
+    "name": "foundations-input-tokens",
+    "title": "Foundations · Input tokens (gap-fill) + audit WCAG Light mode",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "7:2",
+    "pageName": "🎨 Foundations",
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_foundations_card_pattern.md",
+      "feedback_figma_plugin_gotchas.md",
+      "feedback_delegation.md"
+    ]
+  },
+  "scopeDecisions": {
+    "dropped": [
+      "color/semantic/* (desnecessário — feedback/* já cobre as 4 cores em 12 vars)",
+      "filled como estado visual (não é estado — é consequência de value presente)",
+      "success/warning inputs (deferidos para Etapa 14 — não atendem AA ainda)"
+    ],
+    "reduced": "Escopo inicial de ~35-45 tokens reduzido para 8 após inventário revelar input/* parcial (5 vars) e feedback/* completo (12 vars) já presentes."
+  },
+  "wcagAudit": {
+    "modesAudited": ["Light", "Dark"],
+    "pairsEvaluated": 33,
+    "resolverNote": "Alias collection chain requer que cada variable seja resolvida usando os modes da sua PRÓPRIA collection, não da raiz. Primitives collection tem modo único; Semantic tem Dark/Light.",
+    "lightFailures": [
+      {
+        "pair": "content/tertiary / surface/page",
+        "ratio": 2.54,
+        "fix": "Escurecer primitivo (ex: #9ca3af → #6b7280)",
+        "severity": "alta"
+      },
+      {
+        "pair": "content/placeholder / surface/page",
+        "ratio": 2.54,
+        "fix": "Mesmo primitivo que tertiary — corrige junto",
+        "severity": "alta"
+      },
+      {
+        "pair": "content/primary / surface/overlay",
+        "ratio": 1.06,
+        "fix": "surface/overlay Light está como #000000 — bug de configuração do mode Light",
+        "severity": "crítica"
+      },
+      {
+        "pair": "interactive/outline/fg / interactive/outline/bg",
+        "ratio": 1.06,
+        "fix": "interactive/outline/bg Light = #000000 — mesmo bug",
+        "severity": "crítica"
+      },
+      {
+        "pair": "interactive/ghost/fg / interactive/ghost/bg",
+        "ratio": 1.06,
+        "fix": "idem",
+        "severity": "crítica"
+      },
+      {
+        "pair": "feedback/warning/content / feedback/warning/bg",
+        "ratio": 2.86,
+        "fix": "Escurecer content primitivo (#d97706 → #b45309)",
+        "severity": "alta"
+      },
+      {
+        "pair": "feedback/success/content / feedback/success/bg",
+        "ratio": 3.0,
+        "fix": "Borderline AA large-only; escurecer content",
+        "severity": "média"
+      },
+      {
+        "pair": "feedback/info/content / feedback/info/bg",
+        "ratio": 4.24,
+        "fix": "AA large-only — escurecer para passar body",
+        "severity": "média"
+      },
+      {
+        "pair": "input/placeholder / input/bg",
+        "ratio": 2.13,
+        "fix": "Placeholder específico para input com melhor contraste (override de content/placeholder)",
+        "severity": "alta"
+      }
+    ],
+    "darkFailures": [
+      {
+        "pair": "content/tertiary / surface/page",
+        "ratio": 4.14,
+        "severity": "baixa (large-only)"
+      },
+      {
+        "pair": "content/placeholder / surface/page",
+        "ratio": 4.14,
+        "severity": "baixa (large-only)"
+      },
+      {
+        "pair": "interactive/destructive/fg / interactive/destructive/bg",
+        "ratio": 3.62,
+        "severity": "média (large-only)"
+      },
+      {
+        "pair": "feedback/error/content / feedback/error/bg",
+        "ratio": 3.62,
+        "severity": "média (large-only)"
+      },
+      { "pair": "input/placeholder / input/bg", "ratio": 3.44, "severity": "média (large-only)" }
+    ],
+    "summary": "Light mode tem 5 falhas críticas/altas. 3 delas (overlay, outline/bg, ghost/bg) apontam ambas para #000000 — forte indicador de bug de configuração dos aliases Light mode em Primitives. Deferido para Etapa de correção de tokens Light dedicada."
+  },
+  "tokensCreated": {
+    "collection": "Semantic · Theme",
+    "count": 8,
+    "namingConvention": "Segue padrão existente input/{role}-{state}. fg/bg/border/placeholder + hover/focus/error/disabled/readonly.",
+    "items": [
+      {
+        "name": "input/fg",
+        "id": "VariableID:526:2",
+        "dark": "content/primary",
+        "light": "content/primary"
+      },
+      {
+        "name": "input/fg-disabled",
+        "id": "VariableID:526:3",
+        "dark": "content/disabled",
+        "light": "content/disabled"
+      },
+      {
+        "name": "input/fg-readonly",
+        "id": "VariableID:526:4",
+        "dark": "content/secondary",
+        "light": "content/secondary"
+      },
+      {
+        "name": "input/placeholder-disabled",
+        "id": "VariableID:526:5",
+        "dark": "content/disabled",
+        "light": "content/disabled"
+      },
+      {
+        "name": "input/border-focus",
+        "id": "VariableID:526:6",
+        "dark": "ring/focus",
+        "light": "ring/focus"
+      },
+      {
+        "name": "input/border-error",
+        "id": "VariableID:526:7",
+        "dark": "border/invalid",
+        "light": "border/invalid"
+      },
+      {
+        "name": "input/border-disabled",
+        "id": "VariableID:526:8",
+        "dark": "border/subtle",
+        "light": "border/subtle"
+      },
+      {
+        "name": "input/bg-error",
+        "id": "VariableID:526:9",
+        "dark": "feedback/error/bg",
+        "light": "feedback/error/bg"
+      }
+    ],
+    "inputVarsAfter": [
+      "input/bg",
+      "input/bg-disabled",
+      "input/bg-error",
+      "input/border",
+      "input/border-disabled",
+      "input/border-error",
+      "input/border-focus",
+      "input/border-hover",
+      "input/fg",
+      "input/fg-disabled",
+      "input/fg-readonly",
+      "input/placeholder",
+      "input/placeholder-disabled"
+    ]
+  },
+  "sectionBuilt": {
+    "id": "531:2",
+    "name": "11 · Input Tokens",
+    "pageId": "7:2",
+    "position": { "x": 0, "y": 30580 },
+    "size": { "w": 1440, "h": 1549 },
+    "structure": {
+      "frame": {
+        "padding": [80, 80, 80, 80],
+        "itemSpacing": 48,
+        "layoutMode": "VERTICAL",
+        "fill": "surface/page"
+      },
+      "header": {
+        "eyebrow": "FOUNDATIONS · FORMS",
+        "title": "11 · Input Tokens",
+        "divider": "60×2 border/strong"
+      },
+      "subsections": [
+        {
+          "name": "Background",
+          "cardCount": 3,
+          "tokens": ["input/bg", "input/bg-disabled", "input/bg-error"]
+        },
+        {
+          "name": "Border",
+          "cardCount": 5,
+          "tokens": [
+            "input/border",
+            "input/border-hover",
+            "input/border-focus",
+            "input/border-error",
+            "input/border-disabled"
+          ]
+        },
+        {
+          "name": "Foreground",
+          "cardCount": 5,
+          "tokens": [
+            "input/fg",
+            "input/fg-disabled",
+            "input/fg-readonly",
+            "input/placeholder",
+            "input/placeholder-disabled"
+          ]
+        }
+      ],
+      "callout": {
+        "type": "accessibility warning",
+        "topic": "input/placeholder contraste Light mode 2.13:1"
+      }
+    },
+    "cardPattern": "200×{HUG} — preview 200×112 FIXED/FIXED (chip 140×72 rectangular), info FILL/HUG com name (Body/Meta content/primary) + usage (Code/Small content/tertiary).",
+    "noteBorderCards": "Cards de border mostram retângulo SEM fill com stroke 2px bound ao token, não chip sólido — padrão diferente dos fg/bg cards."
+  },
+  "delegation": {
+    "glm-reviewer": "Rascunhou toda a copy pt-BR (header, 3 subsection headers, callout, 13 usage strings). Um único round-trip, JSON usado direto no build script.",
+    "mimo-reasoner": "Validou enumeração de 6 estados obrigatórios (default/hover/focus/error/disabled/readonly) e confirmou que 'filled' não é estado visual.",
+    "opus": "Inventário (1 MCP), WCAG audit com bug fix de resolver chain (3 MCPs — 2 falharam por nomes errados e resolver shape), criação de tokens (1 MCP), build section (3 MCPs — 2 falharam por surface/background vs surface/page e setSize timing), fix de sizing (1 MCP), screenshot (2 MCPs). Total: 11 MCP calls (vs budget de ~14)."
+  },
+  "knownIssues": [
+    "Memória project_foundations_card_pattern.md dizia sectionWidth 1600, mas Foundations usa 1440 (corrigido implicitamente no build). Atualizar memória.",
+    "Memória dizia surface/background como variable, mas o nome real é surface/page. Atualizar memória se aplicável."
+  ],
+  "deferredToFutureStages": [
+    "Fix primitivos Light mode bugados (surface/overlay, interactive/outline/bg, interactive/ghost/bg todos = #000000)",
+    "Escurecer content/tertiary + content/placeholder primitivos para passar AA Light",
+    "Escurecer feedback/*/content primitivos para passar AA Light",
+    "Override de input/placeholder específico para inputs (não herdar content/placeholder)",
+    "Criar Form primitives (TextField, Select, Checkbox, Radio, Toggle) usando estes tokens — Etapa 10+"
+  ],
+  "notes": "Etapa 9 fecha a base de tokens de formulário necessária para construir Form primitives nas etapas seguintes. Descoberta principal: o arquivo já tinha muito mais tokens do que a memória indicava — input/* parcial e feedback/* completo. O escopo original foi reduzido em ~80% após inventário, evitando duplicação. WCAG audit Light mode revelou 5 falhas críticas, todas deferidas para uma etapa de correção dedicada (não são bloqueadores para criar form primitives em Dark mode, que é o mode default do portfolio).",
+  "capturedAt": "2026-04-18T20:30:00Z"
+}

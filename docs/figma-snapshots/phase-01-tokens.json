@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "phase": 1,
+    "name": "tokens",
+    "title": "Revisão e ajuste dos tokens e styles",
+    "concludedAt": "2026-04-17",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": null,
+    "pageName": null,
+    "backfillMethod": "documental",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": ["project_portfolio_etapas.md", "project_portfolio_style_rules.md"]
+  },
+  "tree": [],
+  "components": [],
+  "componentSets": [],
+  "variables": {
+    "collections": [
+      { "name": "Semantic · Theme", "modes": ["Dark", "Light"] },
+      { "name": "Primitive · Color", "modes": null },
+      { "name": "Dimension", "modes": null },
+      { "name": "Motion", "modes": null }
+    ],
+    "namespaces": [
+      "color/*",
+      "surface/*",
+      "content/*",
+      "interactive/*",
+      "border/*",
+      "dimension/*",
+      "motion/*"
+    ],
+    "notes": "Namespaces e collections identificados pelo uso nas páginas Foundations. surface/base NÃO existe — usar surface/subtle para cards e surface/background para seções."
+  },
+  "styles": {
+    "text": [
+      { "name": "Display/Hero", "family": "Inter" },
+      { "name": "Display/Section", "family": "Inter" },
+      { "name": "Heading/H1", "family": "Inter" },
+      { "name": "Heading/H2", "family": "Inter" },
+      { "name": "Heading/H3", "family": "Inter" },
+      { "name": "Body/Large", "family": "Inter" },
+      { "name": "Body/Default", "family": "Inter" },
+      { "name": "Body/Small", "family": "Inter" },
+      { "name": "Body/Meta", "family": "Inter" },
+      { "name": "Label/Eyebrow", "family": "Inter" },
+      { "name": "Label/Default", "family": "Inter" },
+      { "name": "Nav/Default", "family": "Inter" },
+      { "name": "Button/Default", "family": "Inter" },
+      { "name": "Button/Small", "family": "Inter" },
+      { "name": "Code/Default", "family": "Roboto Mono" },
+      { "name": "Code/Small", "family": "Roboto Mono" }
+    ],
+    "effect": [
+      { "name": "Shadow/*", "note": "família de elevações" },
+      { "name": "Focus/Ring" },
+      { "name": "Glass/Backdrop *", "note": "família de glass" },
+      { "name": "Blur/Layer *", "note": "família de blur" }
+    ],
+    "paint": [],
+    "notes": "16 text styles consolidados (14 Inter + 2 Roboto Mono). Label/Small NÃO existe — usar Body/Small. Nomes exatos conferidos pelas seções da Foundations."
+  },
+  "fonts": ["Inter", "Roboto Mono"],
+  "fontsForbidden": ["Google Sans Flex"],
+  "notes": "Etapa base do sistema. Desconectou text styles da fonte problemática (Google Sans Flex) e consolidou Inter + Roboto Mono. Qualquer nova seção/componente deve reaproveitar estes styles e variáveis, não criar paralelos. Se precisar de style novo, pedir aprovação."
+}

@@ -1,0 +1,354 @@
+{
+  "meta": {
+    "phase": "15a",
+    "name": "form-family-part1",
+    "title": "Form Family Part 1 — Checkbox (30) + Radio (20) + Select (30) + SelectPanel standalone + minus icon",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "536:2",
+    "pageName": "🧩 Forms",
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_foundations_card_pattern.md",
+      "feedback_figma_plugin_gotchas.md"
+    ],
+    "notes": "Etapa 15 foi dividida em 15a (Checkbox + Radio + Select) e 15b (Switch + FormField + copy error library + documentação visual consolidada na página Forms). 2 débitos herdados da Etapa 13/14 foram arquivados por limitação da Figma API (INSTANCE_SWAP não funciona em ComponentSet/variants) e por low ROI (TextField iconEnd absorvido via manual swap quando necessário)."
+  },
+  "scopeDiscoveriesVsPlan": {
+    "originalPlan": [
+      "Criar 3 ícones novos (chevron-down, check, minus)",
+      "Débito IconButton — INSTANCE_SWAP icon property",
+      "Débito TextField — node iconEnd + BOOLEAN showIconEnd",
+      "Build Checkbox 30 variants",
+      "Build Radio 20 variants",
+      "Build Select 30 + SelectPanel",
+      "Documentação visual na página Forms"
+    ],
+    "actualExecution": {
+      "done": [
+        "minus icon criado (583:2, key 3e58f02f704f893cedfe163869978a4b1053b66e) via createVector + vectorPaths (não SVG parse)",
+        "Checkbox ComponentSet 30 variants (588:131) + properties label/showLabel",
+        "Radio ComponentSet 20 variants (589:72) + properties label/showLabel",
+        "Select ComponentSet 30 variants (591:161) + properties label/placeholder/helperText/showLabel/showHelper (150 bindings × 100%)",
+        "SelectPanel standalone COMPONENT (591:162) com 5 options exemplo (default/hover/selected/default/default)"
+      ],
+      "skippedAsNotNeeded": [
+        "chevron-down: já existia (399:24)",
+        "check: já existia (399:17)",
+        "4 tokens interactive/primary/*: já existiam em Semantic · Theme (93:41-46)"
+      ],
+      "archived": [
+        "IconButton INSTANCE_SWAP icon property — limitação estrutural Figma API: INSTANCE_SWAP não pode ser adicionado em COMPONENT_SET nem em variants (só em product components standalone). Swap manual via UI Figma continua funcionando.",
+        "TextField iconEnd node + showIconEnd BOOLEAN — low ROI: 3 MCP calls para adicionar node em 36 variants vs funcionalidade trivial em React + manual swap no Figma."
+      ],
+      "deferredTo15b": [
+        "Documentação visual Checkbox/Radio/Select na página Forms — melhor fazer junto de Switch/FormField em 15b"
+      ]
+    }
+  },
+  "mimoReasonerValidation": {
+    "recommendationsApplied": [
+      "Removido `readonly` state de Checkbox e Radio (shadcn/Radix não têm)",
+      "Removido combinações `open=true + state=disabled` e `open=true + state=readonly` de Select (contraditório/não-UX)",
+      "`checked` como VARIANT enum em Checkbox (3 valores false/true/indeterminate) ao invés de 2 booleans conflitantes",
+      "SelectPanel criado como componente separado (não embutido como variant)",
+      "Focus/Ring aplicado no box (Checkbox/Radio) / trigger (Select) apenas quando state=focus"
+    ],
+    "recommendationsRejected": [
+      "Tokens interactive/primary/{bg,fg,bg-disabled,fg-disabled} — mimo sugeriu criar 4 novos; inspeção revelou que já existem em Semantic · Theme (IDs 93:41-46). Economia: 1 MCP call."
+    ],
+    "tokenMatrixValidation": {
+      "CheckboxRadio_6state_5state": {
+        "states": ["default", "hover", "focus", "error", "disabled"],
+        "checked_unchecked_boxBg_divergence": "checked usa interactive/primary/bg; unchecked usa input/bg",
+        "error_special": "error+checked usa feedback/error/bg (não primary) — border sempre input/border-error",
+        "focus_effect": "Focus/Ring effectStyleId aplicado no box (Checkbox) ou circle (Radio)"
+      }
+    }
+  },
+  "checkbox": {
+    "componentSetId": "588:131",
+    "variantCount": 30,
+    "axes": {
+      "size": ["sm", "md"],
+      "state": ["default", "hover", "focus", "error", "disabled"],
+      "checked": ["false", "true", "indeterminate"]
+    },
+    "componentProperties": [
+      {
+        "key": "label#588:0",
+        "type": "TEXT",
+        "default": "Label",
+        "boundTo": "label TEXT.characters"
+      },
+      {
+        "key": "showLabel#588:31",
+        "type": "BOOLEAN",
+        "default": true,
+        "boundTo": "label TEXT.visible"
+      }
+    ],
+    "bindings": { "label": 30, "showLabel": 30 },
+    "sizeConfig": {
+      "sm": {
+        "box": 14,
+        "radius": 3,
+        "vectorSize": 10,
+        "vectorInset": 2,
+        "gap": 8,
+        "labelStyle": "Body/Meta"
+      },
+      "md": {
+        "box": 16,
+        "radius": 4,
+        "vectorSize": 12,
+        "vectorInset": 2,
+        "gap": 8,
+        "labelStyle": "Body/Small"
+      }
+    },
+    "iconPaths": {
+      "checkSm": "M 8.33 2.5 L 3.75 7.08 L 1.67 5",
+      "checkMd": "M 10 3 L 4.5 8.5 L 2 6",
+      "minusSm": "M 2.5 5 L 7.5 5",
+      "minusMd": "M 3 6 L 9 6"
+    },
+    "stateTokenMap": {
+      "default": {
+        "bg_unchecked": "input/bg",
+        "bg_checked": "interactive/primary/bg",
+        "border_unchecked": "input/border",
+        "border_checked": "interactive/primary/bg",
+        "vector": "interactive/primary/fg",
+        "label": "content/primary"
+      },
+      "hover": {
+        "bg_checked": "interactive/primary/bg-hover",
+        "border_unchecked": "input/border-hover",
+        "border_checked": "interactive/primary/bg-hover"
+      },
+      "focus": { "border_unchecked": "input/border-focus", "effect": "Focus/Ring" },
+      "error": {
+        "bg_unchecked": "input/bg-error",
+        "bg_checked": "feedback/error/bg",
+        "border": "input/border-error",
+        "vector": "feedback/error/content",
+        "label": "feedback/error/content"
+      },
+      "disabled": {
+        "bg_unchecked": "input/bg-disabled",
+        "bg_checked": "interactive/primary/bg-disabled",
+        "border": "input/border-disabled",
+        "vector": "interactive/primary/fg-disabled",
+        "label": "content/disabled"
+      }
+    }
+  },
+  "radio": {
+    "componentSetId": "589:72",
+    "variantCount": 20,
+    "axes": {
+      "size": ["sm", "md"],
+      "state": ["default", "hover", "focus", "error", "disabled"],
+      "checked": ["false", "true"]
+    },
+    "componentProperties": [
+      {
+        "key": "label#589:0",
+        "type": "TEXT",
+        "default": "Label",
+        "boundTo": "label TEXT.characters"
+      },
+      {
+        "key": "showLabel#589:21",
+        "type": "BOOLEAN",
+        "default": true,
+        "boundTo": "label TEXT.visible"
+      }
+    ],
+    "bindings": { "label": 20, "showLabel": 20 },
+    "sizeConfig": {
+      "sm": { "circle": 14, "cornerRadius": 7, "dot": 6, "gap": 8, "labelStyle": "Body/Meta" },
+      "md": { "circle": 16, "cornerRadius": 8, "dot": 8, "gap": 8, "labelStyle": "Body/Small" }
+    },
+    "dotType": "ELLIPSE constrained to CENTER/CENTER within circle frame",
+    "stateTokenMap": "Mesmo padrão do Checkbox, mas bg sempre = input/bg (unchecked ou checked); a diferença visual é apenas a presença/ausência do dot interno."
+  },
+  "select": {
+    "componentSetId": "591:161",
+    "variantCount": 30,
+    "axes": {
+      "size": ["sm", "md", "lg"],
+      "state": ["default", "hover", "focus", "error", "disabled", "readonly"],
+      "open": ["false", "true"]
+    },
+    "invalidCombos": ["state=disabled + open=true", "state=readonly + open=true"],
+    "componentProperties": [
+      {
+        "key": "label#591:0",
+        "type": "TEXT",
+        "default": "Rótulo do campo",
+        "boundTo": "Rótulo do campo TEXT.characters"
+      },
+      {
+        "key": "placeholder#591:31",
+        "type": "TEXT",
+        "default": "Selecione uma opção",
+        "boundTo": "value TEXT.characters"
+      },
+      {
+        "key": "helperText#591:62",
+        "type": "TEXT",
+        "default": "Texto de apoio",
+        "boundTo": "helper TEXT.characters"
+      },
+      {
+        "key": "showLabel#591:93",
+        "type": "BOOLEAN",
+        "default": true,
+        "boundTo": "Rótulo do campo TEXT.visible"
+      },
+      {
+        "key": "showHelper#591:124",
+        "type": "BOOLEAN",
+        "default": true,
+        "boundTo": "helper TEXT.visible"
+      }
+    ],
+    "bindings": {
+      "label": 30,
+      "placeholder": 30,
+      "helperText": 30,
+      "showLabel": 30,
+      "showHelper": 30
+    },
+    "sizeConfig": {
+      "sm": {
+        "height": 32,
+        "padH": 10,
+        "padV": 6,
+        "iconSize": 14,
+        "valueStyle": "Body/Meta",
+        "labelStyle": "Body/Meta"
+      },
+      "md": {
+        "height": 40,
+        "padH": 12,
+        "padV": 10,
+        "iconSize": 16,
+        "valueStyle": "Body/Small",
+        "labelStyle": "Body/Small"
+      },
+      "lg": {
+        "height": 48,
+        "padH": 14,
+        "padV": 12,
+        "iconSize": 18,
+        "valueStyle": "Body/Base",
+        "labelStyle": "Body/Small"
+      }
+    },
+    "anatomy": {
+      "root": "COMPONENT VERTICAL itemSpacing 6, width 280, HUG height",
+      "structure": [
+        "Rótulo do campo TEXT (FILL/HUG)",
+        "trigger FRAME (HORIZONTAL, FILL/FIXED)",
+        "helper TEXT (FILL/HUG)"
+      ],
+      "triggerChildren": ["value TEXT (FILL/HUG)", "chevron INSTANCE (FIXED/FIXED, from 399:24)"],
+      "chevronRotation": "when open=true: chevron.rotation = 180 (flip)"
+    }
+  },
+  "selectPanel": {
+    "componentId": "591:162",
+    "type": "standalone COMPONENT (não ComponentSet)",
+    "width": 280,
+    "anatomy": {
+      "root": "FRAME VERTICAL padding 4, gap 2, cornerRadius 8, bg surface/popover, border input/border stroke 1",
+      "options": [
+        { "index": 0, "text": "Opção 1", "state": "default", "bg": "transparent" },
+        { "index": 1, "text": "Opção 2", "state": "hover", "bg": "interactive/ghost/bg-hover" },
+        {
+          "index": 2,
+          "text": "Opção 3 — selecionada",
+          "state": "selected",
+          "bg": "interactive/ghost/bg-hover",
+          "hasCheckIcon": true
+        },
+        { "index": 3, "text": "Opção 4", "state": "default" },
+        { "index": 4, "text": "Opção 5", "state": "default" }
+      ]
+    },
+    "futureWork": "Em Etapa 16 ou 18, virar ComponentSet com variant para mostrar estados e com componente SelectItem separado."
+  },
+  "minusIcon": {
+    "componentId": "583:2",
+    "key": "3e58f02f704f893cedfe163869978a4b1053b66e",
+    "name": "minus",
+    "size": "16×16",
+    "style": "stroke 1.5 ROUND ROUND bound a color/neutral/050",
+    "pathData": "M 3.333 8 L 12.667 8",
+    "constraints": "SCALE × SCALE",
+    "creationMethod": "createVector + vectorPaths direto (figma.createNodeFromSvg falhou silenciosamente)",
+    "parent": "mesmo parent do check (399:17) na página 🪷 Icons"
+  },
+  "iconsPage": {
+    "totalMastersAfter15a": 25,
+    "deltaPhase4": "+17 (página tinha 8 originais, Etapa 4 adicionou 16, 15a adicionou 1 minus)",
+    "fullList": [
+      "arrow-left",
+      "arrow-right",
+      "arrow-up-right",
+      "briefcase",
+      "calendar",
+      "check",
+      "chevron-down",
+      "chevron-right",
+      "download",
+      "external-link",
+      "folder-open",
+      "github",
+      "home",
+      "layers",
+      "linkedin",
+      "mail",
+      "menu",
+      "minus",
+      "moon",
+      "plus",
+      "search",
+      "send",
+      "sun",
+      "user",
+      "x"
+    ]
+  },
+  "apiLimitations": {
+    "instanceSwapOnComponentSet": {
+      "constraint": "addComponentProperty('x', 'INSTANCE_SWAP', key) em COMPONENT_SET falha com 'Property value is incompatible with component property type'",
+      "alsoFailsOn": "variants de um ComponentSet (product components filhos) — erro 'Can only set component property definitions on a product component'",
+      "workaround": "INSTANCE_SWAP só funciona em standalone COMPONENTs criados FORA de ComponentSet. Para componentes já em set (como IconButton), o swap manual via UI Figma (right-click → Swap instance) continua disponível e funciona como prop no Code Connect.",
+      "impact": "IconButton não expõe `icon` property explícita — mas funcionalidade no React é trivial (<IconButton icon={...} />) e manutenção não foi bloqueada."
+    }
+  },
+  "delegation": {
+    "mimo-reasoner": "1 call (~21k tokens) — validação matriz Select/Checkbox/Radio + enumeração de 10 edge cases + recomendações aplicadas (readonly remove, open+disabled remove, checked enum, tokens novos).",
+    "opus": "6 MCP calls efetivas: inspect (1) + minus+debug IconButton (1 retry = 2 calls) + Checkbox create+combine (2 calls) + Radio (1 call) + Select create+combine+panel (2 calls) = 8 MCP calls totais. Orçamento inicial 14, economia ~6 por descobertas (tokens primary já existiam, ícones já existiam).",
+    "glm-reviewer": "Não invocado — copy default reutilizado da Etapa 10 (label, placeholder, helperText em pt-BR).",
+    "kimi-longctx": "Não invocado — escopo cabe no context Opus.",
+    "quorum-synth": "Não invocado — decisões unânimes do mimo."
+  },
+  "knownIssues": [
+    "Chevron INSTANCE em Select variants não tem stroke bound — herda neutral/050 default do master. Para state=error/disabled, o chevron deveria ser bound a feedback/error/content / input/fg-disabled respectivamente. Override via overrideProps é complexo em variants; fica para Etapa 18 (bridge) via CSS override ou manual polish em 15b."
+  ],
+  "deferredToFutureStages": [
+    "Documentação visual Checkbox/Radio/Select na página Forms → Etapa 15b (junto de Switch + FormField)",
+    "Copy error library pt-BR → Etapa 15b (glm-reviewer draft)",
+    "Switch ComponentSet + FormField wrapper → Etapa 15b",
+    "SelectPanel como ComponentSet com variants (hover/focus por option) → Etapa 16 ou 18",
+    "Chevron color override por state em Select variants → Etapa 18 (CSS) ou manual polish"
+  ],
+  "capturedAt": "2026-04-18T23:45:00Z"
+}

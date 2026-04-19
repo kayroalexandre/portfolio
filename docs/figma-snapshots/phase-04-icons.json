@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "phase": 4,
+    "name": "icons",
+    "title": "Página Icons — biblioteca Lucide-style",
+    "concludedAt": "2026-04-17",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": null,
+    "pageName": "🪷 Icons",
+    "backfillMethod": "documental",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": ["project_portfolio_etapas.md", "feedback_figma_plugin_gotchas.md"]
+  },
+  "layout": {
+    "width": 1600,
+    "padding": 80,
+    "sectionFill": "surface/background"
+  },
+  "tree": [
+    { "id": "406:2", "name": "00 · Page Header", "type": "SECTION", "note": "marker 01 | ÍCONES" },
+    {
+      "id": "406:41",
+      "name": "01 · Componentes",
+      "type": "SECTION",
+      "note": "4 subsections: Navegação 8, Ações 6, Social & Contato 4, Interface 6. Marker 01 | COMPONENTES"
+    },
+    {
+      "id": "407:58",
+      "name": "02 · Biblioteca",
+      "type": "SECTION",
+      "note": "24 masters em tiles 72×72 (surface/subtle, ícone centralizado via layoutPositioning=ABSOLUTE). Marker 02 | BIBLIOTECA"
+    }
+  ],
+  "components": {
+    "spec": {
+      "style": "Lucide",
+      "grid": "16×16",
+      "strokeWeight": 1.5,
+      "strokeCaps": "ROUND",
+      "strokeJoin": "ROUND",
+      "boundStroke": "color/neutral/050"
+    },
+    "renamedFromPrior": ["removido prefixo 'Icon / ' de 8 ícones pré-existentes"],
+    "newIcons": [
+      "home",
+      "menu",
+      "x",
+      "check",
+      "arrow-up-right",
+      "chevron-down",
+      "chevron-right",
+      "external-link",
+      "mail",
+      "github",
+      "linkedin",
+      "moon",
+      "sun",
+      "calendar",
+      "search",
+      "download"
+    ],
+    "categoryCounts": {
+      "Navegação": 8,
+      "Ações": 6,
+      "Social & Contato": 4,
+      "Interface": 6
+    },
+    "totalMasters": 24
+  },
+  "componentSets": [],
+  "variables": { "created": [] },
+  "styles": { "text": [], "effect": [], "paint": [] },
+  "fonts": ["Inter", "Roboto Mono"],
+  "pipeline": [
+    "SVG viewBox 24 → createNodeFromSvg → createComponent + migrar filhos → applyIconStyles",
+    "applyIconStyles: stroke 1.5, CENTER, ROUND, bound color/neutral/050, fills vazios",
+    "applyIconStyles recursivo DEVE usar hasChildren(n) — VECTOR não expõe .children"
+  ],
+  "notes": "56 MCP calls consumidos nesta etapa — limite batido. Motivou este sistema de snapshots. Ao adicionar ícone: atualizar contadores do meta grid do header + categoria correspondente."
+}

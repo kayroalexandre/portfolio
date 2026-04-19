@@ -1,1 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/*
+ * Fontes carregadas em index.html com preconnect para melhor performance:
+ * - Google Sans (texto padrão)
+ * - Google Sans Code (mono/código/técnica)
+ */

@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "phase": 13,
+    "name": "form-polish-properties-states",
+    "title": "Polish Form primitives — component properties TextField/Textarea + focus-visible audit + decisão error-focus",
+    "concludedAt": "2026-04-18",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "536:2",
+    "pageName": "🧩 Forms",
+    "backfillMethod": "mcp-full",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": [
+      "project_portfolio_etapas.md",
+      "project_bridge_dark_only.md",
+      "feedback_figma_plugin_gotchas.md",
+      "feedback_delegation.md"
+    ],
+    "notes": "Etapa reduzida em escopo após descobertas de inspeção: Button já tinha label/showIconStart/showIconEnd properties + loading state; IconButton também tinha loading. Focus ring presente em 39/39 variantes relevantes. Restou component properties TextField/Textarea (feito) e decisão arquitetural sobre error-focus (resolvido via CSS, não variant)."
+  },
+  "scopeDiscoveriesVsPlan": {
+    "originalPlan": [
+      "Component properties TextField/Textarea",
+      "Decisão error-focus (7º estado)",
+      "Loading state Button + IconButton",
+      "Read-only state Forms",
+      "Focus-visible audit cross-component"
+    ],
+    "actualExecution": {
+      "done": [
+        "Component properties TextField (5 props × 36 variants)",
+        "Component properties Textarea (5 props × 18 variants)",
+        "Focus-visible audit (diagnóstico apenas — 39/39 já conformes)"
+      ],
+      "notNeeded": [
+        "Loading state Button — já existia desde Etapa 5 (state=loading com FRAME spinner + vector path M21 12a9 9 0 1 1-6.219-8.56)",
+        "Loading state IconButton — já existia desde Etapa 5 (state=loading)",
+        "Read-only Forms — já existia desde Etapa 10 (state=readonly em TextField e Textarea)",
+        "Error-focus 7º estado — decisão: NÃO criar como variant (ver errorFocusDecision)"
+      ],
+      "deferred": [
+        "TextField showIconEnd BOOLEAN — exige adicionar node iconEnd em 36 variants, não caiu no escopo desta etapa",
+        "IconButton INSTANCE_SWAP 'icon' property — single property, não bloqueia; deferido para Etapa 14"
+      ]
+    }
+  },
+  "focusVisibleAudit": {
+    "focusRingStyleId": "S:40abfab825652b8b3e4fd78125d6d608404b23e4,",
+    "focusRingStyleName": "Focus/Ring",
+    "results": {
+      "Button": {
+        "id": "417:632",
+        "focusVariants": 15,
+        "withRing": 15,
+        "application": "COMPONENT root — Focus/Ring no próprio variant root frame"
+      },
+      "IconButton": {
+        "id": "419:377",
+        "focusVariants": 15,
+        "withRing": 15,
+        "application": "COMPONENT root"
+      },
+      "TextField": {
+        "id": "548:38",
+        "focusVariants": 6,
+        "withRing": 6,
+        "application": "Inner FRAME 'field' recebe Focus/Ring (não o variant root — padrão diferente mas correto)"
+      },
+      "Textarea": {
+        "id": "550:68",
+        "focusVariants": 3,
+        "withRing": 3,
+        "application": "Inner FRAME 'field' recebe Focus/Ring"
+      }
+    },
+    "totals": "39/39 focus variants com Focus/Ring aplicado",
+    "verdict": "GAP-01 do mimo-reasoner (Etapa 11 completenessValidation) era falso-positivo. Figma está conforme. Responsabilidade do bridge (Etapa 18) é garantir que o CSS respeita o efeito nos :focus-visible dos componentes React."
+  },
+  "errorFocusDecision": {
+    "decision": "NÃO criar error+focus como variant separado",
+    "recommender": "mimo-reasoner",
+    "rationale": [
+      "Custo vs benefício: +15 variants (12 TextField + 3 Textarea) sem ganho real",
+      "Alinhado com shadcn/ui, Material UI, Radix — usam composição CSS",
+      "Focus/Ring é efeito aditivo (outline externo), não conflita com error border/bg",
+      "Manter ortogonalidade de estados (focus é runtime, error é semântico)"
+    ],
+    "codeStrategy": {
+      "css": "[aria-invalid=\"true\"]:focus-visible { background: var(--color-bg-error); border-color: var(--color-border-error); box-shadow: 0 0 0 2px var(--color-focus-ring); }",
+      "prerequisites": [
+        "aria-invalid no input DOM quando state=error",
+        ":focus-visible para não mostrar ring em cliques de mouse",
+        "focus-ring token deriva da Focus/Ring effect do Figma"
+      ],
+      "edgeCases": [
+        "readonly+error+focus: border-error prevalece + ring visível",
+        "disabled+error: ignorar foco (comportamento padrão de disabled)"
+      ]
+    },
+    "appliedInEtapa": "Etapa 18 (Bridge) implementa a CSS. Nada a fazer no Figma."
+  },
+  "componentPropertiesAdded": {
+    "TextField": {
+      "id": "548:38",
+      "variantsAffected": 36,
+      "properties": [
+        {
+          "key": "label#567:0",
+          "type": "TEXT",
+          "default": "Rótulo do campo",
+          "boundTo": "Rótulo do campo (TEXT) — characters"
+        },
+        {
+          "key": "placeholder#567:37",
+          "type": "TEXT",
+          "default": "Digite aqui...",
+          "boundTo": "input (TEXT) — characters"
+        },
+        {
+          "key": "helperText#567:74",
+          "type": "TEXT",
+          "default": "Texto de apoio",
+          "boundTo": "helper (TEXT) — characters"
+        },
+        {
+          "key": "showLabel#567:111",
+          "type": "BOOLEAN",
+          "default": true,
+          "boundTo": "Rótulo do campo (TEXT) — visible"
+        },
+        {
+          "key": "showHelper#567:148",
+          "type": "BOOLEAN",
+          "default": true,
+          "boundTo": "helper (TEXT) — visible"
+        }
+      ],
+      "bindings": {
+        "label": 36,
+        "placeholder": 36,
+        "helperText": 36,
+        "showLabel": 36,
+        "showHelper": 36
+      }
+    },
+    "Textarea": {
+      "id": "550:68",
+      "variantsAffected": 18,
+      "properties": [
+        {
+          "key": "label#568:0",
+          "type": "TEXT",
+          "default": "Rótulo do campo",
+          "boundTo": "Rótulo do campo (TEXT) — characters"
+        },
+        {
+          "key": "placeholder#568:19",
+          "type": "TEXT",
+          "default": "Escreva sua mensagem...",
+          "boundTo": "input (TEXT) — characters"
+        },
+        {
+          "key": "helperText#568:38",
+          "type": "TEXT",
+          "default": "Texto de apoio",
+          "boundTo": "helper (TEXT) — characters"
+        },
+        {
+          "key": "showLabel#568:57",
+          "type": "BOOLEAN",
+          "default": true,
+          "boundTo": "Rótulo do campo (TEXT) — visible"
+        },
+        {
+          "key": "showHelper#568:76",
+          "type": "BOOLEAN",
+          "default": true,
+          "boundTo": "helper (TEXT) — visible"
+        }
+      ],
+      "bindings": {
+        "label": 18,
+        "placeholder": 18,
+        "helperText": 18,
+        "showLabel": 18,
+        "showHelper": 18
+      }
+    },
+    "summary": "10 new component properties, 270 total bindings (54 variants × 5 props), 100% success — zero falhas"
+  },
+  "stateOfButtonFamily": {
+    "Button": {
+      "id": "417:632",
+      "preExistingProperties": [
+        { "key": "label#418:0", "type": "TEXT", "default": "Button" },
+        { "key": "showIconStart#418:91", "type": "BOOLEAN", "default": false },
+        { "key": "showIconEnd#418:182", "type": "BOOLEAN", "default": false }
+      ],
+      "variants": 90,
+      "states": ["default", "hover", "pressed", "focused", "disabled", "loading"],
+      "loadingImplementation": "FRAME 'spinner' com VECTOR path M21 12a9 9 0 1 1-6.219-8.56 (lucide loader-2)",
+      "status": "completo — nada a fazer nesta etapa"
+    },
+    "IconButton": {
+      "id": "419:377",
+      "preExistingProperties": "somente VARIANT axes (variant, size, state)",
+      "missingProperty": "INSTANCE_SWAP 'icon' — deferido para Etapa 14",
+      "variants": 90,
+      "states": ["default", "hover", "pressed", "focused", "disabled", "loading"],
+      "loadingImplementation": "FRAME 'spinner' com VECTOR (idêntico ao Button)",
+      "status": "loading ok — property icon pendente"
+    }
+  },
+  "delegation": {
+    "mimo-reasoner": "Decisão error-focus (1 call, 13k tokens) + validação completude Etapa 11 (usado retroativamente).",
+    "opus": "4 MCP calls efetivas: focus audit + inspect consolidado + TextField props + Textarea props. Zero falhas, zero retries.",
+    "glm-reviewer": "Não invocado — escopo reduziu e copy default foi reutilizada da Etapa 10.",
+    "quorum-synth": "Não invocado — decisão error-focus foi unânime do mimo sem contestação."
+  },
+  "knownIssues": [],
+  "deferredToFutureStages": [
+    "TextField BOOLEAN showIconEnd — exige adicionar node iconEnd em 36 variants (sem instance existente). Pode virar micro-etapa ou absorver em Etapa 15 (Form Family) junto com expansão de inputs.",
+    "IconButton INSTANCE_SWAP 'icon' property — Etapa 14 (débitos)."
+  ],
+  "notes": "Etapa 13 descobriu que 4 dos 5 itens planejados já estavam resolvidos desde etapas anteriores. Apenas component properties TextField/Textarea precisou execução. Economia: ~6 MCP calls estimadas viraram 4 efetivas. Próxima etapa: 14 (Limpeza de débitos técnicos) com Project Card VariableID fantasmas + Prev-Next master textStyleId + aria-current Header + IconButton icon property + memórias desatualizadas.",
+  "capturedAt": "2026-04-18T22:45:00Z"
+}

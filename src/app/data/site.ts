@@ -16,6 +16,12 @@ export interface SiteGalleryImage {
   readonly alt: string;
 }
 
+export interface SiteNavigationItem {
+  readonly label: string;
+  readonly href: '/' | '/projects' | '/about' | '/contact';
+  readonly isActive: (pathname: string) => boolean;
+}
+
 export interface SiteConfig {
   readonly name: string;
   readonly title: string;
@@ -41,6 +47,29 @@ export interface SiteConfig {
   readonly practice: SitePracticeEntry[];
   readonly aboutGallery: SiteGalleryImage[];
 }
+
+export const siteNavigationItems: readonly SiteNavigationItem[] = [
+  {
+    label: 'Início',
+    href: '/',
+    isActive: (pathname) => pathname === '/',
+  },
+  {
+    label: 'Projetos',
+    href: '/projects',
+    isActive: (pathname) => pathname === '/projects' || pathname.startsWith('/project/'),
+  },
+  {
+    label: 'Sobre',
+    href: '/about',
+    isActive: (pathname) => pathname === '/about',
+  },
+  {
+    label: 'Contato',
+    href: '/contact',
+    isActive: (pathname) => pathname === '/contact',
+  },
+] as const;
 
 export const siteConfig: SiteConfig = {
   name: 'Kayro Gomes',

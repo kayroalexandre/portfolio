@@ -7,3 +7,6 @@ coverage/
 .uv-cache/
 .uv-python/
 tmp/*.log
+
+# Claude Code local credentials/permissions (machine-scoped)
+.claude/settings.local.json

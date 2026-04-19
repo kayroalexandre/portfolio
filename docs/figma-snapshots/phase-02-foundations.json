@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "phase": 2,
+    "name": "foundations",
+    "title": "Revisão e ajustes da página Foundations",
+    "concludedAt": "2026-04-17",
+    "fileKey": "HrLXJwWcQkD0HbiFpf3PQc",
+    "pageId": "7:2",
+    "pageName": "🎨 Foundations",
+    "backfillMethod": "documental",
+    "snapshotVersion": 1,
+    "sourceMemoryFiles": ["project_portfolio_etapas.md", "project_foundations_card_pattern.md"]
+  },
+  "layout": {
+    "width": 1600,
+    "paddingAll": 80,
+    "sectionFill": "surface/background",
+    "frameGap": 48,
+    "cardSize": { "w": 200, "h": 172 },
+    "previewSize": { "w": 200, "h": 112, "sizing": "FIXED/FIXED" }
+  },
+  "tree": [
+    {
+      "id": null,
+      "name": "00 · Page Header",
+      "type": "FRAME",
+      "note": "usado como baseline pelas demais páginas"
+    },
+    { "id": null, "name": "01 · Colors", "type": "SECTION" },
+    { "id": null, "name": "02 · Alpha", "type": "SECTION" },
+    { "id": null, "name": "03 · Semantic", "type": "SECTION" },
+    { "id": null, "name": "04 · Typography", "type": "SECTION" },
+    { "id": null, "name": "05 · Dimensions", "type": "SECTION", "note": "spacing/radius/sizing" },
+    { "id": null, "name": "06 · Borders", "type": "SECTION" },
+    { "id": null, "name": "07 · Shadows", "type": "SECTION" },
+    {
+      "id": null,
+      "name": "08 · Glass & Blur",
+      "type": "SECTION",
+      "note": "usa wallpaper gradient magenta/roxo/azul"
+    },
+    {
+      "id": null,
+      "name": "09 · Motion",
+      "type": "SECTION",
+      "note": "barras proporcionais (durations) + vetor bezier (easings)"
+    },
+    {
+      "id": null,
+      "name": "10 · Interactive States",
+      "type": "SECTION",
+      "note": "primary/outline/ghost × default/hover/pressed/disabled/focused"
+    }
+  ],
+  "components": [],
+  "componentSets": [],
+  "variables": { "created": [] },
+  "styles": { "text": [], "effect": [], "paint": [] },
+  "fonts": ["Inter", "Roboto Mono"],
+  "patternRules": [
+    "SECTION 1600w, fill surface/background, FRAME interno auto-layout VERTICAL gap 48 padding 80",
+    "Header: eyebrow Label/Eyebrow MAIÚSCULO (FOO · BAR), title Display/Section (NN · Nome), desc Body/Large content/secondary 900w, divider 60×2 border/strong",
+    "Subsection: VERTICAL gap 20 FILL; subsection-header VERTICAL gap 8 (Label/Eyebrow + Heading/H3 + Body/Small 760w); grid HORIZONTAL WRAP gap 16×16 FILL",
+    "Card: 200×172 VERTICAL cornerRadius 6 clipsContent fill surface/subtle; preview 200×112 FIXED/FIXED center/center; info padding 12/12/10/12 gap 2 FILL (name Body/Meta content/primary + usage Code/Small content/tertiary)"
+  ],
+  "notes": "Peça chave do design system. Seções 01-06 consolidadas primeiro; 07-10 rebuild depois para casar o padrão. IDs dos SECTIONs não registrados na memória em 2026-04-17 — usar findByName em scripts. NÃO mexer nas 10 seções sem pedido explícito."
+}
